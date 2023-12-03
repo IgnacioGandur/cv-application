@@ -1,3 +1,3 @@
-# CV Generator
+# CV Generator Application
 
-A web page to create a simple CV with React. My first React project.
+A small webpage to create CVs with the ability to generate an A4 PDF file with the entered information. (My first React project).
