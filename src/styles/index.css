@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Darker+Grotesque:wght@300;400;900&family=Poiret+One&display=swap");
+
+:root {
+	--title-font: "Aboreto";
+	--main-font: "Poiret One";
+	--secondary-font: "Darker Grotesque";
+	--color-pink: #ffa1ac;
+	--color-yellow: #f9e978;
+	--color-lavender: #ebe9ff;
+	--color-white: #f8f9fa;
+	--color-black: #343a40;
+}
+
+* {
+	border: 1px solid red;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: var(--secondary-font);
+}
+
+body {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+div#root {
+	width: 90%;
+	height: 90%;
+	display: flex;
+	border-radius: 10px;
+}
+
+div#root > section {
+	width: 50%;
+}
+
+div#root > section.inputs {
+	display: flex;
+	flex-direction: column;
+}
+
+div#root > section.inputs > label {
+	display: flex;
+	flex-direction: column;
+}
+
+div#root > section.CV > img {
+	background-image: linear-gradient(
+		135deg,
+		#9b5de5,
+		#f15bb5,
+		#fee440,
+		#00bbf9,
+		#00f5d4
+	);
+	padding: 3px;
+	width: 200px;
+	height: 200px;
+	border-radius: 100%;
+	object-fit: cover;
+}
