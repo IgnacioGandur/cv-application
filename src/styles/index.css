@@ -46,19 +46,3 @@ div#root > section.inputs > label {
 	display: flex;
 	flex-direction: column;
 }
-
-div#root > section.CV > img {
-	background-image: linear-gradient(
-		135deg,
-		#9b5de5,
-		#f15bb5,
-		#fee440,
-		#00bbf9,
-		#00f5d4
-	);
-	padding: 3px;
-	width: 200px;
-	height: 200px;
-	border-radius: 100%;
-	object-fit: cover;
-}

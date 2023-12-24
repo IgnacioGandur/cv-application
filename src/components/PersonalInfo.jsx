@@ -1,4 +1,6 @@
-export default function PersonalInfo({ gatherInfo }) {
+import "./../styles/PersonalInfo.css";
+
+export default function PersonalInfo({ gatherPersonalInfo }) {
 	return (
 		<>
 			<h1>Personal Info</h1>
@@ -6,7 +8,7 @@ export default function PersonalInfo({ gatherInfo }) {
 				Country:
 				<input
 					onChange={(e) =>
-						gatherInfo("personal-info", e.target.id, e.target.value)
+						gatherPersonalInfo(e.target.id, e.target.value)
 					}
 					type="text"
 					name="country"
@@ -14,10 +16,10 @@ export default function PersonalInfo({ gatherInfo }) {
 				/>
 			</label>
 			<label htmlFor="city">
-				City/State:
+				Province/State/City:
 				<input
 					onChange={(e) =>
-						gatherInfo("personal-info", e.target.id, e.target.value)
+						gatherPersonalInfo(e.target.id, e.target.value)
 					}
 					type="text"
 					name="city"
@@ -31,7 +33,7 @@ export default function PersonalInfo({ gatherInfo }) {
 					name="address"
 					id="address"
 					onChange={(e) =>
-						gatherInfo("personal-info", e.target.id, e.target.value)
+						gatherPersonalInfo(e.target.id, e.target.value)
 					}
 				/>
 			</label>
@@ -39,7 +41,7 @@ export default function PersonalInfo({ gatherInfo }) {
 				First name:
 				<input
 					onChange={(e) =>
-						gatherInfo("personal-info", e.target.id, e.target.value)
+						gatherPersonalInfo(e.target.id, e.target.value)
 					}
 					type="text"
 					name="first-name"
@@ -52,7 +54,7 @@ export default function PersonalInfo({ gatherInfo }) {
 				Last name:
 				<input
 					onChange={(e) =>
-						gatherInfo("personal-info", e.target.id, e.target.value)
+						gatherPersonalInfo(e.target.id, e.target.value)
 					}
 					type="text"
 					name="last-name"
@@ -65,7 +67,7 @@ export default function PersonalInfo({ gatherInfo }) {
 				Email:
 				<input
 					onChange={(e) =>
-						gatherInfo("personal-info", e.target.id, e.target.value)
+						gatherPersonalInfo(e.target.id, e.target.value)
 					}
 					type="email"
 					name="email"
@@ -78,7 +80,7 @@ export default function PersonalInfo({ gatherInfo }) {
 				Phone number:
 				<input
 					onChange={(e) =>
-						gatherInfo("personal-info", e.target.id, e.target.value)
+						gatherPersonalInfo(e.target.id, e.target.value)
 					}
 					type="tel"
 					name="phone-number"
@@ -91,7 +93,7 @@ export default function PersonalInfo({ gatherInfo }) {
 				A small description about you:
 				<input
 					onChange={(e) =>
-						gatherInfo("personal-info", e.target.id, e.target.value)
+						gatherPersonalInfo(e.target.id, e.target.value)
 					}
 					type="text"
 					name="about-me"
@@ -103,11 +105,7 @@ export default function PersonalInfo({ gatherInfo }) {
 				Select a profile picture:
 				<input
 					onChange={(e) =>
-						gatherInfo(
-							"personal-info",
-							e.target.id,
-							e.target.files[0]
-						)
+						gatherPersonalInfo(e.target.id, e.target.files[0])
 					}
 					id="profile-picture"
 					name="profile-picture"
