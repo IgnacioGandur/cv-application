@@ -1,0 +1,77 @@
+div.skills {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+div.skills > p.title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+div.skills > div.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+div.skills > div.skills-container > div.skill-item {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+div.skills
+    > div.skills-container
+    > div.skill-item:hover
+    > button.delete-section-button {
+    opacity: 1;
+}
+
+div.skills > div.skills-container > div.skill-item > img.skill-icon {
+    width: 20px;
+    height: 20px;
+}
+
+div.skills
+    > div.skills-container
+    > div.skill-item
+    > button.delete-section-button {
+    background-color: var(--color-grey-transparent);
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-grey);
+    border-radius: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 300ms ease;
+    opacity: 0;
+}
+
+div.skills
+    > div.skills-container
+    > div.skill-item
+    > button.delete-section-button:hover {
+    scale: 1.25;
+}
+
+div.skills
+    > div.skills-container
+    > div.skill-item
+    > button.delete-section-button {
+    color: var(--color-span-icon);
+    font-size: 1.25rem;
+}
+
+div.skills
+    > div.skills-container
+    > div.skill-item
+    > button.delete-section-button
+    > span {
+    font-size: 1.25rem;
+    color: var(--color-span-icon);
+}

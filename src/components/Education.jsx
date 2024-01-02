@@ -1,6 +1,8 @@
-import Flatpickr from "react-flatpickr";
+import '../styles/Education.css';
 import { useState } from "react";
-import "flatpickr/dist/themes/light.css";
+import Flatpickr from "react-flatpickr";
+import MonthSelect from 'flatpickr/dist/plugins/monthSelect';
+import "flatpickr/dist/themes/material_orange.css";
 
 export default function Education({ addSection, clearInputs }) {
 	const [educationInfo, setEducationInfo] = useState({
@@ -24,22 +26,18 @@ export default function Education({ addSection, clearInputs }) {
 					titleOfStudy: value,
 				}));
 				break;
-			case "date-from": {
-				const dateFrom = document.querySelector(`#${input}`).value;
+			case "date-from": 
 				setEducationInfo((prevEducationInfo) => ({
 					...prevEducationInfo,
-					dateFrom: dateFrom,
+					dateFrom: value,
 				}));
 				break;
-			}
-			case "date-until": {
-				const dateUntil = document.querySelector(`#${input}`).value;
+			case "date-until": 
 				setEducationInfo((prevEducationInfo) => ({
 					...prevEducationInfo,
-					dateUntil: dateUntil,
+					dateUntil: value,
 				}));
-				break;
-			}
+                break;
 			default:
 				throw new Error("Invalid education input field.");
 		}
@@ -66,62 +64,76 @@ export default function Education({ addSection, clearInputs }) {
 		>
 			<fieldset>
 				<legend>Education Info</legend>
-				<label htmlFor="institution-name">
-					Institution name:
-					<input
-						onChange={(e) =>
-							gatherEducationInfo(e.target.id, e.target.value)
-						}
-						type="text"
-						name="institution-name"
-						id="institution-name"
-						required
-					/>
-				</label>
-				<label htmlFor="title-of-study">
-					Title of study:
-					<input
-						onChange={(e) =>
-							gatherEducationInfo(e.target.id, e.target.value)
-						}
-						type="text"
-						name="title-of-study"
-						id="title-of-study"
-						required
-					/>
-				</label>
-				<label htmlFor="date-from">
-					Date of study, from:
-					<Flatpickr
-						value={educationInfo.dateFrom}
-						onChange={() => gatherEducationInfo("date-from", "")}
-						options={{
-							dateFormat: "F - Y",
-							allowInput: true,
-						}}
-						type="datetime-local"
-						name="date-from"
-						id="date-from"
-						required
-					/>
-				</label>
-				<label htmlFor="date-until">
-					Date of study, until:
-					<Flatpickr
-						value={educationInfo.dateUntil}
-						onChange={() => gatherEducationInfo("date-until", "")}
-						options={{
-							dateFormat: "F - Y",
-							allowInput: true,
-						}}
-						type="datetime-local"
-						name="date-until"
-						id="date-until"
-						required
-					/>
-				</label>
+                <div className="inputs-container">
+                    <label htmlFor="institution-name">
+                        <span>Institution name</span>
+                        <input
+                            onChange={(e) =>
+                                gatherEducationInfo(e.target.id, e.target.value)
+                            }
+                            type="text"
+                            name="institution-name"
+                            id="institution-name"
+                            placeholder='The Odin Project'
+                            required
+                        />
+                    </label>
+                    <label htmlFor="title-of-study">
+                        <span>Title of study</span>
+                        <input
+                            onChange={(e) =>
+                                gatherEducationInfo(e.target.id, e.target.value)
+                            }
+                            type="text"
+                            name="title-of-study"
+                            id="title-of-study"
+                            placeholder='Front end web developer'
+                            required
+                        />
+                    </label>
+                </div>
+                <div className="inputs-container">
+                    <label htmlFor="date-from">
+                        <span>Date of study, from</span>
+                        <Flatpickr
+                            value={educationInfo.dateFrom}
+                            // onChange={() => gatherEducationInfo("date-from", "")}
+                            options={{
+                                plugins:[new MonthSelect({})],
+                                allowInput: true,
+                                onChange:(selectedDate, dateStr) => {
+                                    gatherEducationInfo('date-from', dateStr);
+                                }
+                            }}
+                            // type="datetime-local"
+                            name="date-from"
+                            id="date-from"
+                            placeholder='Click to open the calendar...'
+                            required
+                        />
+                    </label>
+                    <label htmlFor="date-until">
+                        <span>Date of study, until</span>
+                        <Flatpickr
+                            value={educationInfo.dateUntil}
+                            // onChange={() => gatherEducationInfo("date-until", "")}
+                            options={{
+                                plugins:[new MonthSelect({})],
+                                allowInput: true,
+                                onChange: (selectedDate, dateStr) => {
+                                    gatherEducationInfo('date-until', dateStr);
+                                }
+                            }}
+                            // type="datetime-local"
+                            name="date-until"
+                            id="date-until"
+                            placeholder='Click to open the calendar...'
+                            required
+                        />
+                    </label>
+                </div>
+                <button type="submit">Add education section</button>
 			</fieldset>
-			<button type="submit">Add education section</button>
 		</form>
 	);
 }

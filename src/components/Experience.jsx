@@ -1,5 +1,9 @@
+import '../styles/Experience.css';
 import { useState } from "react";
 import Flatpickr from "react-flatpickr";
+import MonthSelect from 'flatpickr/dist/plugins/monthSelect';
+import 'flatpickr/dist/plugins/monthSelect/style.css';
+import 'flatpickr/dist/themes/material_orange.css';
 
 export default function Experience({ addSection, clearInputs }) {
 	const [experienceInfo, setExperienceInfo] = useState({
@@ -31,24 +35,23 @@ export default function Experience({ addSection, clearInputs }) {
 				}));
 				break;
 			case "date-from": {
-				const dateFrom = document.querySelector(`#${input}`).value;
 				setExperienceInfo((prevExperienceInfo) => ({
 					...prevExperienceInfo,
-					dateFrom: dateFrom,
+					 dateFrom: value,
 				}));
 				break;
 			}
 			case "date-until": {
-				const dateUntil = document.querySelector(`#${input}`).value;
 				setExperienceInfo((prevExperienceInfo) => ({
 					...prevExperienceInfo,
-					dateUntil: dateUntil,
+					 dateUntil: value,
 				}));
 				break;
 			}
 			default:
 				throw new Error("Invalid experience input field.");
 		}
+
 	}
 
 	function clearExperienceInputs() {
@@ -72,74 +75,87 @@ export default function Experience({ addSection, clearInputs }) {
 		>
 			<fieldset>
 				<legend>Experience:</legend>
-				<label htmlFor="company-name">
-					Company name:
-					<input
-						type="text"
-						name="company-name"
-						id="company-name"
-						onChange={(e) =>
-							gatherExperienceInfo(e.target.id, e.target.value)
-						}
-						required
-					/>
-				</label>
-				<label htmlFor="position-title">
-					Your position at the company:
-					<input
-						type="text"
-						name="position-title"
-						id="position-title"
-						onChange={(e) =>
-							gatherExperienceInfo(e.target.id, e.target.value)
-						}
-						required
-					/>
-				</label>
+                <div className="inputs-container">
+                    <label htmlFor="company-name">
+                        <span>Company name</span>
+                        <input
+                            type="text"
+                            name="company-name"
+                            id="company-name"
+                            onChange={(e) =>
+                                gatherExperienceInfo(e.target.id, e.target.value)
+                            }
+                            placeholder='Mercado libre'
+                            required
+                        />
+                    </label>
+                    <label htmlFor="position-title">
+                        <span>Your position at the company</span>
+                        <input
+                            type="text"
+                            name="position-title"
+                            id="position-title"
+                            placeholder='Front end developer'
+                            onChange={(e) =>
+                                gatherExperienceInfo(e.target.id, e.target.value)
+                            }
+                            required
+                        />
+                    </label>
+                </div>
 				<label htmlFor="responsibilities">
-					Main responsibilities at your position:
+					<span>Main responsibilities at your position</span>
 					<input
 						type="text"
 						name="responsibilities"
 						id="responsibilities"
+                        placeholder='To ensure the website visitors can easily interact with the website'
 						onChange={(e) =>
 							gatherExperienceInfo(e.target.id, e.target.value)
 						}
 						required
 					/>
 				</label>
-				<label htmlFor="date-from">
-					Date, from:
-					<Flatpickr
-						value={experienceInfo.dateFrom}
-						onChange={() => gatherExperienceInfo("date-from", "")}
-						options={{
-							dateFormat: "F - Y",
-							allowInput: true,
-						}}
-						type="datetime-local"
-						name="date-from"
-						id="date-from"
-						required
-					/>
-				</label>
-				<label htmlFor="date-until">
-					Date, until:
-					<Flatpickr
-						value={experienceInfo.dateUntil}
-						onChange={() => gatherExperienceInfo("date-until", "")}
-						options={{
-							dateFormat: "F - Y",
-							allowInput: true,
-						}}
-						type="datetime-local"
-						name="date-until"
-						id="date-until"
-						required
-					/>
-				</label>
+                <div className="inputs-container">
+                    <label htmlFor="date-from">
+                        <span>Date, from</span>
+                        <Flatpickr
+                            value={experienceInfo.dateFrom}
+                            options={{
+                                allowInput:true,
+                                plugins:[new MonthSelect({})],
+                                onChange:(selectedDate, dateStr) => {
+                                    console.info(dateStr)
+                                    gatherExperienceInfo('date-from', dateStr)
+                                }
+                            }}
+                            name="date-from"
+                            id="date-from"
+                            placeholder='Click to open the calendar...'
+                            required
+                        />
+                    </label>
+                    <label htmlFor="date-until">
+                        <span>Date, until</span>
+                        <Flatpickr
+                            value={experienceInfo.dateUntil}
+                            options={{
+                                allowInput: true,
+                                plugins:[new MonthSelect({})],
+                                onChange: (selectedDate, dateStr) => {
+                                    console.info(dateStr);
+                                    gatherExperienceInfo('date-until', dateStr);
+                                }
+                            }}
+                            name="date-until"
+                            id="date-until"
+                            placeholder='Click to open the calendar...'
+                            required
+                        />
+                    </label>
+                </div>
+                <button type="submit">Add experience section</button>
 			</fieldset>
-			<button type="submit">Add experience section</button>
 		</form>
 	);
 }

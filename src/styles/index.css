@@ -1,48 +1,82 @@
-@import url("https://fonts.googleapis.com/css2?family=Aboreto&family=Darker+Grotesque:wght@300;400;900&family=Poiret+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&family=Darker+Grotesque:wght@300;400;900&family=Poiret+One&display=swap');
+
+@font-face {
+    font-family: 'CoffeCake';
+    src: url('./../assets/fonts/coffecake/CoffeCake.otf');
+}
+
+@font-face {
+    font-family: 'GeoSansLight';
+    src: url('./../assets/fonts/geo_sans_light/GeosansLight.ttf');
+}
 
 :root {
-	--title-font: "Aboreto";
-	--main-font: "Poiret One";
-	--secondary-font: "Darker Grotesque";
-	--color-pink: #ffa1ac;
-	--color-yellow: #f9e978;
-	--color-lavender: #ebe9ff;
-	--color-white: #f8f9fa;
-	--color-black: #343a40;
+    --font-coffecake: 'CoffeCake';
+    --font-titles-h2: 'GeoSansLight';
+    --main-font: 'Poiret One';
+    --secondary-font: 'Darker Grotesque';
+    --color-pink: #ffa1ac;
+    --color-pink-transparent: #ffa1ac55;
+    --color-yellow: #f9e978;
+    --color-lavender: #ebe9ff;
+    --color-cyan: #00bbf9;
+    --color-cyan-transparent: #00bbf955;
+    --color-orange: #fcc095;
+    --color-white: #f8f9fa;
+    --color-black: #343a40;
+    --color-grey: #adb5bd55;
+    --color-grey-transparent: #adb5bd3f;
+    --color-span-icon: #aeb4b7;
+    --default-value: 15px;
+    --border-radius: 10px;
 }
 
 * {
-	border: 1px solid red;
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-	font-family: var(--secondary-font);
-}
-
-body {
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    border: 1px solid red;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--secondary-font);
 }
 
 div#root {
-	width: 90%;
-	height: 90%;
-	display: flex;
-	border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
 }
 
-div#root > section {
-	width: 50%;
+input {
+    width: 100%;
+    background-image: linear-gradient(
+        75deg,
+        var(--color-grey-transparent),
+        var(--color-grey-transparent),
+        var(--color-pink-transparent),
+        var(--color-pink-transparent)
+    );
+    background-size: 400%;
+    background-position: left;
+    border: 1px solid transparent;
+    padding: 7px;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    transition: all 500ms ease-in-out;
 }
 
-div#root > section.inputs {
-	display: flex;
-	flex-direction: column;
+input:hover {
+    background-position: right;
+    border: 1px solid var(--color-pink);
 }
 
-div#root > section.inputs > label {
-	display: flex;
-	flex-direction: column;
+input:focus {
+    background-image: none;
+    background-color: var(--color-cyan-transparent);
+    border: 1px solid var(--color-pink);
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    /* gap: calc(var(--default-value) / 4); */
 }

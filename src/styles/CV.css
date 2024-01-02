@@ -1,0 +1,408 @@
+main.app {
+    background-color: white;
+    display: flex;
+    gap: var(--default-value);
+    padding: var(--default-value);
+}
+
+main.app > section {
+    width: 50%;
+    padding: var(--default-value);
+    /* box-shadow: */
+    /*     rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, */
+    /*     rgba(0, 0, 0, 0.1) 0px 0px 1px 0px; */
+    border-radius: 5px;
+    box-shadow:
+        rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+main.app > section.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--default-value);
+}
+
+main.app > div.separator,
+section.CV > div.separator {
+    background-image: radial-gradient(
+        circle,
+        var(--color-yellow),
+        var(--color-lavender),
+        var(--color-pink)
+    );
+    height: 99%;
+    width: 2px;
+    align-self: center;
+    opacity: 0.7;
+}
+
+section.CV > div.separator {
+    background-image: linear-gradient(
+        45deg,
+        var(--color-lavender),
+        var(--color-pink),
+        var(--color-yellow),
+        var(--color-lavender),
+        var(--color-cyan)
+    );
+    width: 100%;
+    height: 2px;
+}
+
+main.app > section.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--default-value);
+}
+
+main.app
+    > section.inputs
+    > div.education-and-experience
+    > form#create-skill
+    > fieldset
+    > div.container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+main.app
+    > section.inputs
+    > div.education-and-experience
+    > form#create-skill
+    > fieldset
+    > div.container
+    > * {
+    flex: 1 1 33%;
+}
+
+main.app
+    > section.inputs
+    > div.education-and-experience
+    > form#create-skill
+    > fieldset
+    > div.container
+    > label
+    > input[type='file']::file-selector-button {
+    display: none;
+}
+
+main.app
+    > section.inputs
+    > div.education-and-experience
+    > form#references
+    > fieldset
+    > div.inputs-container {
+    display: flex;
+    align-items: flex-end;
+}
+
+main.app > section.CV {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--default-value);
+}
+
+main.app > section.CV > p.full-name {
+    font-family: var(--font-titles-h2);
+    font-weight: 400;
+    width: 50%;
+    text-align: center;
+    font-size: 3rem;
+    border: 2px solid black;
+}
+
+main.app > section.CV > p.ocupation {
+    font-size: 1.25rem;
+    font-family: var(--font-titles-h2);
+}
+
+section.CV > img.profile-picture {
+    background-image: linear-gradient(
+        45deg,
+        #70d6ff88,
+        #ff70a688,
+        #ff977088,
+        #ffd67088
+    );
+    padding: 3px;
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+section.CV > div.education-and-experience {
+    display: flex;
+    width: 100%;
+    height: 60%;
+    justify-content: center;
+    gap: calc(var(--default-value) * 1.5);
+}
+
+section.CV > div.education-and-experience > div.experience-section,
+section.CV > div.education-and-experience > div.education {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+section.CV > div.education-and-experience > div > p.title,
+section.CV
+    > div.education-and-experience
+    > div.experience-section
+    > div.about-me
+    > p.title,
+section.CV
+    > div.education-and-experience
+    > div.education
+    > div.contact
+    > p.title,
+section.CV > div.references > p.title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+section.CV > div.education-and-experience > div.experience-section {
+    text-align: end;
+}
+
+section.CV
+    > div.education-and-experience
+    > div.experience-section
+    > div.experience-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+section.CV
+    > div.education-and-experience
+    > div.experience-section
+    > div.experience-item
+    > div.button-companyName-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+section.CV
+    > div.education-and-experience
+    > div.experience-section
+    > div.experience-item
+    > div.button-companyName-container
+    > button.delete-section {
+    background-color: var(--color-grey-transparent);
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-grey);
+    border-radius: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 300ms ease;
+    opacity: 0;
+}
+
+section.CV
+    > div.education-and-experience
+    > div.experience-section
+    > div.experience-item:hover
+    > div.button-companyName-container
+    > button.delete-section {
+    opacity: 1;
+}
+
+section.CV
+    > div.education-and-experience
+    > div.experience-section
+    > div.experience-item
+    > div.button-companyName-container
+    > button.delete-section:hover {
+    transform: scale(1.2);
+}
+
+section.CV
+    > div.education-and-experience
+    > div.experience-section
+    > div.experience-item
+    > div.button-companyName-container
+    > button.delete-section
+    > span.material-icons-round {
+    color: var(--color-span-icon);
+    font-size: 1.25rem;
+}
+
+section.CV
+    > div.education-and-experience
+    > div.experience-section
+    > div.experience-item
+    > div.button-companyName-container
+    > p.company-name {
+    text-align: end;
+    font-family: var(--font-titles-h2);
+    border: 1px solid black;
+    padding: 3px 5px;
+    width: fit-content;
+}
+
+section.CV
+    > div.education-and-experience
+    > div.experience-section
+    > div.about-me,
+section.CV > div.education-and-experience > div.education > div.contact {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    margin-top: auto;
+}
+
+section.CV > div.education-and-experience > div.education > div.skills {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+section.CV
+    > div.education-and-experience
+    > div.education
+    > div.skills
+    > div.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+section.CV
+    > div.education-and-experience
+    > div.education
+    > div.skills
+    > div.skills-container
+    > div.skill-item {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+section.CV
+    > div.education-and-experience
+    > div.education
+    > div.skills
+    > div.skills-container
+    > div.skill-item
+    > img {
+    width: 20px;
+    height: 20px;
+}
+
+section.CV > div > div.education > div.skills > div > div > button {
+    margin-left: auto;
+}
+
+section.CV > div.education-and-experience > div.separator {
+    height: 100%;
+    width: 2px;
+    background-image: linear-gradient(
+        45deg,
+        #70d6ff88,
+        #ff70a688,
+        #ff977088,
+        #ffd67088
+    );
+}
+
+#root > main > section.CV > div > div.education > div.skills > p.title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+section.CV > div.references {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+section.CV > div.references > p.title {
+    text-align: center;
+}
+
+section.CV > div.references > div.references-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+section.CV > div.references > div.references-container > div.reference-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+section.CV
+    > div.references
+    > div.references-container
+    > div.reference-item
+    > p.name {
+    font-size: 1.05rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+section.CV
+    > div.references
+    > div.references-container
+    > div.reference-item:hover
+    > button.delete-section-button {
+    opacity: 1;
+}
+
+section.CV
+    > div.references
+    > div.references-container
+    > div.reference-item
+    > button.delete-section-button {
+    margin-top: 5px;
+    background-color: var(--color-grey-transparent);
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-grey);
+    border-radius: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 300ms ease;
+    opacity: 0;
+}
+
+section.CV
+    > div.references
+    > div.references-container
+    > div.reference-item
+    > button.delete-section-button:hover {
+    transform: scale(1.25);
+}
+
+section.CV
+    > div.references
+    > div.references-container
+    > div.reference-item
+    > button.delete-section-button
+    > span {
+    font-size: 1.25rem;
+    color: var(--color-span-icon);
+}
