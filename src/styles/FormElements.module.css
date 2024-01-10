@@ -1,0 +1,106 @@
+.h2-title {
+    font-weight: 100;
+    font-family: var(--font-titles-h2);
+    font-size: 2.25rem;
+    color: var(--color-black);
+}
+
+.h2-title__span {
+    font-size: 1.2rem;
+}
+
+.fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: var(--default-value);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-grey-transparent);
+}
+
+.fieldset__legend {
+    padding: 5px;
+    border: 1px solid var(--color-grey-transparent);
+    border-radius: calc(var(--border-radius) / 2);
+}
+
+.fieldset__inputs-container {
+    display: flex;
+    gap: var(--default-value);
+}
+
+.fieldset__inputs-container--flex-end {
+    align-items: flex-end;
+}
+
+.fieldset__inputs-container > * {
+    width: 100%;
+}
+
+.fieldset__inputs-container__label {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--default-value) / 4);
+}
+
+.input {
+    width: 100%;
+    background-image: linear-gradient(
+        75deg,
+        var(--color-grey-transparent),
+        var(--color-grey-transparent),
+        var(--color-pink-transparent),
+        var(--color-pink-transparent)
+    );
+    background-size: 400%;
+    background-position: left;
+    border: 1px solid transparent;
+    padding: 7px;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    transition: all 500ms ease-in-out;
+}
+
+.input:hover {
+    background-position: right;
+    border: 1px solid var(--color-pink);
+}
+
+.input:active,
+.input:focus {
+    background-image: none;
+    background-color: var(--color-cyan-transparent);
+    border: 1px solid var(--color-cyan);
+}
+
+.input-type-file::file-selector-button {
+    display: none;
+}
+
+.button {
+    background-image: linear-gradient(
+        90deg,
+        var(--color-grey-transparent),
+        var(--color-grey-transparent),
+        var(--color-pink),
+        var(--color-yellow)
+    );
+    background-size: 750%;
+    background-position: left;
+    font-size: 1.15rem;
+    width: 100%;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: all 500ms ease-out;
+    cursor: pointer;
+}
+
+.button:hover,
+.button:active,
+.button:focus {
+    background-position: right;
+    background-size: 250%;
+    color: var(--color-black);
+    border: 1px solid var(--color-pink-transparent);
+}

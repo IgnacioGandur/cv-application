@@ -10,12 +10,6 @@ div.skills > p.title {
     font-family: var(--font-titles-h2);
 }
 
-div.skills > div.skills-container {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
 div.skills > div.skills-container > div.skill-item {
     display: flex;
     align-items: flex-end;
@@ -25,19 +19,32 @@ div.skills > div.skills-container > div.skill-item {
 div.skills
     > div.skills-container
     > div.skill-item:hover
-    > button.delete-section-button {
+    > div.buttons-container
+    > button.delete-section-button,
+div.skills
+    > div.skills-container
+    > div.skill-item:hover
+    > div.buttons-container
+    > button.edit-section-button {
     opacity: 1;
 }
 
-div.skills > div.skills-container > div.skill-item > img.skill-icon {
-    width: 20px;
-    height: 20px;
-}
+/* div.skills > div.skills-container > div.skill-item > img.skill-icon { */
+/*     width: 35px; */
+/*     height: 35px; */
+/*     object-fit: cover; */
+/* } */
 
 div.skills
     > div.skills-container
     > div.skill-item
-    > button.delete-section-button {
+    > div.buttons-container
+    > button.delete-section-button,
+div.skills
+    > div.skills-container
+    > div.skill-item
+    > div.buttons-container
+    > button.edit-section-button {
     background-color: var(--color-grey-transparent);
     width: 30px;
     height: 30px;
@@ -55,14 +62,26 @@ div.skills
 div.skills
     > div.skills-container
     > div.skill-item
-    > button.delete-section-button:hover {
+    > div.buttons-container
+    > button.delete-section-button:hover,
+div.skills
+    > div.skills-container
+    > div.skill-item
+    > div.buttons-container
+    > button.edit-section-button:hover {
     scale: 1.25;
 }
 
 div.skills
     > div.skills-container
     > div.skill-item
-    > button.delete-section-button {
+    > div.buttons-container
+    > button.delete-section-button,
+div.skills
+    > div.skills-container
+    > div.skill-item
+    > div.buttons-container
+    > button.edit-section-button {
     color: var(--color-span-icon);
     font-size: 1.25rem;
 }
@@ -70,7 +89,14 @@ div.skills
 div.skills
     > div.skills-container
     > div.skill-item
+    > div.buttons-container
     > button.delete-section-button
+    > span,
+div.skills
+    > div.skills-container
+    > div.skill-item
+    > div.buttons-container
+    > button.edit-section-button
     > span {
     font-size: 1.25rem;
     color: var(--color-span-icon);

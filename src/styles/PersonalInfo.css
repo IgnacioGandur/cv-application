@@ -1,47 +1,57 @@
 h2 {
-	font-weight: 100;
-	font-family: var(--font-titles-h2);
-	font-size: 2.25rem;
-	color: var(--color-black);
+    font-weight: 100;
+    font-family: var(--font-titles-h2);
+    font-size: 2.25rem;
+    color: var(--color-black);
 }
 
 h2 > span {
-	font-size: 1.2rem;
+    font-size: 1.2rem;
 }
 
 div.inputs-container {
-	display: flex;
-	gap: var(--default-value);
+    display: flex;
+    gap: var(--default-value);
 }
 
 div.inputs-container > label {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 div.inputs-container > label > input {
-	width: 100%;
+    width: 100%;
 }
 
 div.inputs-container > * {
-	width: 50%;
+    width: 50%;
 }
 
 fieldset {
-	display: flex;
-	flex-direction: column;
-	gap: var(--default-value);
-	padding: 10px;
-	border-radius: var(--border-radius);
-	border: 1px solid var(--color-grey-transparent);
+    display: flex;
+    flex-direction: column;
+    gap: var(--default-value);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-grey-transparent);
 }
 
 legend {
-	padding: 5px;
-	border: 1px solid var(--color-grey-transparent);
-	border-radius: calc(var(--border-radius) / 2);
+    padding: 5px;
+    border: 1px solid var(--color-grey-transparent);
+    border-radius: calc(var(--border-radius) / 2);
 }
 
 fieldset > div.inputs-container > label > input::file-selector-button {
-	display: none;
+    display: none;
+}
+
+section.inputs > fieldset:nth-child(3) > div.input-container.social-media {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--default-value);
+}
+
+section.inputs > fieldset:nth-child(3) > div.input-container.social-media > * {
+    flex: 1 1 auto;
 }

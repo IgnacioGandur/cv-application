@@ -1,5 +1,6 @@
+// import '../styles/Skill.css';
 import { useState } from 'react';
-import '../styles/Skill.css';
+import FormElementsStyle from '../styles/FormElements.module.css';
 
 export default function Skills ({ addSection }) {
     const [skill, setSkill] = useState(
@@ -35,18 +36,41 @@ export default function Skills ({ addSection }) {
             }} 
             id='create-skill'
         >
-            <fieldset>
-                <legend>Skill</legend>
-                    <div className="container">
-                        <label htmlFor="skill-name">
+            <fieldset
+                className={FormElementsStyle.fieldset}
+            >
+                <legend
+                    className={FormElementsStyle.fieldset__legend}
+                >Skill</legend>
+                    <div className={`${FormElementsStyle['fieldset__inputs-container']} ${FormElementsStyle['fieldset__inputs-container--flex-end']}`}>
+                        <label 
+                            className={ FormElementsStyle['fieldset__inputs-container__label'] }
+                            htmlFor="skill-name"
+                        >
                             Skill
-                            <input type="text" id="skill-name" placeholder='Photoshop...' onChange={(e) => gatherSkillsInfo(e.target.id, e.target.value)} />
+                            <input 
+                                className={FormElementsStyle.input}
+                                type="text"
+                                id="skill-name" 
+                                placeholder='Photoshop...' 
+                                onChange={(e) => gatherSkillsInfo(e.target.id, e.target.value)}
+                            />
                         </label>
-                        <label htmlFor="skill-icon">
+                        <label 
+                            className={FormElementsStyle['fieldset__inputs-container__label']}
+                            htmlFor="skill-icon"
+                        >
                             Icon
-                            <input type="file" accept='image/png, image/jpg, image/jpeg' id='skill-icon' name='skill-icon' onChange={(e) => gatherSkillsInfo(e.target.id, e.target.files[0])} required/>
+                            <input
+                                className={`${FormElementsStyle.input} ${FormElementsStyle['input-type-file']}`}
+                                type="file" 
+                                accept='image/png, image/jpg, image/jpeg' 
+                                id='skill-icon' 
+                                name='skill-icon' 
+                                onChange={(e) => gatherSkillsInfo(e.target.id, e.target.files[0])} 
+                                required/>
                         </label>
-                        <button >Add skill</button>
+                        <button className={FormElementsStyle.button}>Add skill</button>
                     </div>
             </fieldset>
         </form>

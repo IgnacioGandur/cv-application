@@ -1,7 +1,8 @@
-import '../styles/Experience.css';
+// import '../styles/Experience.css';      // Delete this later
 import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import MonthSelect from 'flatpickr/dist/plugins/monthSelect';
+import ExperienceStyles from '../styles/FormElements.module.css';
 import 'flatpickr/dist/plugins/monthSelect/style.css';
 import 'flatpickr/dist/themes/material_orange.css';
 
@@ -73,12 +74,20 @@ export default function Experience({ addSection, clearInputs }) {
 				clearExperienceInputs();
 			}}
 		>
-			<fieldset>
-				<legend>Experience:</legend>
-                <div className="inputs-container">
-                    <label htmlFor="company-name">
+			<fieldset 
+                className={ExperienceStyles.fieldset}
+            >
+				<legend
+                    className={ExperienceStyles.fieldset__legend}
+                >Experience:</legend>
+                <div className={ExperienceStyles['fieldset__inputs-container']}>
+                    <label 
+                        className={ExperienceStyles['fieldset__inputs-container__label']}
+                        htmlFor="company-name"
+                    >
                         <span>Company name</span>
                         <input
+                            className={ExperienceStyles.input}
                             type="text"
                             name="company-name"
                             id="company-name"
@@ -89,9 +98,13 @@ export default function Experience({ addSection, clearInputs }) {
                             required
                         />
                     </label>
-                    <label htmlFor="position-title">
+                    <label 
+                        htmlFor="position-title"
+                        className={ExperienceStyles['fieldset__inputs-container__label']}
+                    >
                         <span>Your position at the company</span>
                         <input
+                            className={ExperienceStyles.input}
                             type="text"
                             name="position-title"
                             id="position-title"
@@ -103,9 +116,13 @@ export default function Experience({ addSection, clearInputs }) {
                         />
                     </label>
                 </div>
-				<label htmlFor="responsibilities">
+				<label 
+                    htmlFor="responsibilities"
+                    className={ExperienceStyles['fieldset__inputs-container__label']}
+                >
 					<span>Main responsibilities at your position</span>
 					<input
+                        className={ExperienceStyles.input}
 						type="text"
 						name="responsibilities"
 						id="responsibilities"
@@ -116,16 +133,19 @@ export default function Experience({ addSection, clearInputs }) {
 						required
 					/>
 				</label>
-                <div className="inputs-container">
-                    <label htmlFor="date-from">
+                <div className={ExperienceStyles['fieldset__inputs-container']}>
+                    <label 
+                        htmlFor="date-from"
+                        className={ExperienceStyles['fieldset__inputs-container__label']}
+                    >
                         <span>Date, from</span>
                         <Flatpickr
+                            className={ExperienceStyles.input}
                             value={experienceInfo.dateFrom}
                             options={{
                                 allowInput:true,
                                 plugins:[new MonthSelect({})],
                                 onChange:(selectedDate, dateStr) => {
-                                    console.info(dateStr)
                                     gatherExperienceInfo('date-from', dateStr)
                                 }
                             }}
@@ -135,15 +155,18 @@ export default function Experience({ addSection, clearInputs }) {
                             required
                         />
                     </label>
-                    <label htmlFor="date-until">
+                    <label 
+                        className={ExperienceStyles['fieldset__inputs-container__label']}
+                        htmlFor="date-until"
+                    >
                         <span>Date, until</span>
                         <Flatpickr
+                            className={ExperienceStyles['fieldset__inputs-container__label__input']}
                             value={experienceInfo.dateUntil}
                             options={{
                                 allowInput: true,
                                 plugins:[new MonthSelect({})],
                                 onChange: (selectedDate, dateStr) => {
-                                    console.info(dateStr);
                                     gatherExperienceInfo('date-until', dateStr);
                                 }
                             }}
@@ -154,7 +177,10 @@ export default function Experience({ addSection, clearInputs }) {
                         />
                     </label>
                 </div>
-                <button type="submit">Add experience section</button>
+                <button 
+                    className={ExperienceStyles.button}
+                    type="submit"
+                >Add experience section</button>
 			</fieldset>
 		</form>
 	);

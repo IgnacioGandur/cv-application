@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Flatpickr from "react-flatpickr";
+import MonthSelect from 'flatpickr/dist/plugins/monthSelect';
 import PersonalInfo from "./PersonalInfo.jsx";
 import Education from "./Education.jsx";
 import Experience from "./Experience.jsx";
@@ -7,6 +9,7 @@ import References from "./References.jsx";
 import defaultProfilePicture from "../assets/images/default-ppf.png";
 import '../styles/CV.css';
 import CVStyles from '../styles/CV.module.css';
+import CVElementStyles from '../styles/CVElements.module.css';
 
 export default function CV() {
 const [personalInfo, setPersonalInfo] = useState({
@@ -17,9 +20,15 @@ const [personalInfo, setPersonalInfo] = useState({
 		lastName: "Gandur",
         ocupation: "Web developer",
 		email: "gandurjuanignacio@gmail.com",
-		phoneNumber: "381 692 5908",
+		phoneNumber: "+54 123 456 7890",
 		aboutMe: "Dictum malesuada eget ligula, consectetur montes elit, est suscipit sem neque lacus nulla massa risus placerat neque ante, risus nam venenatis lacus et eros cursus, dictum eget ornare imperdiet. ",
 		profilePicture: defaultProfilePicture,
+        xTwitter: null,
+        xTwitterLink: null,
+        facebook: null,
+        facebookLink: null,
+        linkedin: null,
+        linkedinLink: null,
 	});
 
 	function gatherPersonalInfo(inputField, value) {
@@ -110,6 +119,33 @@ const [personalInfo, setPersonalInfo] = useState({
 				reader.readAsDataURL(value);
 				break;
 			}
+			case "x-twitter": {
+                const xProfileLink = `https://www.x.com/${value}`;
+				setPersonalInfo((prevPersonalInfo) => ({
+					...prevPersonalInfo,
+					xTwitter: value,
+                    xTwitterLink: xProfileLink,
+				}));
+				break;
+            }
+			case "facebook": {
+                const facebookProfileLink = `https://www.facebook.com/${value}`;
+				setPersonalInfo((prevPersonalInfo) => ({
+					...prevPersonalInfo,
+					facebook: value,
+                    facebookLink: facebookProfileLink,
+				}));
+				break;
+            }
+			case "linkedin": {
+                const linkedinProfileLink = `https://linkedin.com/in/${value}`
+				setPersonalInfo((prevPersonalInfo) => ({
+					...prevPersonalInfo,
+					linkedin: value,
+                    linkedinLink: linkedinProfileLink,
+				}));
+				break;
+            }
 			default:
 				throw new Error("Invalid personal information input element.");
 		}
@@ -157,28 +193,32 @@ const [personalInfo, setPersonalInfo] = useState({
 
     const [skillsSections, setSkillsSections] = useState([
         {
-            skillName:'Photoshop',
-            icon: '/cv.png',
+            skillName:'Html',
+            icon: '/icons/html.png',
         },
         {
             skillName:'Css',
-            icon: '/cv.png',
-        },
-        {
-            skillName:'Html',
-            icon: '/cv.png',
+            icon: '/icons/css-3.png',
         },
         {
             skillName:'Javascript',
-            icon: '/cv.png',
+            icon: '/icons/js.png',
         },
         {
             skillName:'React',
-            icon: '/cv.png',
+            icon: '/icons/react.png',
         },
         {
-            skillName:'Figma',
-            icon: '/cv.png',
+            skillName:'Github',
+            icon: '/icons/github.png',
+        },
+        {
+            skillName:'Git',
+            icon: '/icons/git.png',
+        },
+        {
+            skillName:'Linux',
+            icon: '/icons/linux.png',
         },
     ]);
 
@@ -232,7 +272,7 @@ const [personalInfo, setPersonalInfo] = useState({
 				setSkillsSections(updatedSections);
 				break;
 			}
-			case "reference": {
+			case "references": {
 				const updatedSections = [...referenceSections];
 				updatedSections.splice(index, 1);
 				setReferenceSections(updatedSections);
@@ -240,7 +280,7 @@ const [personalInfo, setPersonalInfo] = useState({
 			}
 			default:
 				throw new Error(
-					'Invalid section, "education" or "experience" are the only valid options.'
+					`Invalid section. Expects: "education", "experience", "skill", "references". Instead received: ${whichSection}.`
 				);
 		}
 	}
@@ -268,6 +308,79 @@ const [personalInfo, setPersonalInfo] = useState({
 		}
 	}
 
+    function toggleEditing(whichSection, index, isEditing) {
+        switch(whichSection) {
+            case 'experience': {
+                const updatedSections = [...experienceSections];
+                updatedSections[index] = {...updatedSections[index], isEditing}
+                setExperienceSections(updatedSections);
+                break;
+            }
+            case 'education': {
+                const updatedSections = [...educationSections];
+                updatedSections[index] = {...updatedSections[index], isEditing}
+                setEducationSections(updatedSections);
+                break;
+            }
+            case 'skills': {
+                const updatedSections = [...skillsSections];
+                updatedSections[index] = {...updatedSections[index], isEditing}
+                setSkillsSections(updatedSections);
+                break;
+            }
+            case 'references': {
+                const updatedSections = [...referenceSections];
+                updatedSections[index] = {...updatedSections[index], isEditing}
+                setReferenceSections(updatedSections);
+                break;
+            }
+            default:
+                throw new Error(`Invalid section. Expects: "experience", "education", "skills", "references". Instead received: ${whichSection}`);
+        }
+    }
+
+    function handleEditedValues(whichSection, index, property,value) {
+        switch(whichSection) {
+            case 'experience' : {
+                const updatedSections = [...experienceSections];
+                updatedSections[index][property] = value;
+                setExperienceSections(updatedSections);
+                break;
+            }
+            case 'education' : {
+                const updatedSections = [...educationSections];
+                updatedSections[index][property] = value;
+                setEducationSections(updatedSections);
+                break;
+            }
+            case 'skills' : {
+                if (property === 'skill-icon') {
+                    const updatedSections = [...skillsSections];
+                    const reader = new FileReader();
+                    reader.onloadend = (e) => {
+                       updatedSections[index].icon =  e.target.result;
+                    }
+                    reader.readAsDataURL(value);
+                    console.log(updatedSections);
+                    setSkillsSections(updatedSections);
+                }
+
+                const updatedSections = [...skillsSections];
+                updatedSections[index][property] = value;
+                setSkillsSections(updatedSections);
+                break;
+            }
+            case 'references' : {
+                const updatedSections = [...referenceSections];
+                updatedSections[index][property] = value;
+                setReferenceSections(updatedSections);
+                break;
+            }
+            default:
+                throw new Error(`Invalid section. Expects: "experience", "education", "skills", "references". Instead received: ${whichSection} section.`)
+        }
+    } 
+
 	return (
         <main className='app'>
 			<section className="inputs">
@@ -294,26 +407,99 @@ const [personalInfo, setPersonalInfo] = useState({
                     <div className="experience-section">
                         <p className='title'>Experience</p>
                         {experienceSections.map((section, index) => (
-                            <div className='experience-item' key={index}>
-                                <div className='button-companyName-container'>
-                                    <button
-                                        className='delete-section'
-                                        onClick={() =>
-                                            removeSection("experience", index)
-                                        }
-                                    >
-                                        <span className='material-icons-round'>delete</span>
-                                    </button>
-                                    <p className='company-name'>{section.companyName}</p>
+                            section.isEditing ? (
+                            <div style={{zIndex: '100',}} className="modal-background" key={index}>
+                                <div className="modal-box">
+                                   <label htmlFor="new-company-name">
+                                        Company name
+                                        <input 
+                                            defaultValue={section.companyName} 
+                                            type="text" 
+                                            id="new-company-name"
+                                            name="new-company-name"
+                                            onChange={ (e) => handleEditedValues('experience', index, 'companyName', e.target.value)}
+                                />
+                                    </label>                                     
+                                   <label htmlFor="new-position-title">
+                                        Position title
+                                        <input 
+                                            defaultValue={section.positionTitle} 
+                                            type="text" 
+                                            id="new-position-title" 
+                                            name="new-position-title"
+                                            onChange={(e) => handleEditedValues('experience', index, 'positionTitle', e.target.value)}
+                                            />
+                                    </label>                                     
+                                   <label htmlFor="edit-date-from">
+                                        Date, from
+                                        <Flatpickr 
+                                            defaultValue={section.dateFrom} 
+                                            id="edit-date-from" 
+                                            name="edit-date-from"  
+                                            options={{
+                                                allowInput:true,
+                                                plugins:[new MonthSelect({})],
+                                                onChange: (selectedDate, dateStr) => {
+                                                    handleEditedValues('experience', index, 'dateFrom', dateStr);
+                                                }
+                                            }}
+                                        />
+                                    </label>                                     
+                                   <label htmlFor="edit-date-until">
+                                        Date, until
+                                        <Flatpickr 
+                                            defaultValue={section.dateUntil} 
+                                            id="edit-date-until" 
+                                            name="edit-date-until"  
+                                            options={{
+                                                allowInput:true,
+                                                plugins:[new MonthSelect({})],
+                                                onChange: (selectedDate, dateStr) => {
+                                                    handleEditedValues('experience', index, 'dateUntil', dateStr);
+                                                }
+                                            }}
+                                        />
+                                    </label>                                     
+                                   <label htmlFor="edit-responsibilities">
+                                        Responsibilities at your position
+                                        <input 
+                                            defaultValue={section.responsibilities} 
+                                            type="text" 
+                                            id="edit-responsibilities" 
+                                            name="edit-responsibilities"
+                                            onChange={(e) => handleEditedValues('experience', index, 'responsibilities', e.target.value)}
+                                            />
+                                    </label>                                     
+                                    <button onClick={ () => toggleEditing('experience', index, false)} >Save edit</button>
                                 </div>
-                                <p>
-                                    {section.positionTitle}
-                                </p>
-                                <p className='date'>{`${section.dateFrom} - ${section.dateUntil}`}</p>
-                                <p>
-                                    {section.responsibilities}
-                                </p>
-                            </div>
+                            </div> 
+                            ) : (
+                                <div className='experience-item' key={index}>
+                                    <div className='button-companyName-container'>
+                                        <div className="buttons-container">
+                                            <button
+                                                className='delete-section'
+                                                onClick={() =>
+                                                    removeSection("experience", index)
+                                                }
+                                            >
+                                                <span className='material-icons-round'>delete</span>
+                                            </button>
+                                            <button className='edit-section-button' onClick={() => toggleEditing('experience', index, true)}>
+                                                <span className="material-icons-round">edit</span>
+                                            </button>
+                                        </div>
+                                        <p className='company-name'>{section.companyName}</p>
+                                    </div>
+                                    <p>
+                                        {section.positionTitle}
+                                    </p>
+                                    <p className='date'>{`${section.dateFrom} - ${section.dateUntil}`}</p>
+                                    <p>
+                                        {section.responsibilities}
+                                    </p>
+                                </div>
+                            )
                         ))}
                         <div className='about-me'>
                             <p className='title'>About me</p>
@@ -325,31 +511,116 @@ const [personalInfo, setPersonalInfo] = useState({
                     <div className="education">
                         <p className='title'>Education</p>
                         {educationSections.map((section, index) => (
+                            section.isEditing ? (
+                                <div className="modal-background" key={index}>
+                                    <div className="modal-box">
+                                        <label htmlFor="edit-institution-name">
+                                            Institution name
+                                            <input 
+                                                defaultValue={section.institutionName}
+                                                type="text"
+                                                id='edit-institution-name'
+                                                name='edit-institution-name'
+                                                onChange={(e) => handleEditedValues('education', index, 'institutionName', e.target.value)}
+                                            />
+                                        </label>
+                                        <label htmlFor="edit-title-of-study">
+                                            Title of study
+                                            <input 
+                                                defaultValue={section.titleOfStudy}
+                                                type="text"
+                                                id='edit-title-of-study'
+                                                name='edit-title-of-study'
+                                                onChange={(e) => handleEditedValues('education', index, 'titleOfStudy', e.target.value)}
+                                            />
+                                        </label>
+                                        <label htmlFor="edit-date-from">
+                                            Date, from
+                                            <Flatpickr 
+                                                defaultValue={section.dateFrom}
+                                                id='edit-date-from'
+                                                name='edit-date-from'
+                                                options={{
+                                                    allowInput:true,
+                                                    plugins:[new MonthSelect({})],
+                                                    onChange:(selectedDates, dateStr) => {
+                                                        handleEditedValues('education', index, 'dateFrom', dateStr);
+                                                    }
+                                                }}
+                                            />
+                                        </label>
+                                        <label htmlFor="edit-date-until">
+                                            Date, until
+                                            <Flatpickr 
+                                                defaultValue={section.dateUntil}
+                                                id='edit-date-until'
+                                                name='edit-date-until'
+                                                options={{
+                                                    allowInput:true,
+                                                    plugins:[new MonthSelect({})],
+                                                    onChange:(selectedDates, dateStr) => {
+                                                        handleEditedValues('education', index, 'dateUntil', dateStr);
+                                                    }
+                                                }}
+                                            />
+                                        </label>
+                                        <button onClick={() => toggleEditing('education', index, false)}>Save edit</button>
+                                    </div>
+                                </div>
+                            ) : (
                             <div key={index} className={CVStyles['education-item']}>
                                 <div className={CVStyles['title-and-delete-button-container']}>
                                     <p className={CVStyles.title}>{section.institutionName}</p>
-                                    <button
-                                        className={CVStyles['delete-section-button']}
-                                        onClick={() =>
-                                            removeSection("education", index)
-                                        }
-                                    >
-                                        <span className={`${CVStyles['material-icons-round']} material-icons-round`}>delete</span>
-                                    </button>
+                                    <div className="buttons-container">
+                                        <button
+                                            className={CVStyles['delete-section-button']}
+                                            onClick={() =>
+                                                removeSection("education", index)
+                                            }
+                                        >
+                                            <span className={`${CVStyles['material-icons-round']} material-icons-round`}>delete</span>
+                                        </button>
+                                        <button className={CVStyles['edit-section-button']} onClick={() => toggleEditing('education', index, true)}>
+                                            <span className={`${CVStyles['material-icons-round']} material-icons-round`}>edit</span>
+                                        </button>
+                                    </div>
                                 </div>
                                 <p>{section.titleOfStudy}</p>
                                 <p>{section.dateFrom} - {section.dateUntil}</p>
                             </div>
-                        ))}
+                            )))}
                         <div className="skills">
                             <p className="title">Skills</p>
                             <div className="skills-container">
                                 {skillsSections.map((section, index) => (
+                                    section.isEditing ? (
+                                        <div className="modal-background" key={index} autoFocus>
+                                            <div className="modal-box">
+                                                <label htmlFor="edit-skill">
+                                                    Edit name
+                                                    <input onChange={ (e) => handleEditedValues('skills', index, 'skillName', (e.target.value))} type="text" defaultValue={section.skillName} id='edit-skill' name='edit-skill' />
+                                                </label>
+                                                <label htmlFor="edit-skill-image">
+                                                    Edit image
+                                                    <input type="file" accept="image/png, image/jpg, image/jpeg" id='edit-skill-image' name='edit-skill-image' onChange={(e) => handleEditedValues('skills', index, 'skill-icon', e.target.files[0])} />
+                                                </label>
+                                                <button onClick={() => toggleEditing('skills', index, false)}>Save edit</button>
+                                            </div>
+                                        </div>
+                                    ) : (
                                     <div className="skill-item" key={index}>
                                         <img className="skill-icon" src={section.icon} alt='Skill icon'/>
                                         <p>{section.skillName}</p>
-                                        <button className="delete-section-button" onClick={() => removeSection('skill', index) }><span className="material-icons-round">delete</span></button>
+                                        <div className="buttons-container">
+                                            <button className='edit-section-button'  onClick={() => {
+                                                toggleEditing('skills', index, true);
+                                            }}><span className={'material-icons-round'}>
+                                            edit
+                                            </span></button>
+                                            <button className="delete-section-button" onClick={() => removeSection('skill', index) }><span className="material-icons-round">delete</span></button>
+                                        </div>
                                     </div>
+                                    )
                                 ))}
                             </div>
                         </div>
@@ -358,11 +629,19 @@ const [personalInfo, setPersonalInfo] = useState({
                             <p>{personalInfo.address},<br/>{personalInfo.city}, {personalInfo.country}.<br/>
                             <i className="fa-solid fa-mobile-screen"></i> {personalInfo.phoneNumber}<br/>
                             <i className="fa-solid fa-envelope"></i> {personalInfo.email}</p>
-                            <div className="social-media">
-                                <p><i className="fa-brands fa-square-x-twitter"></i> @</p>
-                                <p><i className="fa-brands fa-square-facebook"></i> facebook.com/</p>
-                                <p><i className="fa-brands fa-linkedin"></i> linkedin.com/in/</p>
-                            </div>
+                            {(personalInfo.xTwitter || personalInfo.facebook || personalInfo.linkedin) && (
+                                <div className="social-media">
+                                    {personalInfo.xTwitter && (
+                                        <p><i className="fa-brands fa-square-x-twitter"></i> @<a href={personalInfo.xTwitterLink} target="_blank" rel="noreferrer">{personalInfo.xTwitter}</a></p>
+                                    )}
+                                    {personalInfo.facebook && (
+                                        <p><i className="fa-brands fa-square-facebook"></i> <a href={personalInfo.facebookLink} target="_blank" rel="noreferrer">facebook.com/{personalInfo.facebook}</a></p>
+                                    )}
+                                    {personalInfo.linkedin && (
+                                        <p><i className="fa-brands fa-linkedin"></i> <a href={personalInfo.linkedinLink} target="_blank" rel="noreferrer">linkedin.com/in/{personalInfo.linkedin}</a></p>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -371,14 +650,78 @@ const [personalInfo, setPersonalInfo] = useState({
                     <p className="title">References</p>
                     <div className="references-container">
                         {referenceSections.map((section, index) => (
+                            section.isEditing ? (
+                                <div className="modal-background" key={index}>
+                                    <div className="modal-box">
+                                        <label htmlFor="edit-reference-name">
+                                            Reference name
+                                            <input 
+                                                type="text"
+                                                id='edit-reference-name'
+                                                name='edit-reference-name'
+                                                defaultValue={section.referenceName}
+                                                onChange={(e) => handleEditedValues('references', index, 'referenceName', e.target.value)}
+                                            />
+                                        </label>
+                                        <label htmlFor="edit-reference-position">
+                                            Reference position
+                                            <input 
+                                                type="text"
+                                                id='edit-reference-position'
+                                                name='edit-reference-position'
+                                                defaultValue={section.referencePosition}
+                                                onChange={(e) => handleEditedValues('references', index, 'referencePosition', e.target.value)}
+                                            />
+                                        </label>
+                                        <label htmlFor="edit-reference-phone-number">
+                                            Phone number
+                                            <input 
+                                                type="text"
+                                                id='edit-reference-phone-number'
+                                                name='edit-reference-phone-number'
+                                                defaultValue={section.referencePhoneNumber}
+                                                onChange={(e) => handleEditedValues('references', index, 'referencePhoneNumber', e.target.value)}
+                                            />
+                                        </label>
+                                        <label htmlFor="edit-reference-phone-number">
+                                            Phone number
+                                            <input 
+                                                type="tel"
+                                                id='edit-reference-phone-number'
+                                                name='edit-reference-phone-number'
+                                                defaultValue={section.referencePhoneNumber}
+                                                onChange={(e) => handleEditedValues('references', index, 'referencePhoneNumber', e.target.value)}
+                                            />
+                                        </label>
+                                        <label htmlFor="edit-reference-email">
+                                            Email
+                                            <input 
+                                                type="email"
+                                                id='edit-reference-email'
+                                                name='edit-reference-email'
+                                                defaultValue={section.referenceEmail}
+                                                onChange={(e) => handleEditedValues('references', index, 'referenceEmail', e.target.value)}
+                                            />
+                                        </label>
+                                        <button onClick={() => toggleEditing('references', index, false)}>Save edit</button>
+                                    </div>
+                                </div>
+                            ) : (
                             <div className="reference-item" key={index}>
                                 <p className="name">{section.referenceName}</p>
                                 <p>{section.referencePosition}</p>
-                                <p><b>T:</b> {section.referencePhoneNumber}</p>
-                                <p><b>E:</b> {section.referenceEmail}</p>
-                                <button onClick={() => removeSection('reference', index)} className="delete-section-button"><span className="material-icons-round">delete</span></button>
+                                <p><b>Tel:</b> {section.referencePhoneNumber}</p>
+                                <p><b>Email:</b> {section.referenceEmail}</p>
+                                <div className="buttons-container">
+                                    <button onClick={() => removeSection('references', index)} className="delete-section-button">
+                                        <span className="material-icons-round">delete</span>
+                                    </button>
+                                    <button onClick={() => toggleEditing('references', index, true)}>
+                                        <span className='material-icons-round'>edit</span>
+                                    </button>
+                                </div>
                             </div>
-                        ))} 
+                            )))} 
                     </div>
                 </div>
 			</section>

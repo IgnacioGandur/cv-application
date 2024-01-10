@@ -1,3 +1,65 @@
+div.modal-background {
+    background-image: linear-gradient(45deg, #00000055, #00000055);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(5px);
+}
+
+div.modal-box {
+    width: 40%;
+    border: 5px solid white;
+    background-color: white;
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+div.modal-box > label {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+div.modal-box input[type='file']::file-selector-button {
+    display: none;
+}
+
+div.modal-box > button {
+    background-image: linear-gradient(
+        90deg,
+        var(--color-grey-transparent),
+        var(--color-grey-transparent),
+        var(--color-pink),
+        var(--color-yellow)
+    );
+    background-size: 750%;
+    background-position: left;
+    font-size: 1.15rem;
+    width: 100%;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: all 500ms ease-out;
+    cursor: pointer;
+}
+
+div.modal-box > button:hover {
+    background-position: right;
+    background-size: 250%;
+    color: var(--color-black);
+    border: 1px solid var(--color-pink-transparent);
+}
+
 main.app {
     background-color: white;
     display: flex;
@@ -54,6 +116,12 @@ main.app > section.inputs {
     display: flex;
     flex-direction: column;
     gap: var(--default-value);
+}
+
+main.app > section.inputs > div.education-and-experience {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 main.app
@@ -197,7 +265,15 @@ section.CV
     > div.experience-section
     > div.experience-item
     > div.button-companyName-container
-    > button.delete-section {
+    > div.buttons-container
+    > button.delete-section,
+section.CV
+    > div.education-and-experience
+    > div.experience-section
+    > div.experience-item
+    > div.button-companyName-container
+    > div.buttons-container
+    > button.edit-section-button {
     background-color: var(--color-grey-transparent);
     width: 30px;
     height: 30px;
@@ -217,7 +293,8 @@ section.CV
     > div.experience-section
     > div.experience-item:hover
     > div.button-companyName-container
-    > button.delete-section {
+    > div.buttons-container
+    > button {
     opacity: 1;
 }
 
@@ -226,7 +303,8 @@ section.CV
     > div.experience-section
     > div.experience-item
     > div.button-companyName-container
-    > button.delete-section:hover {
+    > div.buttons-container
+    > button:hover {
     transform: scale(1.2);
 }
 
@@ -235,8 +313,9 @@ section.CV
     > div.experience-section
     > div.experience-item
     > div.button-companyName-container
-    > button.delete-section
-    > span.material-icons-round {
+    > div.buttons-container
+    > button
+    > span {
     color: var(--color-span-icon);
     font-size: 1.25rem;
 }
@@ -288,7 +367,7 @@ section.CV
     > div.skills-container
     > div.skill-item {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     gap: 5px;
 }
 
@@ -299,12 +378,37 @@ section.CV
     > div.skills-container
     > div.skill-item
     > img {
-    width: 20px;
-    height: 20px;
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
 }
 
-section.CV > div > div.education > div.skills > div > div > button {
+section.CV
+    > div.education-and-experience
+    > div.education
+    > div.skills
+    > div.skills-container
+    > div.skill-item
+    > div.buttons-container {
     margin-left: auto;
+    display: flex;
+    gap: 15px;
+}
+
+section.CV
+    div.education-and-experience
+    div.experience-section
+    div.experience-item
+    div.button-companyName-container
+    div.buttons-container {
+    margin-left: initial;
+    margin-right: auto;
+}
+
+div.buttons-container {
+    margin-left: auto;
+    display: flex;
+    gap: 15px;
 }
 
 section.CV > div.education-and-experience > div.separator {
@@ -356,6 +460,7 @@ section.CV
     > div.references-container
     > div.reference-item
     > p.name {
+    text-decoration: underline;
     font-size: 1.05rem;
     font-weight: 900;
     font-family: var(--font-titles-h2);
@@ -364,8 +469,23 @@ section.CV
 section.CV
     > div.references
     > div.references-container
+    > div.reference-item
+    > div.buttons-container {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: initial;
+    margin-top: 5px;
+}
+
+section.CV
+    > div.references
+    > div.references-container
     > div.reference-item:hover
-    > button.delete-section-button {
+    > div.buttons-container
+    > button {
     opacity: 1;
 }
 
@@ -373,8 +493,8 @@ section.CV
     > div.references
     > div.references-container
     > div.reference-item
-    > button.delete-section-button {
-    margin-top: 5px;
+    > div.buttons-container
+    > button {
     background-color: var(--color-grey-transparent);
     width: 30px;
     height: 30px;
@@ -393,7 +513,8 @@ section.CV
     > div.references
     > div.references-container
     > div.reference-item
-    > button.delete-section-button:hover {
+    > div.buttons-container
+    > button:hover {
     transform: scale(1.25);
 }
 
@@ -401,7 +522,8 @@ section.CV
     > div.references
     > div.references-container
     > div.reference-item
-    > button.delete-section-button
+    > div.buttons-container
+    > button
     > span {
     font-size: 1.25rem;
     color: var(--color-span-icon);

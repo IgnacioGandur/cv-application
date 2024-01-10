@@ -1,12 +1,15 @@
+
+
 div.education-item {
     display: flex;
     flex-direction: column;
 }
 
-div.education-item:hover button.delete-section-button {
+div.education-item:hover button {
     opacity: 1;
 }
-button.delete-section-button {
+button.delete-section-button,
+button.edit-section-button {
     background-color: var(--color-grey-transparent);
     width: 30px;
     height: 30px;
@@ -21,7 +24,8 @@ button.delete-section-button {
     opacity: 0;
 }
 
-button.delete-section-button:hover {
+button.delete-section-button:hover,
+button.edit-section-button:hover {
     transform: scale(1.2);
 }
 

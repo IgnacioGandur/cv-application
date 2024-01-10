@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import FormElementsStyle from '../styles/FormElements.module.css';
 
 export default function References({ addSection }) {
 
@@ -37,27 +38,60 @@ export default function References({ addSection }) {
             e.preventDefault();
             addSection(e.target.id, reference);
         }}>
-            <fieldset>
-                <legend>References</legend>
-                    <div className='inputs-container'>
-                        <label htmlFor="reference-name">
+            <fieldset
+                className={FormElementsStyle.fieldset}
+            >
+                <legend
+                    className={FormElementsStyle.fieldset__legend}
+                >References</legend>
+                    <div className={FormElementsStyle['fieldset__inputs-container']}>
+                        <label 
+                            className={FormElementsStyle['fieldset__inputs-container__label']}
+                            htmlFor="reference-name"
+                        >
                             Reference name
-                            <input onChange={(e) => gatherReferenceInfo(e.target.id, e.target.value)} type="text" id="reference-name" name="reference-name" />
+                            <input 
+                                className={FormElementsStyle.input}
+                                onChange={(e) => gatherReferenceInfo(e.target.id, e.target.value)} 
+                                type="text" 
+                                id="reference-name" 
+                                name="reference-name" />
                         </label>
-                        <label htmlFor="reference-position">
+                        <label 
+                            className={FormElementsStyle['fieldset__inputs-container__label']}
+                            htmlFor="reference-position">
                             Your position at the reference
-                            <input onChange={(e) => gatherReferenceInfo(e.target.id, e.target.value)} type="text" id="reference-position" name="reference-position" />
+                            <input 
+                                className={FormElementsStyle.input}
+                                onChange={(e) => gatherReferenceInfo(e.target.id, e.target.value)} 
+                                type="text"
+                                id="reference-position"
+                                name="reference-position" />
                         </label>
-                        <label htmlFor="reference-phone">
+                        <label 
+                            className={FormElementsStyle['fieldset__inputs-container__label']}
+                            htmlFor="reference-phone">
                             Reference phone number
-                            <input onChange={(e) => gatherReferenceInfo(e.target.id, e.target.value)} type="text" id="reference-phone" name="reference-phone" />
+                            <input 
+                                className={FormElementsStyle.input}
+                                onChange={(e) => gatherReferenceInfo(e.target.id, e.target.value)}
+                                type="text"
+                                id="reference-phone"
+                                name="reference-phone" />
                         </label>
-                        <label htmlFor="reference-email">
+                        <label 
+                            className={FormElementsStyle['fieldset__inputs-container__label']}
+                            htmlFor="reference-email">
                             Reference email address
-                            <input onChange={(e) => gatherReferenceInfo(e.target.id, e.target.value)} type="text" id="reference-email" name="reference-email" />
+                            <input 
+                                className={FormElementsStyle.input}
+                                onChange={(e) => gatherReferenceInfo(e.target.id, e.target.value)}
+                                type="text"
+                                id="reference-email"
+                                name="reference-email" />
                         </label>
                     </div>
-                    <button type='submit'>Add reference</button>
+                    <button className={FormElementsStyle.button} type='submit'>Add reference</button>
             </fieldset>
         </form>
     )

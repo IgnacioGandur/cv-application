@@ -1,7 +1,8 @@
-import '../styles/Education.css';
+// import '../styles/Education.css'; // Delete this later
 import { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import MonthSelect from 'flatpickr/dist/plugins/monthSelect';
+import EducationStyles from '../styles/FormElements.module.css';
 import "flatpickr/dist/themes/material_orange.css";
 
 export default function Education({ addSection, clearInputs }) {
@@ -62,12 +63,13 @@ export default function Education({ addSection, clearInputs }) {
 				clearDateInputs();
 			}}
 		>
-			<fieldset>
-				<legend>Education Info</legend>
-                <div className="inputs-container">
-                    <label htmlFor="institution-name">
+			<fieldset className={EducationStyles.fieldset}>
+				<legend className={EducationStyles.fieldset__legend} >Education Info</legend>
+                <div className={EducationStyles['fieldset__inputs-container']}>
+                    <label className={EducationStyles['fieldset__inputs-container__label']} htmlFor="institution-name">
                         <span>Institution name</span>
                         <input
+                            className={EducationStyles.input}
                             onChange={(e) =>
                                 gatherEducationInfo(e.target.id, e.target.value)
                             }
@@ -78,9 +80,10 @@ export default function Education({ addSection, clearInputs }) {
                             required
                         />
                     </label>
-                    <label htmlFor="title-of-study">
+                    <label className={EducationStyles['fieldset__inputs-container__label']} htmlFor="title-of-study">
                         <span>Title of study</span>
                         <input
+                            className={EducationStyles.input}
                             onChange={(e) =>
                                 gatherEducationInfo(e.target.id, e.target.value)
                             }
@@ -92,12 +95,12 @@ export default function Education({ addSection, clearInputs }) {
                         />
                     </label>
                 </div>
-                <div className="inputs-container">
-                    <label htmlFor="date-from">
+                <div className={EducationStyles['fieldset__inputs-container']}>
+                    <label className={EducationStyles['fieldset__inputs-container__label']} htmlFor="date-from">
                         <span>Date of study, from</span>
                         <Flatpickr
+                            className={EducationStyles.input}
                             value={educationInfo.dateFrom}
-                            // onChange={() => gatherEducationInfo("date-from", "")}
                             options={{
                                 plugins:[new MonthSelect({})],
                                 allowInput: true,
@@ -105,18 +108,17 @@ export default function Education({ addSection, clearInputs }) {
                                     gatherEducationInfo('date-from', dateStr);
                                 }
                             }}
-                            // type="datetime-local"
                             name="date-from"
                             id="date-from"
                             placeholder='Click to open the calendar...'
                             required
                         />
                     </label>
-                    <label htmlFor="date-until">
+                    <label className={EducationStyles['fieldset__inputs-container__label']} htmlFor="date-until">
                         <span>Date of study, until</span>
                         <Flatpickr
+                            className={EducationStyles.input}
                             value={educationInfo.dateUntil}
-                            // onChange={() => gatherEducationInfo("date-until", "")}
                             options={{
                                 plugins:[new MonthSelect({})],
                                 allowInput: true,
@@ -124,7 +126,6 @@ export default function Education({ addSection, clearInputs }) {
                                     gatherEducationInfo('date-until', dateStr);
                                 }
                             }}
-                            // type="datetime-local"
                             name="date-until"
                             id="date-until"
                             placeholder='Click to open the calendar...'
@@ -132,7 +133,7 @@ export default function Education({ addSection, clearInputs }) {
                         />
                     </label>
                 </div>
-                <button type="submit">Add education section</button>
+                <button className={EducationStyles.button} type="submit">Add education section</button>
 			</fieldset>
 		</form>
 	);
