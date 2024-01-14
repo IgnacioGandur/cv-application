@@ -6,7 +6,7 @@ import ExperienceStyles from '../styles/FormElements.module.css';
 import 'flatpickr/dist/plugins/monthSelect/style.css';
 import 'flatpickr/dist/themes/material_orange.css';
 
-export default function Experience({ addSection, clearInputs }) {
+export default function Experience({ addSection, clearInputs, isSectionLimitSurpassed}) {
 	const [experienceInfo, setExperienceInfo] = useState({
 		companyName: "",
 		positionTitle: "",
@@ -69,6 +69,9 @@ export default function Experience({ addSection, clearInputs }) {
 			id="experience-form"
 			onSubmit={(e) => {
 				e.preventDefault();
+                if (isSectionLimitSurpassed('experience')) {
+                    return;
+                }
 				addSection("experience", experienceInfo);
 				clearInputs(e);
 				clearExperienceInputs();
@@ -79,7 +82,7 @@ export default function Experience({ addSection, clearInputs }) {
             >
 				<legend
                     className={ExperienceStyles.fieldset__legend}
-                >Experience:</legend>
+                >Experience <i>(5 items max.)</i></legend>
                 <div className={ExperienceStyles['fieldset__inputs-container']}>
                     <label 
                         className={ExperienceStyles['fieldset__inputs-container__label']}
@@ -95,6 +98,7 @@ export default function Experience({ addSection, clearInputs }) {
                                 gatherExperienceInfo(e.target.id, e.target.value)
                             }
                             placeholder='Mercado libre'
+                            maxLength='30'
                             required
                         />
                     </label>
@@ -112,6 +116,7 @@ export default function Experience({ addSection, clearInputs }) {
                             onChange={(e) =>
                                 gatherExperienceInfo(e.target.id, e.target.value)
                             }
+                            maxLength='30'
                             required
                         />
                     </label>
@@ -130,6 +135,7 @@ export default function Experience({ addSection, clearInputs }) {
 						onChange={(e) =>
 							gatherExperienceInfo(e.target.id, e.target.value)
 						}
+                        maxLength='100'
 						required
 					/>
 				</label>

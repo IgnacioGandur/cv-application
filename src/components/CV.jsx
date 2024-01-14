@@ -7,149 +7,97 @@ import Experience from "./Experience.jsx";
 import Skills from "./Skills.jsx";
 import References from "./References.jsx";
 import defaultProfilePicture from "../assets/images/default-ppf.png";
-import '../styles/CV.css';
-import CVStyles from '../styles/CV.module.css';
+// import '../styles/CV.css';
+// import CVStyles from '../styles/CV.module.css';
 import CVElementStyles from '../styles/CVElements.module.css';
+import ModalElementsStyles from '../styles/ModalElements.module.css';
 
 export default function CV() {
-const [personalInfo, setPersonalInfo] = useState({
-        country: 'Argentina',
-		city: "Tucumán",
-		address: "Pasaje Edmundo Halley 4471",
-		firstName: "Ignacio",
-		lastName: "Gandur",
-        ocupation: "Web developer",
-		email: "gandurjuanignacio@gmail.com",
-		phoneNumber: "+54 123 456 7890",
-		aboutMe: "Dictum malesuada eget ligula, consectetur montes elit, est suscipit sem neque lacus nulla massa risus placerat neque ante, risus nam venenatis lacus et eros cursus, dictum eget ornare imperdiet. ",
-		profilePicture: defaultProfilePicture,
-        xTwitter: null,
-        xTwitterLink: null,
-        facebook: null,
-        facebookLink: null,
-        linkedin: null,
-        linkedinLink: null,
-	});
 
-	function gatherPersonalInfo(inputField, value) {
-		switch (inputField) {
-			case "country":
-				{
-					if (value === "") {
-						setPersonalInfo((prevPersonalInfo) => ({
-							...prevPersonalInfo,
-							country: null,
-						}));
-						return;
-					}
-					const [firstLetter, ...restString] = value;
-					setPersonalInfo((prevPersonalInfo) => ({
-						...prevPersonalInfo,
-						country:
-							firstLetter.toUpperCase() + restString.join(""),
-					}));
-				}
-				break;
-			case "city":
-				{
-					if (value === "") {
-						setPersonalInfo((prevPersonalInfo) => ({
-							...prevPersonalInfo,
-							city: null,
-						}));
-						return;
-					}
-					const [firstLetter, ...restString] = value;
-					setPersonalInfo((prevPersonalInfo) => ({
-						...prevPersonalInfo,
-						city: firstLetter.toUpperCase() + restString.join(""),
-					}));
-				}
-				break;
-			case "address":
-				setPersonalInfo((prevPersonalInfo) => ({
-					...prevPersonalInfo,
-					address: value,
-				}));
-				break;
-			case "first-name":
-				setPersonalInfo((prevPersonalInfo) => ({
-					...prevPersonalInfo,
-					firstName: value,
-				}));
-				break;
-			case "last-name":
-				setPersonalInfo((prevPersonalInfo) => ({
-					...prevPersonalInfo,
-					lastName: value,
-				}));
-				break;
-			case "ocupation":
-				setPersonalInfo((prevPersonalInfo) => ({
-					...prevPersonalInfo,
-					ocupation: value,
-				}));
-				break;
-			case "email":
-				setPersonalInfo((prevPersonalInfo) => ({
-					...prevPersonalInfo,
-					email: value,
-				}));
-				break;
-			case "phone-number":
-				setPersonalInfo((prevPersonalInfo) => ({
-					...prevPersonalInfo,
-					phoneNumber: value,
-				}));
-				break;
-			case "about-me":
-				setPersonalInfo((prevPersonalInfo) => ({
-					...prevPersonalInfo,
-					aboutMe: value,
-				}));
-				break;
-			case "profile-picture": {
-				const reader = new FileReader();
-				reader.onload = (e) => {
-					setPersonalInfo((prevPersonalInfo) => ({
-						...prevPersonalInfo,
-						profilePicture: e.target.result,
-					}));
-				};
-				reader.readAsDataURL(value);
-				break;
-			}
-			case "x-twitter": {
-                const xProfileLink = `https://www.x.com/${value}`;
-				setPersonalInfo((prevPersonalInfo) => ({
-					...prevPersonalInfo,
-					xTwitter: value,
-                    xTwitterLink: xProfileLink,
-				}));
-				break;
+    const [personalInfo, setPersonalInfo] = useState({
+            country: 'Argentina',
+            city: "Tucumán",
+            address: "Pasaje Edmundo Halley 4471",
+            firstName: "Ignacio",
+            lastName: "Gandur",
+            ocupation: "Web developer",
+            email: "gandurjuanignacio@gmail.com",
+            phoneNumber: "+54 123 456 7890",
+            aboutMe: "Dictum malesuada eget ligula, consectetur montes elit, est suscipit sem neque lacus nulla massa risus placerat neque ante, risus nam venenatis lacus et eros cursus, dictum eget ornare imperdiet. ",
+            profilePicture: defaultProfilePicture,
+            portfolioLink:null,
+            xTwitter: null,
+            xTwitterLink: null,
+            instagram: null,
+            instagramLink: null,
+            linkedin: null,
+            linkedinLink: null,
+        });
+
+
+    function handleProfilePicture(value) {
+        if (value) {
+            const reader = new FileReader();
+            reader.onloadend = (e) => {
+                setPersonalInfo((prevPersonalInfo) => ({
+                    ...prevPersonalInfo,
+                    profilePicture: e.target.result,
+                }))
             }
-			case "facebook": {
-                const facebookProfileLink = `https://www.facebook.com/${value}`;
-				setPersonalInfo((prevPersonalInfo) => ({
-					...prevPersonalInfo,
-					facebook: value,
-                    facebookLink: facebookProfileLink,
-				}));
-				break;
+            reader.readAsDataURL(value);
+        } else {
+            setPersonalInfo((prevPersonalInfo) => ({...prevPersonalInfo, profilePicture: defaultProfilePicture}))
+        }
+    }
+
+    function gatherPersonalInfo(event) {
+
+        const { id, value } = event.target;
+
+        // Handle social media links
+        if (id === 'xTwitter' || id === 'instagram' || id === 'linkedin') {
+
+            const generateSocialLink = (prefix) => ({
+                [id]:value,
+                [`${id}Link`] : prefix === 'linkedin' ? `https://www.${prefix}.com/in/${value}` : `https://www.${prefix}.com/${value}`,
+            })
+
+            switch(id) {
+                case 'xTwitter': {
+                    setPersonalInfo((prevPersonalInfo) => ({
+                        ...prevPersonalInfo,
+                        // This will call the 'generateSocialLink' function, the function will return an object, 
+                        // the object will get destructured, the destructured properties returned
+                        // by the function will get used as a new property:value for setPersonalInfo
+                        ...generateSocialLink('x'),
+                    }))
+                    break;
+                }
+                case 'instagram': {
+                    setPersonalInfo((prevPersonalInfo) => ({
+                        ...prevPersonalInfo,
+                        ...generateSocialLink('instagram'),
+                    }))
+                    break;
+                }
+                case 'linkedin': {
+                    setPersonalInfo((prevPersonalInfo) => ({
+                        ...prevPersonalInfo,
+                        ...generateSocialLink('linkedin'),
+                    }))
+                    break;
+                }
+                default: 
+                    throw new Error(`Invalid id. Expects: "xTwitter", "instagram", "linkedin". Instead received: ${id}`)
             }
-			case "linkedin": {
-                const linkedinProfileLink = `https://linkedin.com/in/${value}`
-				setPersonalInfo((prevPersonalInfo) => ({
-					...prevPersonalInfo,
-					linkedin: value,
-                    linkedinLink: linkedinProfileLink,
-				}));
-				break;
-            }
-			default:
-				throw new Error("Invalid personal information input element.");
-		}
-	}
+        }
+
+        // Handle text based input
+        setPersonalInfo((prevPersonalInfo) => ({
+            ...prevPersonalInfo,
+            [id]: value === '' ? null : value.charAt(0).toUpperCase() + value.slice(1),
+        }))
+    }
 
 	const [educationSections, setEducationSections] = useState([
         {
@@ -286,26 +234,11 @@ const [personalInfo, setPersonalInfo] = useState({
 	}
 
 	function clearInputs(event) {
-		switch (event.target.id) {
-			case "education-form": {
-				const form = document.querySelector("#education-form");
-				const formInputs = form.querySelectorAll("input");
-				formInputs.forEach((input) => {
-					input.value = "";
-				});
-				break;
-			}
-			case "experience-form": {
-				const form = document.querySelector(`#${event.target.id}`);
-				const formInputs = form.querySelectorAll("input");
-				formInputs.forEach((input) => {
-					input.value = "";
-				});
-				break;
-			}
-			default:
-				throw new Error('Invalid event id');
-		}
+        const form = document.querySelector(`#${event.target.id}`);
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach((inputField) => {
+            inputField.value = '';
+        })
 	}
 
     function toggleEditing(whichSection, index, isEditing) {
@@ -361,7 +294,6 @@ const [personalInfo, setPersonalInfo] = useState({
                        updatedSections[index].icon =  e.target.result;
                     }
                     reader.readAsDataURL(value);
-                    console.log(updatedSections);
                     setSkillsSections(updatedSections);
                 }
 
@@ -381,343 +313,453 @@ const [personalInfo, setPersonalInfo] = useState({
         }
     } 
 
+    function toggleNotificationBox(message) {
+       const notificationBox = document.querySelector('.notification-box'); 
+        const notificationMessage = document.querySelector('[data-notification-message]');
+        notificationMessage.textContent = message;
+        notificationBox.classList.toggle('notification-box--hidden');
+        notificationBox.focus({preventScroll:true, focusVisible: true});
+    }
+
+    function isSectionLimitSurpassed(section) {
+
+        const sectionLimits = {
+            education: 2,
+            experience: 5,
+            skills: 9,
+            reference: 4,
+        }
+
+        const targetSection = eval(`${section}Sections`);
+
+        if (targetSection.length >= sectionLimits[section]) {
+            toggleNotificationBox(`There are already ${sectionLimits[section]} ${section} items, you can't add more.`);
+            return true;
+        }
+
+        return false;
+    }
+
 	return (
-        <main className='app'>
-			<section className="inputs">
-				<PersonalInfo gatherPersonalInfo={gatherPersonalInfo} />
-                <div className='education-and-experience'>
-                    <Education addSection={addSection} clearInputs={clearInputs} />
-                    <Experience addSection={addSection} clearInputs={clearInputs} />
-                    <Skills addSection={addSection} />
-                    <References addSection={addSection}/>
+        <main className={CVElementStyles.app}>
+			<section className={CVElementStyles.app__inputs}>
+				<PersonalInfo 
+                    gatherPersonalInfo={gatherPersonalInfo} 
+                    handleProfilePicture={handleProfilePicture}/>
+                <div className={CVElementStyles.app__inputs__sections}>
+                    <Education
+                        addSection={addSection}
+                        clearInputs={clearInputs} 
+                        isSectionLimitSurpassed={isSectionLimitSurpassed} />
+                    <Experience
+                        addSection={addSection} 
+                        clearInputs={clearInputs} 
+                        isSectionLimitSurpassed={isSectionLimitSurpassed}/>
+                    <Skills 
+                        addSection={addSection} 
+                        clearInputs={clearInputs} 
+                        isSectionLimitSurpassed={isSectionLimitSurpassed}/>
+                    <References 
+                        addSection={addSection} 
+                        clearInputs={clearInputs} 
+                        isSectionLimitSurpassed={isSectionLimitSurpassed}/>
                 </div>
 			</section>
-            <div className='separator'></div>
-			<section className="CV">
-				<p className='full-name'>
+            <div className={CVElementStyles.app__separator}></div>
+			<section className={CVElementStyles.app__CV} id='CV'>
+				<p className={CVElementStyles['app__CV__full-name']}>
 					{`${personalInfo.firstName} ${personalInfo.lastName} `}
 				</p>
-                <p className='ocupation'>{personalInfo.ocupation}</p>
+                <p className={CVElementStyles.app__CV__ocupation}>{personalInfo.ocupation}</p>
 				<img
-                    className='profile-picture'
+                    className={CVElementStyles['app__CV__profile-picture']}
 					src={personalInfo.profilePicture}
 					alt="User profile picture"
 				/>
-                <div className='education-and-experience'>
-                    <div className="experience-section">
-                        <p className='title'>Experience</p>
-                        {experienceSections.map((section, index) => (
-                            section.isEditing ? (
-                            <div style={{zIndex: '100',}} className="modal-background" key={index}>
-                                <div className="modal-box">
-                                   <label htmlFor="new-company-name">
-                                        Company name
-                                        <input 
-                                            defaultValue={section.companyName} 
-                                            type="text" 
-                                            id="new-company-name"
-                                            name="new-company-name"
-                                            onChange={ (e) => handleEditedValues('experience', index, 'companyName', e.target.value)}
-                                />
-                                    </label>                                     
-                                   <label htmlFor="new-position-title">
-                                        Position title
-                                        <input 
-                                            defaultValue={section.positionTitle} 
-                                            type="text" 
-                                            id="new-position-title" 
-                                            name="new-position-title"
-                                            onChange={(e) => handleEditedValues('experience', index, 'positionTitle', e.target.value)}
+                <div className={CVElementStyles['app__CV__education-and-experience']}>
+                    <div className={CVElementStyles['app__CV__education-and-experience__experience']}>
+                        <p className={CVElementStyles['app__CV__education-and-experience__experience__title']}>Experience</p>
+                        <div className={CVElementStyles['app__CV__education-and-experience__experience__container']}>
+                            {experienceSections.map((section, index) => (
+                                section.isEditing ? (
+                                <div className={ModalElementsStyles['modal-background']} key={index}>
+                                    <div className={ModalElementsStyles['modal-background__modal-box']}>
+                                       <label 
+                                            className={ModalElementsStyles['modal-background__modal-box__label']}
+                                            htmlFor="new-company-name">
+                                            Company name
+                                            <input 
+                                                className={ModalElementsStyles['modal-background__modal-box__label__input']}
+                                                defaultValue={section.companyName} 
+                                                type="text" 
+                                                id="new-company-name"
+                                                name="new-company-name"
+                                                onChange={ (e) => handleEditedValues('experience', index, 'companyName', e.target.value)}
+                                    />
+                                        </label>                                     
+                                       <label 
+                                            className={ModalElementsStyles['modal-background__modal-box__label']}
+                                            htmlFor="new-position-title">
+                                            Position title
+                                            <input 
+                                                className={ModalElementsStyles['modal-background__modal-box__label__input']}
+                                                defaultValue={section.positionTitle} 
+                                                type="text" 
+                                                id="new-position-title" 
+                                                name="new-position-title"
+                                                onChange={(e) => handleEditedValues('experience', index, 'positionTitle', e.target.value)}
+                                                />
+                                        </label>                                     
+                                       <label 
+                                            className={ModalElementsStyles['modal-background__modal-box__label']}
+                                            htmlFor="edit-date-from">
+                                            Date, from
+                                            <Flatpickr 
+                                                className={ModalElementsStyles['modal-background__modal-box__label__input']}
+                                                defaultValue={section.dateFrom} 
+                                                id="edit-date-from" 
+                                                name="edit-date-from"  
+                                                options={{
+                                                    allowInput:true,
+                                                    plugins:[new MonthSelect({})],
+                                                    onChange: (selectedDate, dateStr) => {
+                                                        handleEditedValues('experience', index, 'dateFrom', dateStr);
+                                                    }
+                                                }}
                                             />
-                                    </label>                                     
-                                   <label htmlFor="edit-date-from">
-                                        Date, from
-                                        <Flatpickr 
-                                            defaultValue={section.dateFrom} 
-                                            id="edit-date-from" 
-                                            name="edit-date-from"  
-                                            options={{
-                                                allowInput:true,
-                                                plugins:[new MonthSelect({})],
-                                                onChange: (selectedDate, dateStr) => {
-                                                    handleEditedValues('experience', index, 'dateFrom', dateStr);
-                                                }
-                                            }}
-                                        />
-                                    </label>                                     
-                                   <label htmlFor="edit-date-until">
-                                        Date, until
-                                        <Flatpickr 
-                                            defaultValue={section.dateUntil} 
-                                            id="edit-date-until" 
-                                            name="edit-date-until"  
-                                            options={{
-                                                allowInput:true,
-                                                plugins:[new MonthSelect({})],
-                                                onChange: (selectedDate, dateStr) => {
-                                                    handleEditedValues('experience', index, 'dateUntil', dateStr);
-                                                }
-                                            }}
-                                        />
-                                    </label>                                     
-                                   <label htmlFor="edit-responsibilities">
-                                        Responsibilities at your position
-                                        <input 
-                                            defaultValue={section.responsibilities} 
-                                            type="text" 
-                                            id="edit-responsibilities" 
-                                            name="edit-responsibilities"
-                                            onChange={(e) => handleEditedValues('experience', index, 'responsibilities', e.target.value)}
+                                        </label>                                     
+                                       <label 
+                                            className={ModalElementsStyles['modal-background__modal-box__label']}
+                                            htmlFor="edit-date-until">
+                                            Date, until
+                                            <Flatpickr 
+                                                className={ModalElementsStyles['modal-background__modal-box__label__input']}
+                                                defaultValue={section.dateUntil} 
+                                                id="edit-date-until" 
+                                                name="edit-date-until"  
+                                                options={{
+                                                    allowInput:true,
+                                                    plugins:[new MonthSelect({})],
+                                                    onChange: (selectedDate, dateStr) => {
+                                                        handleEditedValues('experience', index, 'dateUntil', dateStr);
+                                                    }
+                                                }}
                                             />
-                                    </label>                                     
-                                    <button onClick={ () => toggleEditing('experience', index, false)} >Save edit</button>
-                                </div>
-                            </div> 
-                            ) : (
-                                <div className='experience-item' key={index}>
-                                    <div className='button-companyName-container'>
-                                        <div className="buttons-container">
-                                            <button
-                                                className='delete-section'
-                                                onClick={() =>
-                                                    removeSection("experience", index)
-                                                }
-                                            >
-                                                <span className='material-icons-round'>delete</span>
-                                            </button>
-                                            <button className='edit-section-button' onClick={() => toggleEditing('experience', index, true)}>
-                                                <span className="material-icons-round">edit</span>
-                                            </button>
-                                        </div>
-                                        <p className='company-name'>{section.companyName}</p>
+                                        </label>                                     
+                                       <label 
+                                            className={ModalElementsStyles['modal-background__modal-box__label']}
+                                            htmlFor="edit-responsibilities">
+                                            Responsibilities at your position
+                                            <input 
+                                                className={ModalElementsStyles['modal-background__modal-box__label__input']}
+                                                defaultValue={section.responsibilities} 
+                                                type="text" 
+                                                id="edit-responsibilities" 
+                                                name="edit-responsibilities"
+                                                onChange={(e) => handleEditedValues('experience', index, 'responsibilities', e.target.value)}
+                                                />
+                                        </label>                                     
+                                        <button 
+                                            className={ModalElementsStyles['modal-background__modal-box__button']}
+                                            onClick={ () => toggleEditing('experience', index, false)} >Save edit</button>
                                     </div>
-                                    <p>
-                                        {section.positionTitle}
-                                    </p>
-                                    <p className='date'>{`${section.dateFrom} - ${section.dateUntil}`}</p>
-                                    <p>
-                                        {section.responsibilities}
-                                    </p>
-                                </div>
-                            )
-                        ))}
-                        <div className='about-me'>
-                            <p className='title'>About me</p>
-                            <p className='presentation'>I&apos;m {personalInfo.firstName}<br/> a {personalInfo.ocupation.toLowerCase()}<br/> from {personalInfo.country}.</p>
+                                </div> 
+                                ) : (
+                                    <div className={CVElementStyles['app__CV__education-and-experience__experience__item']} key={index}>
+                                        <div className={CVElementStyles['app__CV__education-and-experience__experience__item__title-and-buttons']}>
+                                            <div className={CVElementStyles['app__CV__education-and-experience__experience__item__title-and-buttons__buttons-container']}>
+                                                <button
+                                                    className={CVElementStyles['small-button']}
+                                                    onClick={() =>
+                                                        removeSection("experience", index)
+                                                    }
+                                                >
+                                                    <span className={`${CVElementStyles['small-button__span']} material-icons-round`}>delete</span>
+                                                </button>
+                                                <button className={CVElementStyles['small-button']} onClick={() => toggleEditing('experience', index, true)}>
+                                                    <span className={`${CVElementStyles['small-button__span']} material-icons-round`} >edit</span>
+                                                </button>
+                                            </div>
+                                            <p className={CVElementStyles['app__CV__education-and-experience__experience__item__title-and-buttons__company-name']} >{section.companyName}</p>
+                                        </div>
+                                        <p>
+                                            {section.positionTitle}
+                                        </p>
+                                        <p className='date'>{`${section.dateFrom} - ${section.dateUntil}`}</p>
+                                        <p>
+                                            {section.responsibilities}
+                                        </p>
+                                    </div>
+                                )
+                            ))}
+                        </div>
+                        <div className={CVElementStyles['app__CV__education-and-experience__experience__about-me']}>
+                            <p className={CVElementStyles['app__CV__education-and-experience__experience__about-me__title']}>About me</p>
+                            <p className='presentation'>I&apos;m {personalInfo.firstName}<br/> a {personalInfo.ocupation}<br/> from {personalInfo.country}.</p>
                             <p className='description'>{personalInfo.aboutMe}</p>
                         </div>
                     </div>
-                    <div className='separator'></div>
-                    <div className="education">
-                        <p className='title'>Education</p>
-                        {educationSections.map((section, index) => (
-                            section.isEditing ? (
-                                <div className="modal-background" key={index}>
-                                    <div className="modal-box">
-                                        <label htmlFor="edit-institution-name">
-                                            Institution name
-                                            <input 
-                                                defaultValue={section.institutionName}
-                                                type="text"
-                                                id='edit-institution-name'
-                                                name='edit-institution-name'
-                                                onChange={(e) => handleEditedValues('education', index, 'institutionName', e.target.value)}
-                                            />
-                                        </label>
-                                        <label htmlFor="edit-title-of-study">
-                                            Title of study
-                                            <input 
-                                                defaultValue={section.titleOfStudy}
-                                                type="text"
-                                                id='edit-title-of-study'
-                                                name='edit-title-of-study'
-                                                onChange={(e) => handleEditedValues('education', index, 'titleOfStudy', e.target.value)}
-                                            />
-                                        </label>
-                                        <label htmlFor="edit-date-from">
-                                            Date, from
-                                            <Flatpickr 
-                                                defaultValue={section.dateFrom}
-                                                id='edit-date-from'
-                                                name='edit-date-from'
-                                                options={{
-                                                    allowInput:true,
-                                                    plugins:[new MonthSelect({})],
-                                                    onChange:(selectedDates, dateStr) => {
-                                                        handleEditedValues('education', index, 'dateFrom', dateStr);
-                                                    }
-                                                }}
-                                            />
-                                        </label>
-                                        <label htmlFor="edit-date-until">
-                                            Date, until
-                                            <Flatpickr 
-                                                defaultValue={section.dateUntil}
-                                                id='edit-date-until'
-                                                name='edit-date-until'
-                                                options={{
-                                                    allowInput:true,
-                                                    plugins:[new MonthSelect({})],
-                                                    onChange:(selectedDates, dateStr) => {
-                                                        handleEditedValues('education', index, 'dateUntil', dateStr);
-                                                    }
-                                                }}
-                                            />
-                                        </label>
-                                        <button onClick={() => toggleEditing('education', index, false)}>Save edit</button>
+                    <div className={CVElementStyles['app__CV__education-and-experience__separator']}></div>
+                    <div className={CVElementStyles['app__CV__education-and-experience__education']}>
+                        <p className={CVElementStyles['section-title']}>Education</p>
+                        <div className={CVElementStyles['app__CV__education-and-experience__education__container']}>
+                            {educationSections.map((section, index) => (
+                                section.isEditing ? (
+                                    <div className={ModalElementsStyles['modal-background']} key={index}>
+                                        <div className={ModalElementsStyles['modal-background__modal-box']}>
+                                            <label 
+                                                className={ModalElementsStyles['modal-background__modal-box__label']}
+                                                htmlFor="edit-institution-name">
+                                                Institution name
+                                                <input 
+                                                    className={ModalElementsStyles['modal-background__modal-box__label__input']}
+                                                    defaultValue={section.institutionName}
+                                                    type="text"
+                                                    id='edit-institution-name'
+                                                    name='edit-institution-name'
+                                                    onChange={(e) => handleEditedValues('education', index, 'institutionName', e.target.value)}
+                                                />
+                                            </label>
+                                            <label 
+                                                className={ModalElementsStyles['modal-background__modal-box__label']}
+                                                htmlFor="edit-title-of-study">
+                                                Title of study
+                                                <input 
+                                                    className={ModalElementsStyles['modal-background__modal-box__label__input']}
+                                                    defaultValue={section.titleOfStudy}
+                                                    type="text"
+                                                    id='edit-title-of-study'
+                                                    name='edit-title-of-study'
+                                                    onChange={(e) => handleEditedValues('education', index, 'titleOfStudy', e.target.value)}
+                                                />
+                                            </label>
+                                            <label 
+                                                className={ModalElementsStyles['modal-background__modal-box__label']}
+                                                htmlFor="edit-date-from">
+                                                Date, from
+                                                <Flatpickr 
+                                                    className={ModalElementsStyles['modal-background__modal-box__label__input']}
+                                                    defaultValue={section.dateFrom}
+                                                    id='edit-date-from'
+                                                    name='edit-date-from'
+                                                    options={{
+                                                        allowInput:true,
+                                                        plugins:[new MonthSelect({})],
+                                                        onChange:(selectedDates, dateStr) => {
+                                                            handleEditedValues('education', index, 'dateFrom', dateStr);
+                                                        }
+                                                    }}
+                                                />
+                                            </label>
+                                            <label 
+                                                className={ModalElementsStyles['modal-background__modal-box__label']}
+                                                htmlFor="edit-date-until">
+                                                Date, until
+                                                <Flatpickr 
+                                                    className={ModalElementsStyles['modal-background__modal-box__label__input']}
+                                                    defaultValue={section.dateUntil}
+                                                    id='edit-date-until'
+                                                    name='edit-date-until'
+                                                    options={{
+                                                        allowInput:true,
+                                                        plugins:[new MonthSelect({})],
+                                                        onChange:(selectedDates, dateStr) => {
+                                                            handleEditedValues('education', index, 'dateUntil', dateStr);
+                                                        }
+                                                    }}
+                                                />
+                                            </label>
+                                            <button 
+                                                className={ModalElementsStyles['modal-background__modal-box__button']}
+                                                onClick={() => toggleEditing('education', index, false)}>Save edit</button>
+                                        </div>
                                     </div>
-                                </div>
-                            ) : (
-                            <div key={index} className={CVStyles['education-item']}>
-                                <div className={CVStyles['title-and-delete-button-container']}>
-                                    <p className={CVStyles.title}>{section.institutionName}</p>
-                                    <div className="buttons-container">
-                                        <button
-                                            className={CVStyles['delete-section-button']}
-                                            onClick={() =>
-                                                removeSection("education", index)
-                                            }
-                                        >
-                                            <span className={`${CVStyles['material-icons-round']} material-icons-round`}>delete</span>
-                                        </button>
-                                        <button className={CVStyles['edit-section-button']} onClick={() => toggleEditing('education', index, true)}>
-                                            <span className={`${CVStyles['material-icons-round']} material-icons-round`}>edit</span>
-                                        </button>
+                                ) : (
+                                <div key={index} className={CVElementStyles['app__CV__education-and-experience__education__item']}>
+                                    <div className={CVElementStyles['app__CV__education-and-experience__education__item__title-and-buttons']}>
+                                        <p className={CVElementStyles['app__CV__education-and-experience__education__item__title-and-buttons__institution-name']}>{section.institutionName}</p>
+                                        <div className={CVElementStyles['app__CV__education-and-experience__education__item__title-and-buttons__buttons-container']}>
+                                            <button
+                                                className={CVElementStyles['small-button']}
+                                                onClick={() =>
+                                                    removeSection("education", index)
+                                                }
+                                            >
+                                                <span className={`${CVElementStyles['small-button__span']} material-icons-round`}>delete</span>
+                                            </button>
+                                            <button className={CVElementStyles['small-button']} onClick={() => toggleEditing('education', index, true)}>
+                                                <span className={`${CVElementStyles['small-button__span']} material-icons-round`}>edit</span>
+                                            </button>
+                                        </div>
                                     </div>
+                                    <p>{section.titleOfStudy}</p>
+                                    <p>{section.dateFrom} - {section.dateUntil}</p>
                                 </div>
-                                <p>{section.titleOfStudy}</p>
-                                <p>{section.dateFrom} - {section.dateUntil}</p>
-                            </div>
-                            )))}
-                        <div className="skills">
-                            <p className="title">Skills</p>
-                            <div className="skills-container">
+                                )))}
+                        </div>
+                        <div className={CVElementStyles['app__CV__education-and-experience__education__skills']}>
+                            <p className={CVElementStyles['app__CV__education-and-experience__education__skills__title']}>Skills</p>
+                            <div className={CVElementStyles['app__CV__education-and-experience__education__skills__container']}>
                                 {skillsSections.map((section, index) => (
                                     section.isEditing ? (
-                                        <div className="modal-background" key={index} autoFocus>
-                                            <div className="modal-box">
-                                                <label htmlFor="edit-skill">
+                                        <div className={ModalElementsStyles['modal-background']} key={index} autoFocus>
+                                            <div className={ModalElementsStyles['modal-background__modal-box']}>
+                                                <label 
+                                                    className={ModalElementsStyles['modal-background__modal-box__label']}
+                                                    htmlFor="edit-skill">
                                                     Edit name
-                                                    <input onChange={ (e) => handleEditedValues('skills', index, 'skillName', (e.target.value))} type="text" defaultValue={section.skillName} id='edit-skill' name='edit-skill' />
+                                                    <input
+                                                        className={ModalElementsStyles['modal-background__modal-box__label__input']}
+                                                        onChange={ (e) => handleEditedValues('skills', index, 'skillName', (e.target.value))} 
+                                                        type="text"
+                                                        defaultValue={section.skillName}
+                                                        id='edit-skill'
+                                                        name='edit-skill' />
                                                 </label>
-                                                <label htmlFor="edit-skill-image">
+                                                <label 
+                                                    className={ModalElementsStyles['modal-background__modal-box__label']}
+                                                    htmlFor="edit-skill-image">
                                                     Edit image
-                                                    <input type="file" accept="image/png, image/jpg, image/jpeg" id='edit-skill-image' name='edit-skill-image' onChange={(e) => handleEditedValues('skills', index, 'skill-icon', e.target.files[0])} />
+                                                    <input
+                                                        className={`${ModalElementsStyles['modal-background__modal-box__label__input']} ${ModalElementsStyles['modal-background__modal-box__label__input--hide-file-button']}`}
+                                                        type="file" 
+                                                        accept="image/png, image/jpg, image/jpeg" 
+                                                        id='edit-skill-image' 
+                                                        name='edit-skill-image' 
+                                                        onChange={(e) => handleEditedValues('skills', index, 'skill-icon', e.target.files[0])} />
                                                 </label>
-                                                <button onClick={() => toggleEditing('skills', index, false)}>Save edit</button>
+                                                <button 
+                                                    className={ModalElementsStyles['modal-background__modal-box__button']}
+                                                    onClick={() => toggleEditing('skills', index, false)}>Save edit</button>
                                             </div>
                                         </div>
                                     ) : (
-                                    <div className="skill-item" key={index}>
-                                        <img className="skill-icon" src={section.icon} alt='Skill icon'/>
+                                    <div className={CVElementStyles['app__CV__education-and-experience__education__skills__container__item']} key={index}>
+                                        <img className={CVElementStyles['app__CV__education-and-experience__education__skills__container__item__icon']} src={section.icon} alt='Skill icon'/>
                                         <p>{section.skillName}</p>
-                                        <div className="buttons-container">
-                                            <button className='edit-section-button'  onClick={() => {
+                                        <div className={CVElementStyles['app__CV__education-and-experience__education__skills__container__item__buttons-container']}>
+                                            <button className={CVElementStyles['small-button']} onClick={() => {
                                                 toggleEditing('skills', index, true);
-                                            }}><span className={'material-icons-round'}>
+                                            }}><span className={`${CVElementStyles['small-button__span']} material-icons-round`}>
                                             edit
                                             </span></button>
-                                            <button className="delete-section-button" onClick={() => removeSection('skill', index) }><span className="material-icons-round">delete</span></button>
+                                            <button className={CVElementStyles['small-button']} onClick={() => removeSection('skill', index) }>
+                                                <span className={`${CVElementStyles['small-button__span']} material-icons-round`}>delete</span>
+                                            </button>
                                         </div>
                                     </div>
                                     )
                                 ))}
                             </div>
                         </div>
-                        <div className="contact">
-                            <p className="title">Contact</p>
-                            <p>{personalInfo.address},<br/>{personalInfo.city}, {personalInfo.country}.<br/>
-                            <i className="fa-solid fa-mobile-screen"></i> {personalInfo.phoneNumber}<br/>
-                            <i className="fa-solid fa-envelope"></i> {personalInfo.email}</p>
-                            {(personalInfo.xTwitter || personalInfo.facebook || personalInfo.linkedin) && (
+                        <div className={CVElementStyles['app__CV__education-and-experience__education__contact']}>
+                            <p className={CVElementStyles['app__CV__education-and-experience__education__contact__title']}>Contact</p>
+                            <div className="container">
+                                <p>{personalInfo.address},</p>
+                                <p>{personalInfo.city}, {personalInfo.country}.</p>
+                                <p><i style={{fontSize:'1.3rem', color:'#adb5bd', margin:'2px 2px 2px 0'}} className="fa-solid fa-at"></i> {personalInfo.email}</p>
+                                <p><i style={{fontSize:'1.5rem', color:'#29ac00'}} className="fa-brands fa-square-whatsapp"></i> {personalInfo.phoneNumber}</p>
+                            </div>
+                            {(personalInfo.xTwitter || personalInfo.instagram || personalInfo.linkedin || personalInfo.portfolioLink) && (
                                 <div className="social-media">
                                     {personalInfo.xTwitter && (
-                                        <p><i className="fa-brands fa-square-x-twitter"></i> @<a href={personalInfo.xTwitterLink} target="_blank" rel="noreferrer">{personalInfo.xTwitter}</a></p>
+                                        <p><i style={{fontSize:'1.5rem', color:'#000000'}} className="fa-brands fa-square-x-twitter"></i> <a href={personalInfo.xTwitterLink} target="_blank" rel="noreferrer">@{personalInfo.xTwitter}</a></p>
                                     )}
-                                    {personalInfo.facebook && (
-                                        <p><i className="fa-brands fa-square-facebook"></i> <a href={personalInfo.facebookLink} target="_blank" rel="noreferrer">facebook.com/{personalInfo.facebook}</a></p>
+                                    {personalInfo.instagram && (
+                                        <p><i style={{fontSize:'1.5rem', color:'#f70496'}} className="fa-brands fa-square-instagram"></i> <a href={personalInfo.instagramLink} target="_blank" rel="noreferrer">instagram.com/{personalInfo.instagram}</a></p>
                                     )}
                                     {personalInfo.linkedin && (
-                                        <p><i className="fa-brands fa-linkedin"></i> <a href={personalInfo.linkedinLink} target="_blank" rel="noreferrer">linkedin.com/in/{personalInfo.linkedin}</a></p>
+                                        <p><i style={{fontSize:'1.5rem', color:'#007ab5'}} className="fa-brands fa-linkedin"></i> <a href={personalInfo.linkedinLink} target="_blank" rel="noreferrer">linkedin.com/in/{personalInfo.linkedin}</a></p>
+                                    )}
+                                    {personalInfo.portfolioLink && (
+                                        <p><i style={{fontSize:'1.15rem',}} className="fa-solid fa-link"></i> <a href={personalInfo.portfolioLink} target="_blank" rel='noreferrer'>{personalInfo.portfolioLink}</a></p>
                                     )}
                                 </div>
                             )}
                         </div>
                     </div>
                 </div>
-                <div className="separator" style={{width:'100%', height:'2px', backgroundColor:'red'}}></div>
-                <div className="references">
-                    <p className="title">References</p>
-                    <div className="references-container">
+                <div className={CVElementStyles['app__CV__horizontal-separator']} style={{width:'100%', height:'2px', backgroundColor:'red'}}></div>
+                <div className={CVElementStyles.app__CV__references}>
+                    <p className={`${CVElementStyles['section-title']} ${CVElementStyles['app__CV__references__title--text-center']}`}>References</p>
+                    <div className={CVElementStyles.app__CV__references__container}>
                         {referenceSections.map((section, index) => (
                             section.isEditing ? (
-                                <div className="modal-background" key={index}>
-                                    <div className="modal-box">
-                                        <label htmlFor="edit-reference-name">
+                                <div className={ModalElementsStyles['modal-background']} key={index}>
+                                    <div className={ModalElementsStyles['modal-background__modal-box']}>
+                                        <label
+                                            className={ModalElementsStyles['modal-background__modal-box__label']}
+                                            htmlFor="edit-reference-name">
                                             Reference name
                                             <input 
+                                                className={ModalElementsStyles['modal-background__modal-box__label__input']}
                                                 type="text"
                                                 id='edit-reference-name'
                                                 name='edit-reference-name'
                                                 defaultValue={section.referenceName}
                                                 onChange={(e) => handleEditedValues('references', index, 'referenceName', e.target.value)}
+                                                maxLength='25'
                                             />
                                         </label>
-                                        <label htmlFor="edit-reference-position">
+                                        <label 
+                                            className={ModalElementsStyles['modal-background__modal-box__label']}
+                                            htmlFor="edit-reference-position">
                                             Reference position
                                             <input 
+                                                className={ModalElementsStyles['modal-background__modal-box__label__input']}
                                                 type="text"
                                                 id='edit-reference-position'
                                                 name='edit-reference-position'
                                                 defaultValue={section.referencePosition}
                                                 onChange={(e) => handleEditedValues('references', index, 'referencePosition', e.target.value)}
+                                                maxLength='30'
                                             />
                                         </label>
-                                        <label htmlFor="edit-reference-phone-number">
+                                        <label
+                                            className={ModalElementsStyles['modal-background__modal-box__label']}
+                                            htmlFor="edit-reference-phone-number">
                                             Phone number
                                             <input 
-                                                type="text"
-                                                id='edit-reference-phone-number'
-                                                name='edit-reference-phone-number'
-                                                defaultValue={section.referencePhoneNumber}
-                                                onChange={(e) => handleEditedValues('references', index, 'referencePhoneNumber', e.target.value)}
-                                            />
-                                        </label>
-                                        <label htmlFor="edit-reference-phone-number">
-                                            Phone number
-                                            <input 
+                                                className={ModalElementsStyles['modal-background__modal-box__label__input']}
                                                 type="tel"
                                                 id='edit-reference-phone-number'
                                                 name='edit-reference-phone-number'
                                                 defaultValue={section.referencePhoneNumber}
                                                 onChange={(e) => handleEditedValues('references', index, 'referencePhoneNumber', e.target.value)}
+                                                maxLength='25'
                                             />
                                         </label>
-                                        <label htmlFor="edit-reference-email">
+                                        <label
+                                            className={ModalElementsStyles['modal-background__modal-box__label']}
+                                            htmlFor="edit-reference-email">
                                             Email
                                             <input 
+                                                className={ModalElementsStyles['modal-background__modal-box__label__input']}
                                                 type="email"
                                                 id='edit-reference-email'
                                                 name='edit-reference-email'
                                                 defaultValue={section.referenceEmail}
                                                 onChange={(e) => handleEditedValues('references', index, 'referenceEmail', e.target.value)}
+                                                maxLength='30'
                                             />
                                         </label>
-                                        <button onClick={() => toggleEditing('references', index, false)}>Save edit</button>
+                                        <button
+                                            className={ModalElementsStyles['modal-background__modal-box__button']}
+                                            onClick={() => toggleEditing('references', index, false)}>Save edit</button>
                                     </div>
                                 </div>
                             ) : (
-                            <div className="reference-item" key={index}>
-                                <p className="name">{section.referenceName}</p>
+                            <div className={CVElementStyles.app__CV__references__container__item} key={index}>
+                                <p className={CVElementStyles.app__CV__references__container__item__name}>{section.referenceName}</p>
                                 <p>{section.referencePosition}</p>
-                                <p><b>Tel:</b> {section.referencePhoneNumber}</p>
-                                <p><b>Email:</b> {section.referenceEmail}</p>
-                                <div className="buttons-container">
-                                    <button onClick={() => removeSection('references', index)} className="delete-section-button">
-                                        <span className="material-icons-round">delete</span>
+                                <p><b>T:</b> {section.referencePhoneNumber}</p>
+                                <p><b>E:</b> {section.referenceEmail}</p>
+                                <div className={CVElementStyles['app__CV__references__container__item__buttons-container']}>
+                                    <button className={CVElementStyles['small-button']} onClick={() => removeSection('references', index)} >
+                                        <span className={`${CVElementStyles['small-button__span']} material-icons-round`}>delete</span>
                                     </button>
-                                    <button onClick={() => toggleEditing('references', index, true)}>
-                                        <span className='material-icons-round'>edit</span>
+                                    <button className={CVElementStyles['small-button']} onClick={() => toggleEditing('references', index, true)}>
+                                        <span className={`${CVElementStyles['small-button__span']} material-icons-round`}>edit</span>
                                     </button>
                                 </div>
                             </div>

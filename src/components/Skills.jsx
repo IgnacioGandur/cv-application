@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import FormElementsStyle from '../styles/FormElements.module.css';
 
-export default function Skills ({ addSection }) {
+export default function Skills ({ addSection, clearInputs, isSectionLimitSurpassed}) {
     const [skill, setSkill] = useState(
         {
             skillName: '',
@@ -32,7 +32,11 @@ export default function Skills ({ addSection }) {
         <form
             onSubmit={(e) => {
                 e.preventDefault();
+                if (isSectionLimitSurpassed('skills')) {
+                    return;
+                }
                 addSection('skill', skill);
+                clearInputs(e);
             }} 
             id='create-skill'
         >
@@ -41,7 +45,7 @@ export default function Skills ({ addSection }) {
             >
                 <legend
                     className={FormElementsStyle.fieldset__legend}
-                >Skill</legend>
+                >Skills <i>(9 items max.)</i></legend>
                     <div className={`${FormElementsStyle['fieldset__inputs-container']} ${FormElementsStyle['fieldset__inputs-container--flex-end']}`}>
                         <label 
                             className={ FormElementsStyle['fieldset__inputs-container__label'] }
@@ -54,6 +58,8 @@ export default function Skills ({ addSection }) {
                                 id="skill-name" 
                                 placeholder='Photoshop...' 
                                 onChange={(e) => gatherSkillsInfo(e.target.id, e.target.value)}
+                                maxLength='35'
+                                required
                             />
                         </label>
                         <label 
@@ -75,5 +81,4 @@ export default function Skills ({ addSection }) {
             </fieldset>
         </form>
     )
-
 }

@@ -1,7 +1,7 @@
 // import "../styles/PersonalInfo.css";
 import PersonalInfoStyle from '../styles/FormElements.module.css';
 
-export default function PersonalInfo({ gatherPersonalInfo }) {
+export default function PersonalInfo({ gatherPersonalInfo, handleProfilePicture }) {
 return (
 		<>
             <h2 className={PersonalInfoStyle['h2-title']} >
@@ -15,13 +15,14 @@ return (
                         <input
                             className={PersonalInfoStyle.input}
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.value)
+                                gatherPersonalInfo(e)
                             }
                             type="text"
                             name="country"
                             id="country"
                             placeholder="Argentina"
                             maxLength='20'
+                            autoComplete='true'
                         />
                     </label>
                     <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="city">
@@ -29,7 +30,7 @@ return (
                         <input
                             className={PersonalInfoStyle.input}
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.value)
+                                gatherPersonalInfo(e)
                             }
                             type="text"
                             name="city"
@@ -46,10 +47,11 @@ return (
                             name="address"
                             id="address"
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.value)
+                                gatherPersonalInfo(e)
                             }
                             placeholder="Your address here..."
                             maxLength='40'
+                            autoComplete='true'
                         />
                     </label>
                 </div>
@@ -57,36 +59,34 @@ return (
             <fieldset className={PersonalInfoStyle.fieldset}>
                 <legend className={PersonalInfoStyle.fieldset__legend} >About you</legend>
                 <div className={PersonalInfoStyle['fieldset__inputs-container']}>
-                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="first-name">
+                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="firstName">
                         First name
                         <input
                             className={PersonalInfoStyle.input}
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.value)
+                                gatherPersonalInfo(e)
                             }
                             type="text"
-                            name="first-name"
-                            id="first-name"
+                            name="firstName"
+                            id="firstName"
                             autoComplete="true"
                             placeholder="First name"
                             maxLength='15'
-                            required
                         />
                     </label>
-                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="last-name">
+                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="lastName">
                         Last name
                         <input
                             className={PersonalInfoStyle.input}
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.value)
+                                gatherPersonalInfo(e)
                             }
                             type="text"
-                            name="last-name"
-                            id="last-name"
+                            name="lastName"
+                            id="lastName"
                             autoComplete="true"
                             placeholder="Last name"
                             maxLength='20'
-                            required
                         />
                     </label>
                     <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="ocupation">
@@ -94,14 +94,13 @@ return (
                         <input
                             className={PersonalInfoStyle.input}
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.value)
+                                gatherPersonalInfo(e)
                             }
                             type="text"
                             name="ocupation"
                             id="ocupation"
                             placeholder="Web developer"
                             maxLength='30'
-                            required
                         />
                     </label>
                 </div>
@@ -111,7 +110,7 @@ return (
                         <input
                             className={PersonalInfoStyle.input}
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.value)
+                                gatherPersonalInfo(e)
                             }
                             type="email"
                             name="email"
@@ -119,81 +118,77 @@ return (
                             autoComplete="true"
                             placeholder="YourMail@mail.com"
                             maxLength='40'
-                            required
                         />
                     </label>
-                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="phone-number">
+                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="phoneNumber">
                         Phone number
                         <input
                             className={PersonalInfoStyle.input}
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.value)
+                                gatherPersonalInfo(e)
                             }
                             type="tel"
-                            name="phone-number"
-                            id="phone-number"
+                            name="phoneNumber"
+                            id="phoneNumber"
                             autoComplete="true"
                             placeholder="+54 123 456 7890"
                             maxLength='20'
-                            required
                         />
                     </label>
                 </div>
                 <div className={PersonalInfoStyle['fieldset__inputs-container']}>
-                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="about-me">
+                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="aboutMe">
                         A small description about you
                         <input
                             className={PersonalInfoStyle.input}
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.value)
+                                gatherPersonalInfo(e)
                             }
                             type="text"
-                            name="about-me"
-                            id="about-me"
+                            name="aboutMe"
+                            id="aboutMe"
                             placeholder="A concise description about you..."
                             maxLength='200'
-                            required
                         />
                     </label>
-                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="profile-picture">
+                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="profilePicture">
                         Select a profile picture
                         <input
                             className={`${PersonalInfoStyle.input} ${PersonalInfoStyle['input-type-file']}`}
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.files[0])
+                                handleProfilePicture(e.target.files[0])
                             }
-                            id="profile-picture"
-                            name="profile-picture"
+                            id="profilePicture"
+                            name="profilePicture"
                             type="file"
                             accept="image/png, image/jpg, image/jpeg"
-                            required
                         />
                     </label>
                 </div>
                 <div className={PersonalInfoStyle['fieldset__inputs-container']}>
-                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="x-twitter">
+                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="xTwitter">
                         Your X/Twitter @
                         <input
                             className={PersonalInfoStyle.input}
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.value)
+                                gatherPersonalInfo(e)
                             }
-                            id="x-twitter"
-                            name="x-twitter"
+                            id="xTwitter"
+                            name="xTwitter"
                             type="text"
                             placeholder="UserName"
                         />
                     </label>
-                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="facebook">
-                        Facebook user
+                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="instagram">
+                        Instagram profile
                         <input
                             className={PersonalInfoStyle.input}
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.value)
+                                gatherPersonalInfo(e)
                             }
-                            id="facebook"
-                            name="facebook"
-                            type="text"
+                            id="instagram"
+                            name="instagram"
+                            type="url"
                             placeholder="UserName"
                         />
                     </label>
@@ -202,12 +197,27 @@ return (
                         <input
                             className={PersonalInfoStyle.input}
                             onChange={(e) =>
-                                gatherPersonalInfo(e.target.id, e.target.value)
+                                gatherPersonalInfo(e)
                             }
                             id="linkedin"
                             name="linkedin"
                             type="text"
                             placeholder="UserName"
+                        />
+                    </label>
+                    <label className={PersonalInfoStyle['fieldset__inputs-container__label']} htmlFor="portfolioLink">
+                        Personal portfolio/website url
+                        <input
+                            className={PersonalInfoStyle.input}
+                            onChange={(e) =>
+                                gatherPersonalInfo(e)
+                            }
+                            id="portfolioLink"
+                            name="portfolioLink"
+                            type="url"
+                            placeholder="https://www.YourPortfolio.com"
+                            maxLength='40'
+                            autoComplete='true'
                         />
                     </label>
                 </div>

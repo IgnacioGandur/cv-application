@@ -1,0 +1,94 @@
+.modal-background {
+    background-image: linear-gradient(45deg, #00000055, #00000055);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* backdrop-filter: blur(5px); */
+    z-index: 100;
+}
+
+.modal-background__modal-box {
+    width: 40%;
+    border: 5px solid white;
+    background-color: white;
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-background__modal-box__label {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.modal-background__modal-box__label__input {
+    width: 100%;
+    background-image: linear-gradient(
+        75deg,
+        var(--color-grey-transparent),
+        var(--color-grey-transparent),
+        var(--color-pink-transparent),
+        var(--color-pink-transparent)
+    );
+    background-size: 400%;
+    background-position: left;
+    border: 1px solid transparent;
+    padding: 7px;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    transition: all 500ms ease-in-out;
+}
+
+.modal-background__modal-box__label__input--hide-file-button::file-selector-button {
+    display: none;
+}
+
+.modal-background__modal-box__label__input:hover {
+    background-position: right;
+    border: 1px solid var(--color-pink);
+}
+
+.modal-background__modal-box__label__input:focus,
+.modal-background__modal-box__label__input:active {
+    background-image: none;
+    background-color: var(--color-cyan-transparent);
+    border: 1px solid var(--color-cyan);
+}
+
+.modal-background__modal-box__button {
+    background-image: linear-gradient(
+        90deg,
+        var(--color-grey-transparent),
+        var(--color-grey-transparent),
+        var(--color-pink),
+        var(--color-yellow)
+    );
+    background-size: 750%;
+    background-position: left;
+    font-size: 1.15rem;
+    width: 100%;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: all 500ms ease-out;
+    cursor: pointer;
+}
+
+.modal-background__modal-box__button:hover,
+.modal-background__modal-box__button:active,
+.modal-background__modal-box__button:focus {
+    background-position: right;
+    background-size: 250%;
+    color: var(--color-black);
+    border: 1px solid var(--color-pink-transparent);
+}

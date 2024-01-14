@@ -20,6 +20,12 @@
     gap: var(--default-value);
 }
 
+.app__inputs__sections {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .app__separator {
     background-image: radial-gradient(
         circle,
@@ -41,7 +47,7 @@
     gap: var(--default-value);
 }
 
-.CV__full-name {
+.app__CV__full-name {
     font-family: var(--font-titles-h2);
     font-weight: 400;
     width: 50%;
@@ -50,12 +56,12 @@
     border: 2px solid black;
 }
 
-.CV__ocupation {
+.app__CV__ocupation {
     font-size: 1.25rem;
     font-family: var(--font-titles-h2);
 }
 
-.CV__profile-picture {
+.app__CV__profile-picture {
     background-image: linear-gradient(
         45deg,
         #70d6ff88,
@@ -70,7 +76,7 @@
     object-fit: cover;
 }
 
-.CV__education-and-experience {
+.app__CV__education-and-experience {
     display: flex;
     width: 100%;
     height: 60%;
@@ -78,7 +84,7 @@
     gap: calc(var(--default-value) * 1.5);
 }
 
-.CV__education-and-experience__separator {
+.app__CV__education-and-experience__separator {
     height: 100%;
     width: 2px;
     background-image: linear-gradient(
@@ -90,7 +96,8 @@
     );
 }
 
-.CV__education-and-experience > :not(.CV__education-and-experience__separator) {
+.app__CV__education-and-experience
+    > :not(.app__CV__education-and-experience__separator) {
     flex: 1 1 300px;
     display: flex;
     flex-direction: column;
@@ -99,24 +106,48 @@
 
 /* Experience section */
 
-.experience {
+.app__CV__education-and-experience__experience {
     text-align: right;
 }
 
-.experience__item {
+.app__CV__education-and-experience__experience__title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+.app__CV__education-and-experience__experience__container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.app__CV__education-and-experience__experience__item {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
-.experience__item__container {
+.app__CV__education-and-experience__experience__item:hover button {
+    opacity: 1;
+}
+
+.app__CV__education-and-experience__experience__item__title-and-buttons {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.experience__item__container__buttons {
+.app__CV__education-and-experience__experience__item__title-and-buttons__company-name {
+    text-align: end;
+    font-family: var(--font-titles-h2);
+    border: 1px solid black;
+    padding: 3px 5px;
+    width: fit-content;
+}
+
+.app__CV__education-and-experience__experience__item__title-and-buttons__buttons-container {
     margin-left: initial;
     margin-right: auto;
     display: flex;
@@ -125,59 +156,188 @@
 
 /* About me section */
 
-.about-me {
+.app__CV__education-and-experience__experience__about-me {
     display: flex;
     gap: 20px;
     flex-direction: column;
     margin-top: auto;
 }
 
+.app__CV__education-and-experience__experience__about-me__title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
 /* Education section */
 
-.CV__education-and-experience__education {
+.app__CV__education-and-experience__education {
     flex: 1 1 300px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* Skills section */
-
-.skills {
+.app__CV__education-and-experience__education__container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
 
-.skills__container {
+.app__CV__education-and-experience__education__item {
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
 
-.skills__container__item {
+.app__CV__education-and-experience__education__item:hover button {
+    opacity: 1;
+}
+
+.app__CV__education-and-experience__education__item__title-and-buttons {
+    width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 5px;
 }
 
-.skills__container__item__icon {
-    width: 35px;
-    height: 35px;
-    object-fit: cover;
+.app__CV__education-and-experience__education__item__title-and-buttons__institution-name {
+    text-align: end;
+    font-family: var(--font-titles-h2);
+    border: 1px solid black;
+    padding: 3px 5px;
+    width: fit-content;
 }
 
-.skills__container__item__buttons-container {
+.app__CV__education-and-experience__education__item__title-and-buttons__buttons-container {
     margin-left: auto;
     display: flex;
     gap: 15px;
 }
 
-.contact {
+/* Skills section */
+
+.app__CV__education-and-experience__education__skills {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.app__CV__education-and-experience__education__skills__title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+.app__CV__education-and-experience__education__skills__container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.app__CV__education-and-experience__education__skills__container__item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.app__CV__education-and-experience__education__skills__container__item:hover
+    button {
+    opacity: 1;
+}
+
+.app__CV__education-and-experience__education__skills__container__item__icon {
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+}
+
+.app__CV__education-and-experience__education__skills__container__item__buttons-container {
+    margin-left: auto;
+    display: flex;
+    gap: 15px;
+}
+
+.app__CV__education-and-experience__education__contact {
     display: flex;
     gap: 20px;
     flex-direction: column;
     margin-top: auto;
+}
+
+.app__CV__education-and-experience__education__contact p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.app__CV__education-and-experience__education__contact a {
+    text-decoration: none;
+}
+
+.app__CV__education-and-experience__education__contact__title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+.app__CV__horizontal-separator {
+    width: 100%;
+    height: 2px;
+    background-image: linear-gradient(
+        45deg,
+        var(--color-lavender),
+        var(--color-pink),
+        var(--color-yellow),
+        var(--color-lavender),
+        var(--color-cyan)
+    );
+}
+
+.app__CV__references {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.app__CV__references__title--text-center {
+    text-align: center;
+}
+
+.app__CV__references__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.app__CV__references__container__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.app__CV__references__container__item:hover button {
+    opacity: 1;
+}
+
+.app__CV__references__container__item__name {
+    /* text-decoration: underline; */
+    font-size: 1.05rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+.app__CV__references__container__item__buttons-container {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: initial;
+    margin-top: 5px;
 }
 
 /* Elements */
@@ -213,6 +373,10 @@
     cursor: pointer;
     transition: all 300ms ease;
     opacity: 0;
+}
+
+.small-button:hover {
+    transform: scale(1.25);
 }
 
 .small-button__span {

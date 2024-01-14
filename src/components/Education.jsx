@@ -5,7 +5,7 @@ import MonthSelect from 'flatpickr/dist/plugins/monthSelect';
 import EducationStyles from '../styles/FormElements.module.css';
 import "flatpickr/dist/themes/material_orange.css";
 
-export default function Education({ addSection, clearInputs }) {
+export default function Education({ addSection, clearInputs, isSectionLimitSurpassed}) {
 	const [educationInfo, setEducationInfo] = useState({
 		institutionName: "",
 		titleOfStudy: "",
@@ -58,13 +58,16 @@ export default function Education({ addSection, clearInputs }) {
 			id="education-form"
 			onSubmit={(e) => {
 				e.preventDefault();
+                if (isSectionLimitSurpassed('education')) {
+                    return;
+                }
 				addSection("education", educationInfo);
 				clearInputs(e);
 				clearDateInputs();
 			}}
 		>
 			<fieldset className={EducationStyles.fieldset}>
-				<legend className={EducationStyles.fieldset__legend} >Education Info</legend>
+				<legend className={EducationStyles.fieldset__legend} >Education <i>(2 items max.)</i></legend>
                 <div className={EducationStyles['fieldset__inputs-container']}>
                     <label className={EducationStyles['fieldset__inputs-container__label']} htmlFor="institution-name">
                         <span>Institution name</span>
@@ -77,6 +80,7 @@ export default function Education({ addSection, clearInputs }) {
                             name="institution-name"
                             id="institution-name"
                             placeholder='The Odin Project'
+                            maxLength='40'
                             required
                         />
                     </label>
@@ -91,6 +95,7 @@ export default function Education({ addSection, clearInputs }) {
                             name="title-of-study"
                             id="title-of-study"
                             placeholder='Front end web developer'
+                            maxLength='40'
                             required
                         />
                     </label>
