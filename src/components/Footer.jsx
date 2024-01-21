@@ -1,13 +1,22 @@
-import Styles from '../styles/footer.module.css'
+import Styles from '../styles/Footer.module.css';
 
-export default function Footer () {
-    return(
-        <footer className={Styles.footer}>
-            <p className={Styles.author}>Ignacio Gandur | The Odin Project 
-                <a title='Go to Github link' className={Styles.link} target='_blank' rel='noreferrer' href="https://github.com/IgnacioGandur/cv-application">
+export default function Footer() {
+    return (
+        <footer className={Styles.footer} id='footer'>
+            <p className={Styles.author}>
+                <span className={Styles.name}>
+                    Ignacio Gandur | The Odin Project{' '}
+                </span>
+                <a
+                    title='Go to Github link'
+                    className={Styles.link}
+                    target='_blank'
+                    rel='noreferrer'
+                    href='https://github.com/IgnacioGandur/cv-application'
+                >
                     <i className={`${Styles.icon} fa-brands fa-github-alt`}></i>
                 </a>
             </p>
         </footer>
-    )
+    );
 }

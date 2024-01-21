@@ -1,11 +1,13 @@
 .app {
+    width: 100%;
+    max-width: 2000px;
     background-color: white;
     display: flex;
     gap: var(--default-value);
     padding: var(--default-value);
 }
 
-.app > section {
+.app > :not(.app__separator) {
     width: 50%;
     padding: var(--default-value);
     border-radius: 5px;
@@ -18,12 +20,78 @@
     display: flex;
     flex-direction: column;
     gap: var(--default-value);
+    position: relative;
+}
+
+.app__inputs__label {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.app__inputs__label__button {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    transition: all 250ms ease;
+    border: 1px solid var(--color-grey-transparent);
+}
+
+.app__inputs__label__button:hover {
+    scale: 1.25;
+    cursor: pointer;
+}
+
+.app__inputs__label__button__img {
+    width: 100%;
+    height: 100%;
 }
 
 .app__inputs__sections {
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+.app__inputs__background-options {
+    display: flex;
+}
+
+.app__inputs__background-options > * {
+    flex: 1;
+}
+
+.app__inputs__background-options__label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.app__inputs__background-options__label--checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.app__inputs__background-options__label--checkbox > input {
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+}
+
+.app__inputs__background-options__container {
+    flex: 2;
+    display: flex;
+}
+
+.app__inputs__background-options__container > * {
+    flex: 1;
 }
 
 .app__separator {
@@ -34,18 +102,47 @@
         var(--color-pink)
     );
     height: 99%;
-    width: 2px;
+    width: 3px;
     align-self: center;
     opacity: 0.7;
 }
 
+.app__wrapper-background {
+    background-image: url('../assets/images/cv-background-pattern.webp');
+    background-position: top left;
+    background-repeat: repeat;
+}
+
 .app__CV {
+    height: 100%;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: var(--default-value);
 }
+
+.app__CV a {
+    text-decoration: underline;
+    color: inherit;
+}
+
+/* .app__CV * { */
+/*     z-index: 1; */
+/* } */
+
+/* .app__CV::before { */
+/*     content: ''; */
+/*     background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/doodles.png); */
+/*     position: absolute; */
+/*     left: 0; */
+/*     top: 0; */
+/*     width: 100%; */
+/*     height: 100%; */
+/*     opacity: 0.3; */
+/*     z-index: 0; */
+/* } */
 
 .app__CV__full-name {
     font-family: var(--font-titles-h2);
@@ -69,7 +166,7 @@
         #ff977088,
         #ffd67088
     );
-    padding: 3px;
+    padding: 1px;
     width: 200px;
     height: 200px;
     border-radius: 100%;
@@ -77,16 +174,17 @@
 }
 
 .app__CV__education-and-experience {
+    flex: 1;
     display: flex;
     width: 100%;
-    height: 60%;
+    /* height: 100%; */
     justify-content: center;
     gap: calc(var(--default-value) * 1.5);
 }
 
 .app__CV__education-and-experience__separator {
     height: 100%;
-    width: 2px;
+    width: 1px;
     background-image: linear-gradient(
         45deg,
         #70d6ff88,
@@ -270,9 +368,9 @@
     gap: 5px;
 }
 
-.app__CV__education-and-experience__education__contact a {
-    text-decoration: none;
-}
+/* .app__CV__education-and-experience__education__contact a { */
+/*     text-decoration: none; */
+/* } */
 
 .app__CV__education-and-experience__education__contact__title {
     font-size: 1.25rem;
@@ -282,7 +380,7 @@
 
 .app__CV__horizontal-separator {
     width: 100%;
-    height: 2px;
+    height: 1px;
     background-image: linear-gradient(
         45deg,
         var(--color-lavender),
@@ -340,6 +438,13 @@
     margin-top: 5px;
 }
 
+.app__CV__page-link {
+    display: none;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #dfe1e3;
+}
 /* Elements */
 
 .section-item {
@@ -382,4 +487,25 @@
 .small-button__span {
     color: var(--color-span-icon);
     font-size: 1.25rem;
+}
+
+/* Media queries */
+/* Tablet size */
+@media screen and (max-width: 1200px) {
+    .app {
+        flex-direction: column;
+    }
+    .app > * {
+        width: 100% !important;
+    }
+
+    .app__separator {
+        height: 5px;
+    }
+
+    .app__inputs > h2 {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
 }

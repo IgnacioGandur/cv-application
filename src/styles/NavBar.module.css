@@ -3,7 +3,191 @@
     src: url('./../assets/fonts/coffecake/CoffeCake.otf');
 }
 
-nav.navbar {
+.print-instructions {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(#00000055, #00000055);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+.print-instructions__box {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    padding: 30px;
+}
+
+.print-instructions__box__close-modal-button {
+    width: 35px;
+    height: 35px;
+    background: none;
+    border-radius: 100%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    transition: all 300ms ease;
+    cursor: pointer;
+}
+
+.print-instructions__box__close-modal-button:hover {
+    scale: 1.2;
+}
+
+.print-instructions__box__instructions {
+    background-image: linear-gradient(
+        135deg,
+        var(--color-orange),
+        var(--color-pink),
+        var(--color-orange)
+    );
+    flex: 1 1 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    /* border: 1px solid black; */
+}
+
+.print-instructions__box__instructions
+    .print-instructions__box__instructions__step:nth-child(odd) {
+    background: transparent;
+    color: white;
+    /* background-color: #e9ecef; */
+}
+
+.print-instructions__box__instructions
+    .print-instructions__box__instructions__step:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.print-instructions__box__instructions__step {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 33%;
+    aspect-ratio: 1/1;
+    padding: 50px;
+    /* border: 1px solid white; */
+}
+
+.print-instructions__box__instructions__step:last-child,
+.print-instructions__box__instructions__step:first-child {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.print-instructions__box__instructions__step span {
+    width: fit-content;
+    font-size: 3rem;
+    border-bottom: 3px solid var(--color-cyan);
+}
+
+.print-instructions__box__instructions__step p {
+    font-size: 1.3rem;
+}
+
+.print-instructions__box strong {
+    font-size: 1.5rem;
+}
+
+.print-instructions__box b {
+    color: red;
+    text-decoration: underline;
+    /* font-size: 1.rem; */
+}
+
+.print-instructions__box__title {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.print-instructions__box__title p {
+    width: 100%;
+    text-align: center;
+    padding: 5px 15px;
+    font-family: var(--main-font);
+    font-size: 2.5rem;
+}
+
+.print-instructions__box__decoration {
+    width: 75px;
+    height: 3px;
+    background-color: var(--color-cyan);
+}
+
+.print-instructions__box__container__title__recommendation {
+    text-align: center;
+}
+
+.print-instructions__box__steps {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.print-instructions__box__steps p {
+    font-family: var(--secondary-font);
+}
+
+.print-instructions__box__continue-button {
+    width: 100%;
+    height: 50px;
+    background-image: linear-gradient(
+        90deg,
+        var(--color-grey-transparent),
+        var(--color-grey-transparent),
+        var(--color-pink),
+        var(--color-yellow)
+    );
+    background-size: 750%;
+    background-position: left;
+    font-size: 1.15rem;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: all 500ms ease-out;
+    cursor: pointer;
+}
+
+.print-instructions__box__continue-button:hover,
+.print-instructions__box__continue-button:focus {
+    background-position: right;
+    background-size: 250%;
+    color: var(--color-black);
+    border: 1px solid var(--color-pink-transparent);
+    outline: 3px solid black;
+}
+
+.print-instructions__box__continue-button:active {
+    scale: 0.9;
+}
+
+.navbar {
     background-image: linear-gradient(
         45deg,
         var(--color-pink),
@@ -19,9 +203,16 @@ nav.navbar {
     gap: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     z-index: 10;
+    position: relative;
 }
 
-nav.navbar > h1.navbar-title {
+.hero-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.navbar-title {
     font-size: 3rem;
     font-family: var(--font-coffecake);
     font-weight: 100;
@@ -29,7 +220,128 @@ nav.navbar > h1.navbar-title {
     text-shadow: -3px 3px 4px rgba(0, 0, 0, 0.49);
 }
 
-nav.navbar > img.navbar-icon {
+.navbar-icon {
     width: 40px;
     height: 40px;
+}
+
+.download-button {
+    background-image: radial-gradient(
+        circle,
+        var(--color-cyan) 10%,
+        var(--color-orange) 10%,
+        var(--color-orange) 80%
+    );
+    background-size: 100%;
+    background-position: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    transition: all 500ms ease;
+    position: absolute;
+    right: 50px;
+}
+
+.download-button > span {
+    font-size: 2rem;
+    color: white;
+}
+
+.download-button:hover {
+    background-size: 1000%;
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.download-button:active {
+    scale: 0.9;
+}
+
+/* Tablet size */
+@media screen and (max-width: 1200px) {
+    .print-instructions__box__instructions
+        .print-instructions__box__instructions__step {
+        width: 50%;
+    }
+
+    .print-instructions__box__instructions
+        .print-instructions__box__instructions__step:nth-child(1),
+    .print-instructions__box__instructions
+        .print-instructions__box__instructions__step:nth-child(4),
+    .print-instructions__box__instructions
+        .print-instructions__box__instructions__step:nth-child(5),
+    .print-instructions__box__instructions
+        .print-instructions__box__instructions__step:nth-child(8) {
+        background-color: transparent;
+        color: white;
+    }
+
+    .print-instructions__box__instructions
+        .print-instructions__box__instructions__step:nth-child(2),
+    .print-instructions__box__instructions
+        .print-instructions__box__instructions__step:nth-child(3),
+    .print-instructions__box__instructions
+        .print-instructions__box__instructions__step:nth-child(6),
+    .print-instructions__box__instructions
+        .print-instructions__box__instructions__step:nth-child(7) {
+        background-color: #f8f9fa;
+        color: black;
+    }
+
+    .navbar {
+        padding: 0 25px;
+        justify-content: space-between;
+    }
+
+    .download-button {
+        position: initial;
+    }
+}
+
+/* Mobile size */
+
+@media screen and (max-width: 767px) {
+    .print-instructions__box {
+        width: 90%;
+        height: 90%;
+    }
+
+    .print-instructions__box__instructions
+        .print-instructions__box__instructions__step {
+        width: 100%;
+    }
+
+    .print-instructions__box__instructions
+        .print-instructions__box__instructions__step:nth-child(even) {
+        background-color: #f8f9fa;
+        color: black;
+    }
+
+    .print-instructions__box__instructions
+        .print-instructions__box__instructions__step:nth-child(odd) {
+        background-color: transparent;
+        color: white;
+    }
+
+    .navbar {
+        padding: 10px;
+        min-width: 300px;
+    }
+
+    .navbar-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .navbar-title {
+        font-size: 2rem;
+    }
+
+    .download-button {
+        scale: 0.9;
+    }
 }

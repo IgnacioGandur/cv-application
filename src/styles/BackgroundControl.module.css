@@ -1,0 +1,137 @@
+.background-options__fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: var(--default-value);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-grey-transparent);
+}
+
+.background-options__fieldset > * {
+    flex: 1;
+}
+
+.background-options__fielset__legend {
+    padding: 5px;
+    border: 1px solid var(--color-grey-transparent);
+    border-radius: calc(var(--border-radius) / 2);
+}
+
+.background-options > * {
+    flex: 1;
+    gap: 10px;
+}
+
+.background-options__fieldset__label--checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.background-options__fieldset__themes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.background-options__fieldset__themes-container label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    border: 2px solid #adb5bd3f;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 250ms ease;
+}
+
+.background-options__fieldset__themes-container label:hover {
+    scale: 1.1;
+}
+
+.background-options__fieldset__themes-container label input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.background-options__fieldset__themes-container
+    label
+    input[type='radio']
+    + img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+    padding: 3px;
+    background-color: transparent;
+}
+
+.background-options__fieldset__themes-container
+    label
+    input[type='radio']:checked
+    + img {
+    background-image: linear-gradient(
+        45deg,
+        var(--color-lavender),
+        var(--color-pink),
+        var(--color-yellow),
+        var(--color-cyan)
+    );
+    background-size: 500%;
+    animation: background-spin linear 5s infinite alternate;
+}
+
+.background-options__fieldset__label__input--checkbox {
+    width: 25px;
+    height: 25px;
+}
+
+.background-options__fieldset__container {
+    flex: 2;
+    display: flex;
+}
+
+.background-options__fieldset__container > * {
+    flex: 1;
+    display: flex;
+}
+
+.background-options__container__label--flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.background-options__container__label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.background-options__fieldset__custom-theme-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.background-options__fieldset__custom-theme-options__label-url {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+@keyframes background-spin {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
