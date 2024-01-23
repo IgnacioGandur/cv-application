@@ -32,11 +32,18 @@
 }
 
 * {
-    border: 1px solid red;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: var(--secondary-font);
+}
+
+div#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
 }
 
 .notification-box {
@@ -87,14 +94,6 @@
     font-size: 1.5rem;
 }
 
-div#root {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-}
-
 input {
     width: 100%;
     background-image: linear-gradient(
@@ -127,14 +126,9 @@ input:focus {
 label {
     display: flex;
     flex-direction: column;
-    /* gap: calc(var(--default-value) / 4); */
 }
 
 @media print {
-    /* .notification-box { */
-    /*     display: none; */
-    /* } */
-
     div#root {
         height: fit-content;
         padding: 0;
@@ -159,39 +153,10 @@ label {
         color: #ced4da;
     }
 
-    body {
-        /* background-image: url(../assets/images/light/email-pattern.webp); */
-        /* background-size: 150px; */
-        /* background-repeat: repeat; */
-        /* background-clip: border-box; */
-        /* background-position: top center; */
-        /* background-size: 110%; */
-        /* display: flex; */
-        /* justify-content: center; */
-        /* align-items: center; */
-        /* padding: 0; */
-        /* margin: 0; */
-        /* box-sizing: border-box; */
-        /* width: 100%; */
-        /* height: 100%; */
-    }
-
     #app {
         background: transparent !important;
-        /* background: transparent; */
-        /* background-image: url(../assets/images/cv-background-pattern.webp); */
-        /* background-position: top left; */
-        /* background-repeat: repeat; */
-        /* display: flex; */
-        /* justify-content: center; */
-        /* align-items: center; */
         padding: 0;
         margin: 0;
-        /* box-sizing: border-box; */
-        /* width: 100%; */
-        /* height: 100%; */
-        /* width: 210mm; */
-        /* height: 297mm; */
     }
 
     #CV {
@@ -201,8 +166,6 @@ label {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        /* max-width: 210mm; */
-        /* max-height: 297mm; */
         height: 100%;
         width: 100%;
         margin: 0 auto;
@@ -213,12 +176,4 @@ label {
     #CV__separator {
         height: initial;
     }
-
-    /* #CV__separator { */
-    /*     width: 1px; */
-    /* } */
-
-    /* #CV__separator--horizontal { */
-    /*     height: 1px !important; */
-    /* } */
 }

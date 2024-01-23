@@ -1,6 +1,5 @@
 import { useState } from 'react';
-// import Flatpickr from "react-flatpickr";
-// import MonthSelect from 'flatpickr/dist/plugins/monthSelect';
+// Import input sections
 import PersonalInfo from './PersonalInfo.jsx';
 import Education from './Education.jsx';
 import Experience from './Experience.jsx';
@@ -8,17 +7,14 @@ import RenderExperience from './RenderExperience.jsx';
 import Skills from './Skills.jsx';
 import References from './References.jsx';
 import BackgroundControl from './BackgroundControl.jsx';
-import defaultProfilePicture from '../assets/images/default-ppf.png';
-// import CVBackground from '../assets/images/light/email-pattern.webp';
-// import CVBackgroundDark from '../assets/images/dark/spiration-dark.webp';
-// import '../styles/CV.css';
-// import CVStyles from '../styles/CV.module.css';
-import CVElementStyles from '../styles/CVElements.module.css';
-// import ModalElementsStyles from '../styles/ModalElements.module.css';
+// Rendered sections in the CV
 import RenderEducation from './RenderEducation.jsx';
 import RenderSkills from './RenderSkills.jsx';
 import RenderReferences from './RenderReferences.jsx';
 import RenderContact from './RenderContact.jsx';
+// CSS Styles
+import CVElementStyles from '../styles/CVElements.module.css';
+import defaultProfilePicture from '../assets/images/default-ppf.png';
 
 export default function CV() {
     //                  Personal info section, start.
@@ -85,17 +81,11 @@ export default function CV() {
                     }));
                     break;
                 }
-                case 'instagram': {
-                    setPersonalInfo((prevPersonalInfo) => ({
-                        ...prevPersonalInfo,
-                        ...generateSocialLink('instagram'),
-                    }));
-                    break;
-                }
+                case 'instagram':
                 case 'linkedin': {
                     setPersonalInfo((prevPersonalInfo) => ({
                         ...prevPersonalInfo,
-                        ...generateSocialLink('linkedin'),
+                        ...generateSocialLink(id),
                     }));
                     break;
                 }
@@ -129,12 +119,6 @@ export default function CV() {
                 dateFrom: 'January 2022',
                 dateUntil: 'December 2022',
             },
-            // {
-            //     institutionName: 'Institution name',
-            //     titleOfStudy: 'Title of study',
-            //     dateFrom: 'February 2020',
-            //     dateUntil: 'December 2021',
-            // },
         ],
         experience: [
             {
@@ -145,20 +129,6 @@ export default function CV() {
                 dateFrom: 'May 2021',
                 dateUntil: 'October 2023',
             },
-            // {
-            //     companyName:'Company Name',
-            //     positionTitle: 'Backend web developer',
-            //     responsibilities: 'Part of the team in charge of creating, mantaining, testing and debugging the functionality of websites/aplications.',
-            //     dateFrom: 'February 2018',
-            //     dateUntil: 'August 2021',
-            // },
-            // {
-            //     companyName:'Another random company',
-            //     positionTitle: 'Designer',
-            //     responsibilities: 'Web designer in charge of managing user modern user interfaces',
-            //     dateFrom: 'February 2018',
-            //     dateUntil: 'August 2021',
-            // },
         ],
         skills: [
             {
@@ -206,8 +176,8 @@ export default function CV() {
         ],
     });
 
+    // Target the chosen section and add a new one.
     function addSection(whichSection, sectionObject) {
-        // setSections([...sections[whichSection], sectionObject])
         const updatedSection = [...sections[whichSection], sectionObject];
         setSections((prevSections) => ({
             ...prevSections,
@@ -215,6 +185,7 @@ export default function CV() {
         }));
     }
 
+    // Target the chosen section, remove the target index and update the section.
     function removeSection(whichSection, indexToRemove) {
         const updatedSection = [...sections[whichSection]];
         updatedSection.splice(indexToRemove, 1);
@@ -222,48 +193,27 @@ export default function CV() {
             ...prevSections,
             [whichSection]: updatedSection,
         }));
-        // setSections((prevSections) => {
-        //     const updatedSection = [...prevSections[whichSection]];
-        //     updatedSection.splice(indexToRemove, 1);
-
-        //     return {
-        //         ...prevSections,
-        //         [whichSection]: updatedSection
-        //     }
-        // })
     }
 
+    // Enable editing of specified section
     function toggleEditing(whichSection, indexToEdit, isEditing) {
         const updatedSection = [...sections[whichSection]];
         updatedSection[indexToEdit] = {
             ...updatedSection[indexToEdit],
+            // When 'isEditing' is true the page will render the editing options.
+            // When 'isEditing' is false the page will render the section item normally.
             isEditing,
         };
         setSections((prevSections) => ({
             ...prevSections,
             [whichSection]: updatedSection,
         }));
-
-        // setSections((prevSections) => {
-        //     const updatedSection = [...prevSections[whichSection]];
-        //     updatedSection[indexToEdit] = {
-        //         ...updatedSection[indexToEdit],
-        //         isEditing,
-        //     }
-        //     return {
-        //         ...prevSections,
-        //         [whichSection]: updatedSection,
-        //     }
-        // })
-
-        //             const updatedSections = [...experienceSections];
-        //             updatedSections[index] = {...updatedSections[index], isEditing}
-        //             setExperienceSections(updatedSections);
     }
 
+    // Update the edited values in the correspondant section and item.
     function handleEdit(whichSection, indexOfItem, property, value) {
         const updatedSection = [...sections[whichSection]];
-        // Handle the skill icon edit
+        // Handle the skill icon edit.
         if (property === 'icon') {
             if (value) {
                 const reader = new FileReader();
@@ -285,144 +235,7 @@ export default function CV() {
         }
     }
 
-    //                  Education, experience, skills, references sections, end.
-
-    // =========================================================================== //
-
-    // const [educationSections, setEducationSections] = useState([
-    // {
-    // institutionName:'The odin project',
-    // titleOfStudy:'Full stack web developer',
-    // dateFrom:'January 2022',
-    // dateUntil:'December 2023',
-
-    // },
-    // {
-    // institutionName:'Another institution',
-    // titleOfStudy:'Computer science',
-    // dateFrom:'January 2018',
-    // dateUntil:'December 2022',
-
-    // },
-    // ]);
-    // const [experienceSections, setExperienceSections] = useState([
-    // {
-    // companyName:'Mercado libre',
-    // positionTitle: 'Front end web developer',
-    // responsibilities: 'Design, create and mantain everything related to user interfaces and user experience',
-    // dateFrom: 'May 2021',
-    // dateUntil: 'October 2023',
-    // },
-    // {
-    // companyName:'Another random company',
-    // positionTitle: 'Designer',
-    // responsibilities: 'Web designer in charge of managing user modern user interfaces',
-    // dateFrom: 'February 2018',
-    // dateUntil: 'August 2021',
-    // },
-    // {
-    // companyName:'Another random company',
-    // positionTitle: 'Designer',
-    // responsibilities: 'Web designer in charge of managing user modern user interfaces',
-    // dateFrom: 'February 2018',
-    // dateUntil: 'August 2021',
-    // },
-    // ]);
-
-    // const [skillsSections, setSkillsSections] = useState([
-    // {
-    // skillName:'Html',
-    // icon: '/icons/html.png',
-    // },
-    // {
-    // skillName:'Css',
-    // icon: '/icons/css-3.png',
-    // },
-    // {
-    // skillName:'Javascript',
-    // icon: '/icons/js.png',
-    // },
-    // {
-    // skillName:'React',
-    // icon: '/icons/react.png',
-    // },
-    // {
-    // skillName:'Github',
-    // icon: '/icons/github.png',
-    // },
-    // {
-    // skillName:'Git',
-    // icon: '/icons/git.png',
-    // },
-    // {
-    // skillName:'Linux',
-    // icon: '/icons/linux.png',
-    // },
-    // ]);
-
-    // const [referenceSections, setReferenceSections] = useState([
-    // {
-    // referenceName:'Reference name',
-    // referencePosition: 'Reference position',
-    // referencePhoneNumber: 'Reference phone number',
-    // referenceEmail: 'Reference email',
-    // }
-    // ])
-
-    // function addSection(whichSection, section) {
-    // 	switch (whichSection) {
-    // 		case "education":
-    // 			setEducationSections([...educationSections, section]);
-    // 			break;
-    // 		case "experience":
-    // 			setExperienceSections([...experienceSections, section]);
-    // 			break;
-    // 		case "skill":
-    // 			setSkillsSections([...skillsSections, section]);
-    // 			break;
-    // 		case "references":
-    // 			setReferenceSections([...referenceSections, section]);
-    // 			break;
-    // 		default:
-    // 			throw new Error(
-    // 				`Invalid section, the section can only be: "education", "experience", "skill", "reference". Instead received: ${whichSection}.`
-    // 			);
-    // 	}
-    // }
-
-    // function removeSection(whichSection, index) {
-    // 	switch (whichSection) {
-    // 		case "education": {
-    // 			const updatedSections = [...educationSections];
-    // 			updatedSections.splice(index, 1);
-    // 			setEducationSections(updatedSections);
-    // 			break;
-    // 		}
-    // 		case "experience": {
-    // 			const updatedSections = [...experienceSections];
-    // 			updatedSections.splice(index, 1);
-    // 			setExperienceSections(updatedSections);
-    // 			break;
-    // 		}
-    // 		case "skill": {
-    // 			const updatedSections = [...skillsSections];
-    // 			updatedSections.splice(index, 1);
-    // 			setSkillsSections(updatedSections);
-    // 			break;
-    // 		}
-    // 		case "references": {
-    // 			const updatedSections = [...referenceSections];
-    // 			updatedSections.splice(index, 1);
-    // 			setReferenceSections(updatedSections);
-    // 			break;
-    // 		}
-    // 		default:
-    // 			throw new Error(
-    // 				`Invalid section. Expects: "education", "experience", "skill", "references". Instead received: ${whichSection}.`
-    // 			);
-    // 	}
-    // }
-
+    // Clear the inputs after a new item in a section is created.
     function clearInputs(event) {
         const form = document.querySelector(`#${event.target.id}`);
         const inputs = form.querySelectorAll('input');
@@ -431,78 +244,7 @@ export default function CV() {
         });
     }
 
-    // function toggleEditing(whichSection, index, isEditing) {
-    //     switch(whichSection) {
-    //         case 'experience': {
-    //             const updatedSections = [...experienceSections];
-    //             updatedSections[index] = {...updatedSections[index], isEditing}
-    //             setExperienceSections(updatedSections);
-    //             break;
-    //         }
-    //         case 'education': {
-    //             const updatedSections = [...educationSections];
-    //             updatedSections[index] = {...updatedSections[index], isEditing}
-    //             setEducationSections(updatedSections);
-    //             break;
-    //         }
-    //         case 'skills': {
-    //             const updatedSections = [...skillsSections];
-    //             updatedSections[index] = {...updatedSections[index], isEditing}
-    //             setSkillsSections(updatedSections);
-    //             break;
-    //         }
-    //         case 'references': {
-    //             const updatedSections = [...referenceSections];
-    //             updatedSections[index] = {...updatedSections[index], isEditing}
-    //             setReferenceSections(updatedSections);
-    //             break;
-    //         }
-    //         default:
-    //             throw new Error(`Invalid section. Expects: "experience", "education", "skills", "references". Instead received: ${whichSection}`);
-    //     }
-    // }
-
-    // function handleEditedValues(whichSection, index, property,value) {
-    //     switch(whichSection) {
-    //         case 'experience' : {
-    //             const updatedSections = [...experienceSections];
-    //             updatedSections[index][property] = value;
-    //             setExperienceSections(updatedSections);
-    //             break;
-    //         }
-    //         case 'education' : {
-    //             const updatedSections = [...educationSections];
-    //             updatedSections[index][property] = value;
-    //             setEducationSections(updatedSections);
-    //             break;
-    //         }
-    //         case 'skills' : {
-    //             if (property === 'skill-icon') {
-    //                 const updatedSections = [...skillsSections];
-    //                 const reader = new FileReader();
-    //                 reader.onloadend = (e) => {
-    //                    updatedSections[index].icon =  e.target.result;
-    //                 }
-    //                 reader.readAsDataURL(value);
-    //                 setSkillsSections(updatedSections);
-    //             }
-
-    //             const updatedSections = [...skillsSections];
-    //             updatedSections[index][property] = value;
-    //             setSkillsSections(updatedSections);
-    //             break;
-    //         }
-    //         case 'references' : {
-    //             const updatedSections = [...referenceSections];
-    //             updatedSections[index][property] = value;
-    //             setReferenceSections(updatedSections);
-    //             break;
-    //         }
-    //         default:
-    //             throw new Error(`Invalid section. Expects: "experience", "education", "skills", "references". Instead received: ${whichSection} section.`)
-    //     }
-    // }
-
+    // Show notification box when a section limit has been reached.
     function toggleNotificationBox(message) {
         const notificationBox = document.querySelector('.notification-box');
         const notificationMessage = document.querySelector(
@@ -513,6 +255,8 @@ export default function CV() {
         notificationBox.focus({ preventScroll: true, focusVisible: true });
     }
 
+    // Set and check the limit of items allowed in a section before adding/creating a new item.
+    // If the function return 'true' you can't add more items, if 'false' you can add more.
     function isSectionLimitSurpassed(whichSection) {
         const sectionLimits = {
             education: 2,
@@ -533,6 +277,7 @@ export default function CV() {
         return false;
     }
 
+    // Control the background options of the Cv.
     const [backgroundOptions, setBackgroundOptions] = useState({
         enabled: false,
         customTheme: false,
@@ -628,91 +373,9 @@ export default function CV() {
                     darkBackground: isDarkTheme,
                 }));
         }
-
-        // if (id === 'enable-background') {
-        //     const isChecked = document.querySelector(`#${id}`).checked;
-        //     setBackgroundOptions((prevBackgroundOptions) => ({
-        //         ...prevBackgroundOptions,
-        //         enabled: isChecked,
-        //         url: imageUrl,
-        //     }))
-        // }
-
-        // if (id === 'custom-theme') {
-        //     const allCheckboxes = document.querySelectorAll('[name=selected-background]');
-        //     for (let i = 0; i < allCheckboxes.length; i += 1) {
-        //         if (allCheckboxes[i].checked) {
-        //             allCheckboxes[i].checked = false;
-        //         }
-        //     }
-        //     setBackgroundOptions((prevBackgroundOptions) => ({
-        //         ...prevBackgroundOptions,
-        //         url: imageUrl,
-        //         darkBackground: isDarkTheme,
-        //     }))
-        // }
-
-        // if (id === 'background-url') {
-        //     console.log(id, value)
-        //     setBackgroundOptions((prevBackgroundOptions) => ({
-        //         ...prevBackgroundOptions,
-        //         enabled: true,
-        //         url: value,
-        //     }))
-        // }
-
-        // if (id === 'dark-background') {
-        //     const isChecked = document.querySelector(`#${id}`).checked;
-        //     setBackgroundOptions((prevBackgroundOptions) => ({
-        //         ...prevBackgroundOptions,
-        //         darkBackground: isChecked,
-        //     }))
-        // }
-
-        // setBackgroundOptions((prevBackgroundOptions) => ({
-        //     ...prevBackgroundOptions,
-        //     url: imageUrl,
-        //     darkBackground: isDarkTheme,
-        // }))
-        // switch(id) {
-        //     case 'enable-background': {
-        //         const isChecked = document.querySelector(`#${id}`).checked;
-        //         setBackgroundOptions((prevBackgroundOptions) => ({
-        //             ...prevBackgroundOptions,
-        //             enabled: isChecked,
-        //         }))
-        //         break;
-        //     }
-        //     case 'dark-theme': {
-        //         const isChecked = document.querySelector(`#${id}`).checked;
-        //         setBackgroundOptions((prevBackgroundOptions) => ({
-        //             ...prevBackgroundOptions,
-        //             darkTheme: isChecked,
-        //             url:isChecked ? CVBackgroundDark : CVBackground,
-        //             darkBackground: isChecked,
-        //         }))
-        //         break;
-        //     }
-        //     case 'background-url': {
-        //         setBackgroundOptions((prevBackgroundOptions) => ({
-        //             ...prevBackgroundOptions,
-        //             url: value,
-        //         }))
-        //         break;
-        //     }
-        //     case 'dark-background': {
-        //         const isChecked = document.querySelector(`#${id}`).checked;
-        //         setBackgroundOptions((prevBackgroundOptions) => ({
-        //             ...prevBackgroundOptions,
-        //             darkBackground:isChecked,
-        //         }))
-        //         break;
-        //     }
-        //     default:
-        //         throw new Error('Invalid event id.');
-        // }
     }
-
+    
+    // Render font colors and backgrounds in the CV according to the selected background options.
     const stylesForCV = {
         backgroundImage: backgroundOptions.enabled
             ? `url(${backgroundOptions.url})`
@@ -720,8 +383,8 @@ export default function CV() {
         color: backgroundOptions.darkBackground ? 'white' : 'black',
     };
 
+    // Toggle between spanish and english in the CV.
     const [language, setLanguage] = useState('english');
-
     function changeLanguage(currentLanguage) {
         if (currentLanguage === 'english') {
             setLanguage('spanish');

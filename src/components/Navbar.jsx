@@ -16,16 +16,19 @@ export default function Navbar() {
     }
 
     function downloadPDF() {
+        // Hide instuctions before printing.
         document.querySelector('#print-instructions').style.display = 'none';
+        // Set the background image to the one chosen by the user.
         window.addEventListener('beforeprint', () => {
             document.body.style.backgroundImage =
                 document.querySelector('#CV').style.backgroundImage;
         });
+        // Remove background image after the printing/saving finished.
         window.addEventListener('afterprint', () => {
             notifyAfterPrint();
             document.body.style.backgroundImage = 'none';
         });
-
+        // Print/Save the CV.
         window.print();
     }
 

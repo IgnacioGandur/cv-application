@@ -17,33 +17,12 @@ export default function References({
 
     function gatherReferenceInfo(event) {
         const { id, value } = event.target;
-
+        // Replace the 'reference-' piece of text with no text.
         const property = id.replace('reference-', '');
         setReference((prevReferenceInfo) => ({
             ...prevReferenceInfo,
             [property]: value,
         }));
-
-        // switch(input) {
-        //     case 'reference-name': {
-        //         setReference((prevReferenceInfo) => ({...prevReferenceInfo, referenceName: value,}));
-        //         break;
-        //     }
-        //     case 'reference-position': {
-        //         setReference((prevReferenceInfo) => ({...prevReferenceInfo, referencePosition: value,}));
-        //         break;
-        //     }
-        //     case 'reference-phone': {
-        //         setReference((prevReferenceInfo) => ({...prevReferenceInfo, referencePhoneNumber: value,}));
-        //         break;
-        //     }
-        //     case 'reference-email': {
-        //         setReference((prevReferenceInfo) => ({...prevReferenceInfo, referenceEmail: value,}));
-        //         break;
-        //     }
-        //     default:
-        //         throw new Error(`Invalid input field id. Received: ${input}`)
-        // }
     }
 
     return (

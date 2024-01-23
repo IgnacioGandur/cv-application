@@ -17,6 +17,9 @@ import sun from '../assets/images/light/sun-pattern.webp';
 import email from '../assets/images/light/email-pattern.webp';
 import spiration from '../assets/images/light/spiration-light.webp';
 // Dark backgrounds
+import darkDenim from '../assets/images/dark/denim.webp';
+import stardust from '../assets/images/dark/stardust.png';
+import curls from '../assets/images/dark/curls.png';
 import spirationDark from '../assets/images/dark/spiration-dark.webp';
 import jojoDark from '../assets/images/dark/jojo-pattern-dark.png';
 import alwaysGrey from '../assets/images/dark/always_grey.webp';
@@ -105,6 +108,18 @@ export default function BackgroundControl({ handleBackgroundOptions }) {
             },
         ],
         dark: [
+            {
+                name: 'Dark denim',
+                url: darkDenim,
+            },
+            {
+                name: 'Stardust',
+                url: stardust,
+            },
+            {
+                name: 'Curls',
+                url: curls,
+            },
             {
                 name: 'Spiation dark',
                 url: spirationDark,
@@ -327,7 +342,7 @@ export default function BackgroundControl({ handleBackgroundOptions }) {
                                     }
                                 >
                                     <p>
-                                        Custom image url{' '}
+                                        Background url{' '}
                                         <i>
                                             (Make sure to use a repeatable
                                             pattern image)
