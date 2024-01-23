@@ -254,8 +254,8 @@ export default function RenderExperience({
                                 {section.companyName}
                             </p>
                         </div>
-                        <p>{section.positionTitle}.</p>
-                        <p>{section.responsibilities}.</p>
+                        <p>{section.positionTitle}</p>
+                        <p>{section.responsibilities}</p>
                         <p className='date'>{`${section.dateFrom} - ${section.dateUntil}`}</p>
                     </div>
                 ),

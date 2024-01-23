@@ -8,10 +8,7 @@ export default function PersonalInfo({
     return (
         <>
             <h2 className={PersonalInfoStyle['h2-title']}>
-                Personal Information{' '}
-                <span className={PersonalInfoStyle['h2-title__span']}>
-                    ( all items in the form are required! )
-                </span>
+                Fill in the fields
             </h2>
             <fieldset className={PersonalInfoStyle.fieldset}>
                 <legend className={PersonalInfoStyle.fieldset__legend}>
@@ -211,7 +208,7 @@ export default function PersonalInfo({
                             name='aboutMe'
                             id='aboutMe'
                             placeholder='A concise description about you...'
-                            maxLength='200'
+                            maxLength='325'
                         />
                     </label>
                     <label

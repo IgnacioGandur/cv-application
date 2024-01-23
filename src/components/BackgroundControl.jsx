@@ -349,7 +349,7 @@ export default function BackgroundControl({ handleBackgroundOptions }) {
                                         </i>
                                     </p>
                                     <input
-                                        placeholder='https://www.toptal.com/designers/subtlepatterns/uploads/triangles_pattern.png'
+                                        placeholder='URL to your image...'
                                         type='url'
                                         id='background-url'
                                         name='background-url'

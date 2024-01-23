@@ -60,6 +60,7 @@ export default function References({
                             id='reference-name'
                             name='reference-name'
                             maxLength='25'
+                            placeholder='Jon Doe'
                             required
                         />
                     </label>
@@ -79,6 +80,7 @@ export default function References({
                             id='reference-company'
                             name='reference-company'
                             maxLength='30'
+                            placeholder='Company XYZ'
                             required
                         />
                     </label>
@@ -98,6 +100,7 @@ export default function References({
                             id='reference-position'
                             name='reference-position'
                             maxLength='30'
+                            placeholder='Web developer'
                             required
                         />
                     </label>
@@ -117,6 +120,7 @@ export default function References({
                             id='reference-relationship'
                             name='reference-relationship'
                             maxLength='50'
+                            placeholder='Your relationship with the reference...'
                             required
                         />
                     </label>
@@ -136,6 +140,7 @@ export default function References({
                             id='reference-phoneNumber'
                             name='reference-phoneNumber'
                             maxLength='25'
+                            placeholder='+ 12 345 6890'
                             required
                         />
                     </label>
@@ -155,6 +160,7 @@ export default function References({
                             id='reference-email'
                             name='reference-email'
                             maxLength='40'
+                            placeholder='jonDoe@fakemail.com'
                             required
                         />
                     </label>

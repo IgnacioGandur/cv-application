@@ -8,7 +8,7 @@ export default function Footer() {
                     Ignacio Gandur | The Odin Project{' '}
                 </span>
                 <a
-                    title='Go to Github link'
+                    title='Github link'
                     className={Styles.link}
                     target='_blank'
                     rel='noreferrer'

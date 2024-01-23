@@ -77,7 +77,7 @@ export default function Skills({
                             className={FormElementsStyle.input}
                             type='text'
                             id='skill-name'
-                            placeholder='Photoshop...'
+                            placeholder='Javascript'
                             onChange={(e) =>
                                 gatherSkillsInfo(e.target.id, e.target.value)
                             }
