@@ -226,7 +226,7 @@ export default function Navbar() {
                     </h1>
                     <img
                         className={NavBarStyle['navbar-icon']}
-                        src='/cv.png'
+                        src='./cv.png'
                         alt='Webpage icon'
                     />
                 </div>

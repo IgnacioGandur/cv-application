@@ -133,7 +133,7 @@ export default function CV() {
         skills: [
             {
                 skillName: 'Spanish speaker',
-                icon: '/icons/argentina.png',
+                icon: './icons/argentina.png',
             },
         ],
         references: [
@@ -388,8 +388,8 @@ export default function CV() {
                             }
                             src={
                                 language === 'english'
-                                    ? '/icons/argentina.png'
-                                    : '/icons/usa.png'
+                                    ? './icons/argentina.png'
+                                    : './icons/usa.png'
                             }
                             alt='Argentina icon'
                         />
