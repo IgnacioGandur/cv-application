@@ -24,7 +24,7 @@ export default function CV() {
         address: 'Random street 1234',
         firstName: 'Ignacio',
         lastName: 'Gandur',
-        ocupation: 'Full Stack Web Developer',
+        ocupation: 'Web developer',
         email: 'FakeEmailAddress@gmail.com',
         phoneNumber: '+54 123 456 7890',
         aboutMe:
@@ -122,7 +122,7 @@ export default function CV() {
         ],
         experience: [
             {
-                companyName: 'Mercado libre',
+                companyName: 'XYZ Company',
                 positionTitle: 'Front end web developer',
                 responsibilities:
                     'Part of the team in charge of designing, creating and mantaining everything related to the user interface and user experience',
@@ -134,34 +134,6 @@ export default function CV() {
             {
                 skillName: 'Spanish speaker',
                 icon: '/icons/argentina.png',
-            },
-            {
-                skillName: 'Html',
-                icon: '/icons/html.png',
-            },
-            {
-                skillName: 'Css',
-                icon: '/icons/css-3.png',
-            },
-            {
-                skillName: 'Javascript',
-                icon: '/icons/js.png',
-            },
-            {
-                skillName: 'React',
-                icon: '/icons/react.png',
-            },
-            {
-                skillName: 'Github',
-                icon: '/icons/github.png',
-            },
-            {
-                skillName: 'Git',
-                icon: '/icons/git.png',
-            },
-            {
-                skillName: 'Linux',
-                icon: '/icons/linux.png',
             },
         ],
         references: [
