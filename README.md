@@ -34,3 +34,5 @@ Elevate your job application with a visually appealing and professionally crafte
 ### Examples:
 
 ![Example image 1](./examples/example-two.png)
+[Sample pdf file](./examples/example-cv.pdf)
+[embed]./examples/example-cv.pdf[/embed]
