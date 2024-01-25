@@ -23,7 +23,7 @@ Choose between English and Spanish for your CV presentation. Tailor your content
 
 ## How to use:
 
-1. Visit .
+1. Visit [This page] (https://ignaciogandur.github.io/cv-application/).
 2. **Select language:** Choose between english or spanish for your CV presentation.
 3. **Customize your CV:** Fill in your details, select a decorative background, and tailor each section to match your profile.
 4. **Preview your CV:** Take a look at how your CV will appear with the selected background and content.
@@ -33,5 +33,5 @@ Elevate your job application with a visually appealing and professionally crafte
 
 ### Examples:
 
-![Example image 1](./examples/example-two.png)
+![Example CV](./examples/example.png)
 [Sample pdf file](./examples/example-cv.pdf)

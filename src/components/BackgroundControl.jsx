@@ -379,6 +379,20 @@ export default function BackgroundControl({ handleBackgroundOptions }) {
                                         }}
                                     />
                                 </label>
+                                <label htmlFor='background-size'>
+                                    Background size
+                                    <input
+                                        type='range'
+                                        id='background-size'
+                                        name='background-size'
+                                        min='24'
+                                        max='1400'
+                                        defaultValue='100'
+                                        onChange={(e) => {
+                                            handleBackgroundOptions(e);
+                                        }}
+                                    />
+                                </label>
                                 <label
                                     htmlFor='dark-background'
                                     className={

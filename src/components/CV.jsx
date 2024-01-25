@@ -19,17 +19,18 @@ import defaultProfilePicture from '../assets/images/default-ppf.png';
 export default function CV() {
     //                  Personal info section, start.
     const [personalInfo, setPersonalInfo] = useState({
-        country: 'Argentina',
-        city: 'Tucumán',
-        address: 'Random street 1234',
-        firstName: 'Ignacio',
-        lastName: 'Gandur',
-        ocupation: 'Web developer',
-        email: 'FakeEmailAddress@gmail.com',
-        phoneNumber: '+54 123 456 7890',
+        country:'',
+        city:'',
+        address:'',
+        firstName:'Your',
+        lastName:'Name',
+        ocupation:'',
+        email:'',
+        phoneNumber:'',
         aboutMe:
-            'Dictum malesuada eget ligula, consectetur montes elit, est suscipit sem neque lacus nulla massa risus placerat neque ante, risus nam venenatis lacus et eros cursus, dictum eget ornare imperdiet. ',
+'',
         profilePicture: defaultProfilePicture,
+        githubProfile: null,
         portfolioLink: null,
         xTwitter: null,
         xTwitterLink: null,
@@ -132,7 +133,8 @@ export default function CV() {
         ],
         skills: [
             {
-                skillName: 'Spanish speaker',
+                name: 'Spanish speaker',
+                description: 'Native spanish speaker',
                 icon: './icons/argentina.png',
             },
         ],
@@ -141,7 +143,7 @@ export default function CV() {
                 name: 'Jon Doe',
                 company: 'XYZ Company',
                 position: 'Backend team leader',
-                relationship: 'Worked togheter for 3 years',
+                relationship: 'Worked together for 3 years',
                 phoneNumber: '+12 345 67890',
                 email: 'JonDoe@fakemail.com',
             },
@@ -232,8 +234,8 @@ export default function CV() {
     function isSectionLimitSurpassed(whichSection) {
         const sectionLimits = {
             education: 2,
-            experience: 5,
-            skills: 9,
+            experience: 3,
+            skills: 10,
             reference: 4,
         };
 
@@ -330,6 +332,10 @@ export default function CV() {
                 CVElement.style.backgroundImage = `${gradient} url(${imageUrl})`;
                 break;
             }
+            case 'background-size': {
+                document.querySelector('#CV').style.backgroundSize = `${value}px`;
+                break;
+            }
             case 'dark-background': {
                 const isChecked = document.querySelector(`#${id}`).checked;
                 setBackgroundOptions((prevBackgroundOptions) => ({
@@ -346,7 +352,7 @@ export default function CV() {
                 }));
         }
     }
-    
+
     // Render font colors and backgrounds in the CV according to the selected background options.
     const stylesForCV = {
         backgroundImage: backgroundOptions.enabled
@@ -437,7 +443,7 @@ export default function CV() {
                 <a
                     id='page-link'
                     className={CVElementStyles['app__CV__page-link']}
-                    href='#'
+                    href='https://ignaciogandur.github.io/cv-application/'
                     target='_blank'
                     rel='noreferrer'
                 >
@@ -508,6 +514,30 @@ export default function CV() {
                                 backgroundOptions={backgroundOptions}
                             />
                         </div>
+                        <p
+                            className={
+                                CVElementStyles[
+                                    'app__CV__education-and-experience__experience__title'
+                                ]
+                            }
+                        >
+                            {language === 'english' ? 'Education' : 'Educación'}
+                        </p>
+                        <div
+                            className={
+                                CVElementStyles[
+                                    'app__CV__education-and-experience__education__container'
+                                ]
+                            }
+                        >
+                            <RenderEducation
+                                educationSections={sections.education}
+                                handleEdit={handleEdit}
+                                toggleEditing={toggleEditing}
+                                removeSection={removeSection}
+                                backgroundOptions={backgroundOptions}
+                            />
+                        </div>
                         <div
                             className={
                                 CVElementStyles[
@@ -565,10 +595,10 @@ export default function CV() {
                             ]
                         }
                     >
-                        <p className={CVElementStyles['section-title']}>
+                        {/* <p className={CVElementStyles['section-title']}>
                             {language === 'english' ? 'Education' : 'Educación'}
-                        </p>
-                        <div
+                        </p> */}
+                        {/* <div
                             className={
                                 CVElementStyles[
                                     'app__CV__education-and-experience__education__container'
@@ -582,7 +612,7 @@ export default function CV() {
                                 removeSection={removeSection}
                                 backgroundOptions={backgroundOptions}
                             />
-                        </div>
+                        </div> */}
                         <div
                             className={
                                 CVElementStyles[

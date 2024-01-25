@@ -128,22 +128,6 @@
     color: inherit;
 }
 
-/* .app__CV * { */
-/*     z-index: 1; */
-/* } */
-
-/* .app__CV::before { */
-/*     content: ''; */
-/*     background-image: url(https://www.toptal.com/designers/subtlepatterns/uploads/doodles.png); */
-/*     position: absolute; */
-/*     left: 0; */
-/*     top: 0; */
-/*     width: 100%; */
-/*     height: 100%; */
-/*     opacity: 0.3; */
-/*     z-index: 0; */
-/* } */
-
 .app__CV__full-name {
     font-family: var(--font-titles-h2);
     font-weight: 400;
@@ -177,9 +161,9 @@
     flex: 1;
     display: flex;
     width: 100%;
-    /* height: 100%; */
     justify-content: center;
     gap: calc(var(--default-value) * 1.5);
+    padding: 0px 15px;
 }
 
 .app__CV__education-and-experience__separator {
@@ -224,6 +208,16 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    transition: all 250ms ease;
+    padding: 10px 0px 10px 10px;
+    border: 1px solid transparent;
+}
+
+.app__CV__education-and-experience__experience__item:hover {
+    border-radius: 5px;
+    border: 1px solid var(--color-grey);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    padding: 10px;
 }
 
 .app__CV__education-and-experience__experience__item:hover button {
@@ -285,6 +279,16 @@
 .app__CV__education-and-experience__education__item {
     display: flex;
     flex-direction: column;
+    transition: all 250ms ease;
+    border: 1px solid transparent;
+    padding: 10px 0px 10px 10px;
+}
+
+.app__CV__education-and-experience__education__item:hover {
+    border-radius: 5px;
+    border: 1px solid var(--color-grey);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    padding: 10px;
 }
 
 .app__CV__education-and-experience__education__item:hover button {
@@ -307,14 +311,30 @@
 }
 
 .app__CV__education-and-experience__education__item__title-and-buttons__buttons-container {
-    margin-left: auto;
     display: flex;
     gap: 15px;
 }
 
 /* Skills section */
 
+.app__CV__skills__container__item__title-and-description {
+    display: flex;
+    align-items: center;
+}
+
+.app__CV__skills__container__item__title-and-description > p {
+    flex: 1;
+    font-family: var(--font-titles-h2);
+    font-weight: bold;
+}
+
+.app__CV__skills__container__item__title-and-description__title-and-buttons {
+    flex: 1;
+    display: flex;
+}
+
 .app__CV__education-and-experience__education__skills {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -335,7 +355,30 @@
 .app__CV__education-and-experience__education__skills__container__item {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 15px;
+    padding: 10px 10px 10px 0px;
+    transition: all 200ms ease;
+    border: 1px solid transparent;
+}
+
+.app__CV__education-and-experience__education__skills__container__item:hover {
+    border-radius: 5px;
+    border: 1px solid var(--color-grey);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    padding: 10px;
+}
+
+.app__CV__education-and-experience__education__skills__container__item > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.app__CV__education-and-experience__education__skills__container__item
+    > div
+    > p:first-child {
+    font-family: var(--font-titles-h2);
 }
 
 .app__CV__education-and-experience__education__skills__container__item:hover
@@ -344,13 +387,13 @@
 }
 
 .app__CV__education-and-experience__education__skills__container__item__icon {
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
+    border-radius: 5px;
 }
 
 .app__CV__education-and-experience__education__skills__container__item__buttons-container {
-    margin-left: auto;
     display: flex;
     gap: 15px;
 }
@@ -367,10 +410,6 @@
     align-items: center;
     gap: 5px;
 }
-
-/* .app__CV__education-and-experience__education__contact a { */
-/*     text-decoration: none; */
-/* } */
 
 .app__CV__education-and-experience__education__contact__title {
     font-size: 1.25rem;
@@ -415,6 +454,16 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 10px;
+    border: 1px solid transparent;
+    transition: all 250ms ease;
+}
+
+.app__CV__references__container__item:hover {
+    border-radius: 5px;
+    scale: 1.05;
+    border: 1px solid var(--color-grey);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }
 
 .app__CV__references__container__item:hover button {
@@ -422,7 +471,6 @@
 }
 
 .app__CV__references__container__item__name {
-    /* text-decoration: underline; */
     font-size: 1.05rem;
     font-weight: 900;
     font-family: var(--font-titles-h2);
@@ -507,5 +555,12 @@
         text-align: center;
         display: flex;
         flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .app__inputs__label:first-child {
+        position: initial;
+        justify-content: center;
     }
 }

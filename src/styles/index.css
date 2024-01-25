@@ -140,6 +140,7 @@ label {
     #footer,
     #inputs,
     #separator,
+    [data-hide='true'],
     .notification-box {
         display: none;
     }

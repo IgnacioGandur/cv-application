@@ -29,9 +29,9 @@ export default function RenderSkills({
                                         'modal-background__modal-box__label'
                                     ]
                                 }
-                                htmlFor='edit-skill'
+                                htmlFor='edit-skill-name'
                             >
-                                Edit name
+                                Skill
                                 <input
                                     className={
                                         ModalElementsStyles[
@@ -42,15 +42,45 @@ export default function RenderSkills({
                                         handleEdit(
                                             'skills',
                                             index,
-                                            'skillName',
+                                            'name',
                                             e.target.value,
                                         )
                                     }
                                     type='text'
-                                    defaultValue={section.skillName}
-                                    id='edit-skill'
+                                    defaultValue={section.name}
+                                    id='edit-skill-name'
                                     maxLength='35'
-                                    name='edit-skill'
+                                    name='edit-skill-name'
+                                />
+                            </label>
+                            <label
+                                className={
+                                    ModalElementsStyles[
+                                        'modal-background__modal-box__label'
+                                    ]
+                                }
+                                htmlFor='edit-skill-description'
+                            >
+                                Description
+                                <input
+                                    className={
+                                        ModalElementsStyles[
+                                            'modal-background__modal-box__label__input'
+                                        ]
+                                    }
+                                    onChange={(e) =>
+                                        handleEdit(
+                                            'skills',
+                                            index,
+                                            'description',
+                                            e.target.value,
+                                        )
+                                    }
+                                    type='text'
+                                    defaultValue={section.description}
+                                    id='edit-skill-description'
+                                    maxLength='150'
+                                    name='edit-skill-description'
                                 />
                             </label>
                             <label
@@ -61,7 +91,7 @@ export default function RenderSkills({
                                 }
                                 htmlFor='edit-skill-icon'
                             >
-                                Edit image
+                                Icon
                                 <input
                                     className={`${ModalElementsStyles['modal-background__modal-box__label__input']} ${ModalElementsStyles['modal-background__modal-box__label__input--hide-file-button']}`}
                                     type='file'
@@ -110,36 +140,45 @@ export default function RenderSkills({
                             src={section.icon}
                             alt='Skill icon'
                         />
-                        <p>{section.skillName}</p>
-                        <div
-                            className={
+                        <div>
+                            <div className={
                                 CVElementStyles[
-                                    'app__CV__education-and-experience__education__skills__container__item__buttons-container'
+                                    'app__CV__skills__container__item__title-and-description'
                                 ]
-                            }
-                        >
-                            <button
-                                className={CVElementStyles['small-button']}
-                                onClick={() => {
-                                    toggleEditing('skills', index, true);
-                                }}
-                            >
-                                <span
-                                    className={`${CVElementStyles['small-button__span']} material-icons-round`}
+                            }>
+                                <p>{section.name}</p>
+                                <div
+                                    className={
+                                        CVElementStyles[
+                                            'app__CV__education-and-experience__education__skills__container__item__buttons-container'
+                                        ]
+                                    }
                                 >
-                                    edit
-                                </span>
-                            </button>
-                            <button
-                                className={CVElementStyles['small-button']}
-                                onClick={() => removeSection('skills', index)}
-                            >
-                                <span
-                                    className={`${CVElementStyles['small-button__span']} material-icons-round`}
-                                >
-                                    delete
-                                </span>
-                            </button>
+                                    <button
+                                        className={CVElementStyles['small-button']}
+                                        onClick={() => {
+                                            toggleEditing('skills', index, true);
+                                        }}
+                                    >
+                                        <span
+                                            className={`${CVElementStyles['small-button__span']} material-icons-round`}
+                                        >
+                                            edit
+                                        </span>
+                                    </button>
+                                    <button
+                                        className={CVElementStyles['small-button']}
+                                        onClick={() => removeSection('skills', index)}
+                                    >
+                                        <span
+                                            className={`${CVElementStyles['small-button__span']} material-icons-round`}
+                                        >
+                                            delete
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <p>{section.description}</p>
                         </div>
                     </div>
                 ),

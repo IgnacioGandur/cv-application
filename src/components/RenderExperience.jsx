@@ -91,6 +91,36 @@ export default function RenderExperience({
                                         'modal-background__modal-box__label'
                                     ]
                                 }
+                                htmlFor='edit-responsibilities'
+                            >
+                                Responsibilities at your position
+                                <input
+                                    className={
+                                        ModalElementsStyles[
+                                            'modal-background__modal-box__label__input'
+                                        ]
+                                    }
+                                    defaultValue={section.responsibilities}
+                                    type='text'
+                                    id='edit-responsibilities'
+                                    name='edit-responsibilities'
+                                    maxLength='100'
+                                    onChange={(e) =>
+                                        handleEdit(
+                                            'experience',
+                                            index,
+                                            'responsibilities',
+                                            e.target.value,
+                                        )
+                                    }
+                                />
+                            </label>
+                            <label
+                                className={
+                                    ModalElementsStyles[
+                                        'modal-background__modal-box__label'
+                                    ]
+                                }
                                 htmlFor='edit-date-from'
                             >
                                 Date, from
@@ -147,36 +177,6 @@ export default function RenderExperience({
                                             );
                                         },
                                     }}
-                                />
-                            </label>
-                            <label
-                                className={
-                                    ModalElementsStyles[
-                                        'modal-background__modal-box__label'
-                                    ]
-                                }
-                                htmlFor='edit-responsibilities'
-                            >
-                                Responsibilities at your position
-                                <input
-                                    className={
-                                        ModalElementsStyles[
-                                            'modal-background__modal-box__label__input'
-                                        ]
-                                    }
-                                    defaultValue={section.responsibilities}
-                                    type='text'
-                                    id='edit-responsibilities'
-                                    name='edit-responsibilities'
-                                    maxLength='100'
-                                    onChange={(e) =>
-                                        handleEdit(
-                                            'experience',
-                                            index,
-                                            'responsibilities',
-                                            e.target.value,
-                                        )
-                                    }
                                 />
                             </label>
                             <button

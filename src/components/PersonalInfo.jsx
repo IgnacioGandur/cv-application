@@ -297,7 +297,7 @@ export default function PersonalInfo({
                         }
                         htmlFor='portfolioLink'
                     >
-                        Personal portfolio/website url
+                        Your portfolio/website url
                         <input
                             className={PersonalInfoStyle.input}
                             onChange={(e) => gatherPersonalInfo(e)}
@@ -305,7 +305,27 @@ export default function PersonalInfo({
                             name='portfolioLink'
                             type='url'
                             placeholder='https://www.YourPortfolio.com'
-                            maxLength='40'
+                            maxLength='60'
+                            autoComplete='true'
+                        />
+                    </label>
+                    <label
+                        className={
+                            PersonalInfoStyle[
+                                'fieldset__inputs-container__label'
+                            ]
+                        }
+                        htmlFor='githubProfile'
+                    >
+                        Github profile
+                        <input
+                            className={PersonalInfoStyle.input}
+                            onChange={(e) => gatherPersonalInfo(e)}
+                            id='githubProfile'
+                            name='githubProfile'
+                            type='url'
+                            placeholder='https://github.com/IgnacioGandur'
+                            maxLength='100'
                             autoComplete='true'
                         />
                     </label>

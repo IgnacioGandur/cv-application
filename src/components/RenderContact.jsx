@@ -30,6 +30,7 @@ export default function RenderContact({ personalInfo, backgroundOptions }) {
             {(personalInfo.xTwitter ||
                 personalInfo.instagram ||
                 personalInfo.linkedin ||
+                personalInfo.githubProfile ||
                 personalInfo.portfolioLink) && (
                 <div className='social-media'>
                     {personalInfo.xTwitter && (
@@ -79,6 +80,26 @@ export default function RenderContact({ personalInfo, backgroundOptions }) {
                                 rel='noreferrer'
                             >
                                 linkedin.com/in/{personalInfo.linkedin}
+                            </a>
+                        </p>
+                    )}
+                    {personalInfo.githubProfile && (
+                        <p>
+                            <i
+                                style={{
+                                    fontSize: '1.5rem',
+                                    color: backgroundOptions.darkBackground
+                                        ? 'white'
+                                        : 'black',
+                                }}
+                                className='fa-brands fa-square-github'
+                            ></i>{' '}
+                            <a
+                                href={personalInfo.githubProfile}
+                                target='_blank'
+                                rel='noreferrer'
+                            >
+                                {personalInfo.githubProfile}
                             </a>
                         </p>
                     )}

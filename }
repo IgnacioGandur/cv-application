@@ -1,0 +1,554 @@
+.app {
+    width: 100%;
+    max-width: 2000px;
+    background-color: white;
+    display: flex;
+    gap: var(--default-value);
+    padding: var(--default-value);
+}
+
+.app > :not(.app__separator) {
+    width: 50%;
+    padding: var(--default-value);
+    border-radius: 5px;
+    box-shadow:
+        rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.app__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--default-value);
+    position: relative;
+}
+
+.app__inputs__label {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.app__inputs__label__button {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    transition: all 250ms ease;
+    border: 1px solid var(--color-grey-transparent);
+}
+
+.app__inputs__label__button:hover {
+    scale: 1.25;
+    cursor: pointer;
+}
+
+.app__inputs__label__button__img {
+    width: 100%;
+    height: 100%;
+}
+
+.app__inputs__sections {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.app__inputs__background-options {
+    display: flex;
+}
+
+.app__inputs__background-options > * {
+    flex: 1;
+}
+
+.app__inputs__background-options__label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.app__inputs__background-options__label--checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.app__inputs__background-options__label--checkbox > input {
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+}
+
+.app__inputs__background-options__container {
+    flex: 2;
+    display: flex;
+}
+
+.app__inputs__background-options__container > * {
+    flex: 1;
+}
+
+.app__separator {
+    background-image: radial-gradient(
+        circle,
+        var(--color-yellow),
+        var(--color-lavender),
+        var(--color-pink)
+    );
+    height: 99%;
+    width: 3px;
+    align-self: center;
+    opacity: 0.7;
+}
+
+.app__wrapper-background {
+    background-image: url('../assets/images/cv-background-pattern.webp');
+    background-position: top left;
+    background-repeat: repeat;
+}
+
+.app__CV {
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--default-value);
+}
+
+.app__CV a {
+    text-decoration: underline;
+    color: inherit;
+}
+
+.app__CV__full-name {
+    font-family: var(--font-titles-h2);
+    font-weight: 400;
+    width: 50%;
+    text-align: center;
+    font-size: 3rem;
+    border: 2px solid black;
+}
+
+.app__CV__ocupation {
+    font-size: 1.25rem;
+    font-family: var(--font-titles-h2);
+}
+
+.app__CV__profile-picture {
+    background-image: linear-gradient(
+        45deg,
+        #70d6ff88,
+        #ff70a688,
+        #ff977088,
+        #ffd67088
+    );
+    padding: 1px;
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.app__CV__education-and-experience {
+    flex: 1;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: calc(var(--default-value) * 1.5);
+    padding: 0px 15px;
+}
+
+.app__CV__education-and-experience__separator {
+    height: 100%;
+    width: 1px;
+    background-image: linear-gradient(
+        45deg,
+        #70d6ff88,
+        #ff70a688,
+        #ff977088,
+        #ffd67088
+    );
+}
+
+.app__CV__education-and-experience
+    > :not(.app__CV__education-and-experience__separator) {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Experience section */
+
+.app__CV__education-and-experience__experience {
+    text-align: right;
+}
+
+.app__CV__education-and-experience__experience__title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+.app__CV__education-and-experience__experience__container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.app__CV__education-and-experience__experience__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    transition: all 250ms ease;
+    padding: 10px 0px 10px 10px;
+    border: 1px solid transparent;
+}
+
+.app__CV__education-and-experience__experience__item:hover {
+    border-radius: 5px;
+    border: 1px solid var(--color-grey);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    padding: 10px;
+}
+
+.app__CV__education-and-experience__experience__item:hover button {
+    opacity: 1;
+}
+
+.app__CV__education-and-experience__experience__item__title-and-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app__CV__education-and-experience__experience__item__title-and-buttons__company-name {
+    text-align: end;
+    font-family: var(--font-titles-h2);
+    border: 1px solid black;
+    padding: 3px 5px;
+    width: fit-content;
+}
+
+.app__CV__education-and-experience__experience__item__title-and-buttons__buttons-container {
+    margin-left: initial;
+    margin-right: auto;
+    display: flex;
+    gap: 15px;
+}
+
+/* About me section */
+
+.app__CV__education-and-experience__experience__about-me {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    margin-top: auto;
+}
+
+.app__CV__education-and-experience__experience__about-me__title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+/* Education section */
+
+.app__CV__education-and-experience__education {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.app__CV__education-and-experience__education__container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.app__CV__education-and-experience__education__item {
+    display: flex;
+    flex-direction: column;
+    transition: all 250ms ease;
+    border: 1px solid transparent;
+    padding: 10px 0px 10px 10px;
+}
+
+.app__CV__education-and-experience__education__item:hover {
+    border-radius: 5px;
+    border: 1px solid var(--color-grey);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    padding: 10px;
+}
+
+.app__CV__education-and-experience__education__item:hover button {
+    opacity: 1;
+}
+
+.app__CV__education-and-experience__education__item__title-and-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app__CV__education-and-experience__education__item__title-and-buttons__institution-name {
+    text-align: end;
+    font-family: var(--font-titles-h2);
+    border: 1px solid black;
+    padding: 3px 5px;
+    width: fit-content;
+}
+
+.app__CV__education-and-experience__education__item__title-and-buttons__buttons-container {
+    display: flex;
+    gap: 15px;
+}
+
+/* Skills section */
+
+.app__CV__skills__container__item__title-and-description {
+    display: flex;
+    align-items: center;
+}
+
+.app__CV__skills__container__item__title-and-description > p {
+    flex: 1;
+    font-family: var(--font-titles-h2);
+    font-weight: bold;
+}
+
+.app__CV__skills__container__item__title-and-description__title-and-buttons {
+    flex: 1;
+    display: flex;
+}
+
+.app__CV__education-and-experience__education__skills {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.app__CV__education-and-experience__education__skills__title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+.app__CV__education-and-experience__education__skills__container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.app__CV__education-and-experience__education__skills__container__item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 10px 10px 0px;
+    transition: all 200ms ease;
+    border: 1px solid transparent;
+}
+
+.app__CV__education-and-experience__education__skills__container__item:hover {
+    border-radius: 5px;
+    border: 1px solid var(--color-grey);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    padding: 10px;
+}
+
+.app__CV__education-and-experience__education__skills__container__item > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.app__CV__education-and-experience__education__skills__container__item
+    > div
+    > p:first-child {
+    font-family: var(--font-titles-h2);
+}
+
+.app__CV__education-and-experience__education__skills__container__item:hover
+    button {
+    opacity: 1;
+}
+
+.app__CV__education-and-experience__education__skills__container__item__icon {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.app__CV__education-and-experience__education__skills__container__item__buttons-container {
+    display: flex;
+    gap: 15px;
+}
+
+.app__CV__education-and-experience__education__contact {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    margin-top: auto;
+}
+
+.app__CV__education-and-experience__education__contact p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.app__CV__education-and-experience__education__contact__title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+.app__CV__horizontal-separator {
+    width: 100%;
+    height: 1px;
+    background-image: linear-gradient(
+        45deg,
+        var(--color-lavender),
+        var(--color-pink),
+        var(--color-yellow),
+        var(--color-lavender),
+        var(--color-cyan)
+    );
+}
+
+.app__CV__references {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.app__CV__references__title--text-center {
+    text-align: center;
+}
+
+.app__CV__references__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.app__CV__references__container__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.app__CV__references__container__item:hover button {
+    opacity: 1;
+}
+
+.app__CV__references__container__item__name {
+    font-size: 1.05rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+.app__CV__references__container__item__buttons-container {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: initial;
+    margin-top: 5px;
+}
+
+.app__CV__page-link {
+    display: none;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: #dfe1e3;
+}
+/* Elements */
+
+.section-item {
+    display: flex;
+    flex-direction: column;
+}
+
+/* For experience section items */
+.section-item--flex-end {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    font-family: var(--font-titles-h2);
+}
+
+.small-button {
+    background-color: var(--color-grey-transparent);
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-grey);
+    border-radius: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 300ms ease;
+    opacity: 0;
+}
+
+.small-button:hover {
+    transform: scale(1.25);
+}
+
+.small-button__span {
+    color: var(--color-span-icon);
+    font-size: 1.25rem;
+}
+
+/* Media queries */
+/* Tablet size */
+@media screen and (max-width: 1200px) {
+    .app {
+        flex-direction: column;
+    }
+    .app > * {
+        width: 100% !important;
+    }
+
+    .app__separator {
+        height: 5px;
+    }
+
+    .app__inputs > h2 {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .app__inputs__label:first-child {
+        position: initial;
+        justify-content: center;
+    }
+}

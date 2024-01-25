@@ -243,6 +243,7 @@ export default function RenderReferences({
                             </a>
                         </p>
                         <div
+                            data-hide
                             className={
                                 CVElementStyles[
                                     'app__CV__references__container__item__buttons-container'

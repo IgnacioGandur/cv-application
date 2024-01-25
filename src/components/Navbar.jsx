@@ -22,11 +22,14 @@ export default function Navbar() {
         window.addEventListener('beforeprint', () => {
             document.body.style.backgroundImage =
                 document.querySelector('#CV').style.backgroundImage;
+            document.body.style.backgroundSize = 
+                document.querySelector('#CV').style.backgroundSize;
         });
         // Remove background image after the printing/saving finished.
         window.addEventListener('afterprint', () => {
             notifyAfterPrint();
             document.body.style.backgroundImage = 'none';
+            document.body.style.backgroundSize = 'initial';
         });
         // Print/Save the CV.
         window.print();

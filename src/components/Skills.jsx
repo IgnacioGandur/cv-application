@@ -8,41 +8,67 @@ export default function Skills({
     isSectionLimitSurpassed,
 }) {
     const [skill, setSkill] = useState({
-        skillName: '',
+        name: '',
+        description: '',
         icon: null,
     });
 
     function gatherSkillsInfo(input, value) {
-        switch (input) {
-            case 'skill-name':
-                setSkill((prevSkillsInfo) => ({
-                    ...prevSkillsInfo,
-                    skillName: value,
-                }));
-                break;
-            case 'skill-icon': {
-                if (value) {
-                    const reader = new FileReader();
-                    reader.onloadend = (e) => {
-                        setSkill((prevSkillInfo) => ({
-                            ...prevSkillInfo,
-                            icon: e.target.result,
-                        }));
-                    };
-                    reader.readAsDataURL(value);
-                } else {
+        const property = input.replace('skill-', '');
+
+        if (property === 'icon') {
+            if (value) {
+                const reader = new FileReader();
+                reader.onloadend = (e) => {
                     setSkill((prevSkillInfo) => ({
                         ...prevSkillInfo,
-                        icon: null,
+                        [property]: e.target.result,
                     }));
-                }
-                break;
+                };
+                reader.readAsDataURL(value);
+            } else {
+                setSkill((prevSkillInfo) => ({
+                    ...prevSkillInfo,
+                    [property]: null,
+                }));
             }
-            default:
-                throw new Error(
-                    `Invalid input elements. The function expects "skill" or "icon" input. Instead received: ${input}.`,
-                );
+        } else {
+            setSkill((prevSkillInfo) => ({
+                ...prevSkillInfo,
+                [property]: value,
+            }));
         }
+
+        // switch (input) {
+        //     case 'skill-name':
+        //         setSkill((prevSkillsInfo) => ({
+        //             ...prevSkillsInfo,
+        //             skillName: value,
+        //         }));
+        //         break;
+        //     case 'skill-icon': {
+        //         if (value) {
+        //             const reader = new FileReader();
+        //             reader.onloadend = (e) => {
+        //                 setSkill((prevSkillInfo) => ({
+        //                     ...prevSkillInfo,
+        //                     icon: e.target.result,
+        //                 }));
+        //             };
+        //             reader.readAsDataURL(value);
+        //         } else {
+        //             setSkill((prevSkillInfo) => ({
+        //                 ...prevSkillInfo,
+        //                 icon: null,
+        //             }));
+        //         }
+        //         break;
+        //     }
+        //     default:
+        //         throw new Error(
+        //             `Invalid input elements. The function expects "skill" or "icon" input. Instead received: ${input}.`,
+        //         );
+        // }
     }
 
     return (
@@ -82,6 +108,27 @@ export default function Skills({
                                 gatherSkillsInfo(e.target.id, e.target.value)
                             }
                             maxLength='35'
+                            required
+                        />
+                    </label>
+                    <label
+                        className={
+                            FormElementsStyle[
+                                'fieldset__inputs-container__label'
+                            ]
+                        }
+                        htmlFor='skill-description'
+                    >
+                        Description
+                        <input
+                            className={FormElementsStyle.input}
+                            type='text'
+                            id='skill-description'
+                            placeholder='Description of the skill...'
+                            onChange={(e) =>
+                                gatherSkillsInfo(e.target.id, e.target.value)
+                            }
+                            maxLength='100'
                             required
                         />
                     </label>

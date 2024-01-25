@@ -179,22 +179,6 @@ export default function RenderEducation({
                                 ]
                             }
                         >
-                            <p
-                                style={{
-                                    border: `1px solid ${
-                                        backgroundOptions.darkBackground
-                                            ? 'white'
-                                            : 'black'
-                                    }`,
-                                }}
-                                className={
-                                    CVElementStyles[
-                                        'app__CV__education-and-experience__education__item__title-and-buttons__institution-name'
-                                    ]
-                                }
-                            >
-                                {section.institutionName}
-                            </p>
                             <div
                                 className={
                                     CVElementStyles[
@@ -227,6 +211,22 @@ export default function RenderEducation({
                                     </span>
                                 </button>
                             </div>
+                            <p
+                                style={{
+                                    border: `1px solid ${
+                                        backgroundOptions.darkBackground
+                                            ? 'white'
+                                            : 'black'
+                                    }`,
+                                }}
+                                className={
+                                    CVElementStyles[
+                                        'app__CV__education-and-experience__education__item__title-and-buttons__institution-name'
+                                    ]
+                                }
+                            >
+                                {section.institutionName}
+                            </p>
                         </div>
                         <p>{section.titleOfStudy}</p>
                         <p>
