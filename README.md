@@ -5,7 +5,7 @@ Create stunning and personalized curriculum vitae effortlessly. This web applica
 ## Features:
 
 -   ### Decorative backgrounds:
-    Choose from a variety of decorative backgrounds to give your CV a unique and stylish look. Stand out from the crowd with visually appealing designs that reflect your personality. You can pick between light and dark themes.
+    Choose from a variety of decorative backgrounds to give your CV a unique and stylish look. Stand out from the crowd with visually appealing designs that reflect your personality. You can pick between light and dark themes, or add a custom background (remember to use a repeatable pattern image).
 -   ### PDF download with decorative elements:
     Download your CV as a high-quality PDF file while preserving all the decorative elements, including background images, colors, and links. Ensure that your CV looks as impressive in print as it does on the screen.
 -   ### Social media integration:
@@ -13,7 +13,7 @@ Create stunning and personalized curriculum vitae effortlessly. This web applica
 -   ### Comprehensive sections:
     -   **Skills:** Highlight your key skills and areas of expertise to give employers a quick overview of your qualifications.
     -   **References:** Provide references from professional contacts to strenghten your credibility.
-    -   **Education Background:** Display your academic achievements in a clear and organized manner.
+    -   **Education Background:** Display your academic background in a clear and organized manner.
     -   **Experience:** Showcase your work history with concise descriptions of your roles and accomplishments.
     -   **Personal Information:** Add a personal touch to your CV by including a brief section about yourself, helping employers get you know beyond your professional achievements.
 
